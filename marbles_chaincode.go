@@ -136,6 +136,8 @@ func main() {
 // Init initializes chaincode
 // ===========================
 func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface) pb.Response {
+	fmt.Println("ex02 Init")
+
 	return shim.Success(nil)
 }
 
@@ -177,7 +179,7 @@ func (t *SimpleChaincode) initMarble(stub shim.ChaincodeStubInterface, args []st
 	var err error
 
 	//   0       1       2     3
-	// "asdf", "blue", "35", "bob"
+	// "marbleid", "blue", "35", "bob"
 	if len(args) != 4 {
 		return shim.Error("Incorrect number of arguments. Expecting 4")
 	}
@@ -198,8 +200,8 @@ func (t *SimpleChaincode) initMarble(stub shim.ChaincodeStubInterface, args []st
 	}
 	marbleName := args[0]
 	color := strings.ToLower(args[1])
-	owner := strings.ToLower(args[3])
 	size, err := strconv.Atoi(args[2])
+	owner := strings.ToLower(args[3])
 	if err != nil {
 		return shim.Error("3rd argument must be a numeric string")
 	}
@@ -505,7 +507,7 @@ func (t *SimpleChaincode) queryMarblesByOwner(stub shim.ChaincodeStubInterface, 
 		return shim.Error("Incorrect number of arguments. Expecting 1")
 	}
 
-	owner := strings.ToLower(args[0])
+	owner := args[0]
 
 	queryString := fmt.Sprintf("{\"selector\":{\"docType\":\"marble\",\"owner\":\"%s\"}}", owner)
 
