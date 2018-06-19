@@ -19,22 +19,22 @@ under the License.
 
 // ====CHAINCODE EXECUTION SAMPLES (CLI) ==================
 
-// ==== Invoke marbles ====
-// peer chaincode invoke -C myc1 -n marbles -c '{"Args":["initMarble","marble1","blue","35","tom"]}'
-// peer chaincode invoke -C myc1 -n marbles -c '{"Args":["initMarble","marble2","red","50","tom"]}'
-// peer chaincode invoke -C myc1 -n marbles -c '{"Args":["initMarble","marble3","blue","70","tom"]}'
-// peer chaincode invoke -C myc1 -n marbles -c '{"Args":["transferMarble","marble2","jerry"]}'
-// peer chaincode invoke -C myc1 -n marbles -c '{"Args":["transferMarblesBasedOnColor","blue","jerry"]}'
-// peer chaincode invoke -C myc1 -n marbles -c '{"Args":["delete","marble1"]}'
+// ==== Invoke Marbles ====
+// peer chaincode invoke -C myc1 -n Marbles -c '{"Args":["initMarble","Marble1","blue","35","tom"]}'
+// peer chaincode invoke -C myc1 -n Marbles -c '{"Args":["initMarble","Marble2","red","50","tom"]}'
+// peer chaincode invoke -C myc1 -n Marbles -c '{"Args":["initMarble","Marble3","blue","70","tom"]}'
+// peer chaincode invoke -C myc1 -n Marbles -c '{"Args":["transferMarble","Marble2","jerry"]}'
+// peer chaincode invoke -C myc1 -n Marbles -c '{"Args":["transferMarblesBasedOnColor","blue","jerry"]}'
+// peer chaincode invoke -C myc1 -n Marbles -c '{"Args":["delete","Marble1"]}'
 
-// ==== Query marbles ====
-// peer chaincode query -C myc1 -n marbles -c '{"Args":["readMarble","marble1"]}'
-// peer chaincode query -C myc1 -n marbles -c '{"Args":["getMarblesByRange","marble1","marble3"]}'
-// peer chaincode query -C myc1 -n marbles -c '{"Args":["getHistoryForMarble","marble1"]}'
+// ==== Query Marbles ====
+// peer chaincode query -C myc1 -n Marbles -c '{"Args":["readMarble","Marble1"]}'
+// peer chaincode query -C myc1 -n Marbles -c '{"Args":["getMarblesByRange","Marble1","Marble3"]}'
+// peer chaincode query -C myc1 -n Marbles -c '{"Args":["getHistoryForMarble","Marble1"]}'
 
 // Rich Query (Only supported if CouchDB is used as state database):
-//   peer chaincode query -C myc1 -n marbles -c '{"Args":["queryMarblesByOwner","tom"]}'
-//   peer chaincode query -C myc1 -n marbles -c '{"Args":["queryMarbles","{\"selector\":{\"owner\":\"tom\"}}"]}'
+//   peer chaincode query -C myc1 -n Marbles -c '{"Args":["queryMarblesByOwner","tom"]}'
+//   peer chaincode query -C myc1 -n Marbles -c '{"Args":["queryMarbles","{\"selector\":{\"owner\":\"tom\"}}"]}'
 
 // INDEXES TO SUPPORT COUCHDB RICH QUERIES
 //
@@ -45,7 +45,7 @@ under the License.
 // CouchDB index JSON syntax as documented at:
 // http://docs.couchdb.org/en/2.1.1/api/database/find.html#db-index
 //
-// This marbles02 example chaincode demonstrates a packaged
+// This Marbles02 example chaincode demonstrates a packaged
 // index which you can find in META-INF/statedb/couchdb/indexes/indexOwner.json.
 // For deployment of chaincode to production environments, it is recommended
 // to define any indexes alongside chaincode so that the chaincode and supporting indexes
@@ -59,7 +59,7 @@ under the License.
 // chaincode in the META-INF/statedb/couchdb/indexes directory, for packaging and deployment
 // to managed environments.
 //
-// In the examples below you can find index definitions that support marbles02
+// In the examples below you can find index definitions that support Marbles02
 // chaincode queries, along with the syntax that you can use in development environments
 // to create the indexes in the CouchDB Fauxton interface or a curl command line utility.
 //
@@ -79,7 +79,7 @@ under the License.
 // {"index":{"fields":["data.docType","data.owner"]},"ddoc":"indexOwnerDoc", "name":"indexOwner","type":"json"}
 //
 // Example curl command line to define index in the CouchDB channel_chaincode database
-// curl -i -X POST -H "Content-Type: application/json" -d "{\"index\":{\"fields\":[\"data.docType\",\"data.owner\"]},\"name\":\"indexOwner\",\"ddoc\":\"indexOwnerDoc\",\"type\":\"json\"}" http://hostname:port/myc1_marbles/_index
+// curl -i -X POST -H "Content-Type: application/json" -d "{\"index\":{\"fields\":[\"data.docType\",\"data.owner\"]},\"name\":\"indexOwner\",\"ddoc\":\"indexOwnerDoc\",\"type\":\"json\"}" http://hostname:port/myc1_Marbles/_index
 //
 
 // Index for docType, owner, size (descending order).
@@ -89,13 +89,13 @@ under the License.
 // {"index":{"fields":[{"data.size":"desc"},{"data.docType":"desc"},{"data.owner":"desc"}]},"ddoc":"indexSizeSortDoc", "name":"indexSizeSortDesc","type":"json"}
 //
 // Example curl command line to define index in the CouchDB channel_chaincode database
-// curl -i -X POST -H "Content-Type: application/json" -d "{\"index\":{\"fields\":[{\"data.size\":\"desc\"},{\"data.docType\":\"desc\"},{\"data.owner\":\"desc\"}]},\"ddoc\":\"indexSizeSortDoc\", \"name\":\"indexSizeSortDesc\",\"type\":\"json\"}" http://hostname:port/myc1_marbles/_index
+// curl -i -X POST -H "Content-Type: application/json" -d "{\"index\":{\"fields\":[{\"data.size\":\"desc\"},{\"data.docType\":\"desc\"},{\"data.owner\":\"desc\"}]},\"ddoc\":\"indexSizeSortDoc\", \"name\":\"indexSizeSortDesc\",\"type\":\"json\"}" http://hostname:port/myc1_Marbles/_index
 
 // Rich Query with index design doc and index name specified (Only supported if CouchDB is used as state database):
-//   peer chaincode query -C myc1 -n marbles -c '{"Args":["queryMarbles","{\"selector\":{\"docType\":\"marble\",\"owner\":\"tom\"}, \"use_index\":[\"_design/indexOwnerDoc\", \"indexOwner\"]}"]}'
+//   peer chaincode query -C myc1 -n Marbles -c '{"Args":["queryMarbles","{\"selector\":{\"docType\":\"Marble\",\"owner\":\"tom\"}, \"use_index\":[\"_design/indexOwnerDoc\", \"indexOwner\"]}"]}'
 
 // Rich Query with index design doc specified only (Only supported if CouchDB is used as state database):
-//   peer chaincode query -C myc1 -n marbles -c '{"Args":["queryMarbles","{\"selector\":{\"docType\":{\"$eq\":\"marble\"},\"owner\":{\"$eq\":\"tom\"},\"size\":{\"$gt\":0}},\"fields\":[\"docType\",\"owner\",\"size\"],\"sort\":[{\"size\":\"desc\"}],\"use_index\":\"_design/indexSizeSortDoc\"}"]}'
+//   peer chaincode query -C myc1 -n Marbles -c '{"Args":["queryMarbles","{\"selector\":{\"docType\":{\"$eq\":\"Marble\"},\"owner\":{\"$eq\":\"tom\"},\"size\":{\"$gt\":0}},\"fields\":[\"docType\",\"owner\",\"size\"],\"sort\":[{\"size\":\"desc\"}],\"use_index\":\"_design/indexSizeSortDoc\"}"]}'
 
 package main
 
@@ -115,7 +115,7 @@ import (
 type SimpleChaincode struct {
 }
 
-type marble struct {
+type Marble struct {
 	ObjectType string `json:"docType"` //docType is used to distinguish the various types of objects in state database
 	Name       string `json:"name"`    //the fieldtags are needed to keep case from bouncing around
 	Color      string `json:"color"`
@@ -148,23 +148,23 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 	fmt.Println("invoke is running " + function)
 
 	// Handle different functions
-	if function == "initMarble" { //create a new marble
+	if function == "initMarble" { //create a new Marble
 		return t.initMarble(stub, args)
-	} else if function == "transferMarble" { //change owner of a specific marble
+	} else if function == "transferMarble" { //change owner of a specific Marble
 		return t.transferMarble(stub, args)
-	} else if function == "transferMarblesBasedOnColor" { //transfer all marbles of a certain color
+	} else if function == "transferMarblesBasedOnColor" { //transfer all Marbles of a certain color
 		return t.transferMarblesBasedOnColor(stub, args)
-	} else if function == "delete" { //delete a marble
+	} else if function == "delete" { //delete a Marble
 		return t.delete(stub, args)
-	} else if function == "readMarble" { //read a marble
+	} else if function == "readMarble" { //read a Marble
 		return t.readMarble(stub, args)
-	} else if function == "queryMarblesByOwner" { //find marbles for owner X using rich query
+	} else if function == "queryMarblesByOwner" { //find Marbles for owner X using rich query
 		return t.queryMarblesByOwner(stub, args)
-	} else if function == "queryMarbles" { //find marbles based on an ad hoc rich query
+	} else if function == "queryMarbles" { //find Marbles based on an ad hoc rich query
 		return t.queryMarbles(stub, args)
-	} else if function == "getHistoryForMarble" { //get history of values for a marble
+	} else if function == "getHistoryForMarble" { //get history of values for a Marble
 		return t.getHistoryForMarble(stub, args)
-	} else if function == "getMarblesByRange" { //get marbles based on range query
+	} else if function == "getMarblesByRange" { //get Marbles based on range query
 		return t.getMarblesByRange(stub, args)
 	}
 
@@ -173,19 +173,19 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 }
 
 // ============================================================
-// initMarble - create a new marble, store into chaincode state
+// initMarble - create a new Marble, store into chaincode state
 // ============================================================
 func (t *SimpleChaincode) initMarble(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	var err error
 
 	//   0       1       2     3
-	// "marbleid", "blue", "35", "bob"
+	// "Marbleid", "blue", "35", "bob"
 	if len(args) != 4 {
 		return shim.Error("Incorrect number of arguments. Expecting 4")
 	}
 
 	// ==== Input sanitation ====
-	fmt.Println("- start init marble")
+	fmt.Println("- start init Marble")
 	if len(args[0]) <= 0 {
 		return shim.Error("1st argument must be a non-empty string")
 	}
@@ -198,7 +198,7 @@ func (t *SimpleChaincode) initMarble(stub shim.ChaincodeStubInterface, args []st
 	if len(args[3]) <= 0 {
 		return shim.Error("4th argument must be a non-empty string")
 	}
-	marbleName := args[0]
+	MarbleName := args[0]
 	color := strings.ToLower(args[1])
 	size, err := strconv.Atoi(args[2])
 	owner := strings.ToLower(args[3])
@@ -206,65 +206,65 @@ func (t *SimpleChaincode) initMarble(stub shim.ChaincodeStubInterface, args []st
 		return shim.Error("3rd argument must be a numeric string")
 	}
 
-	// ==== Check if marble already exists ====
-	marbleAsBytes, err := stub.GetState(marbleName)
+	// ==== Check if Marble already exists ====
+	MarbleAsBytes, err := stub.GetState(MarbleName)
 	if err != nil {
-		return shim.Error("Failed to get marble: " + err.Error())
-	} else if marbleAsBytes != nil {
-		fmt.Println("This marble already exists: " + marbleName)
-		return shim.Error("This marble already exists: " + marbleName)
+		return shim.Error("Failed to get Marble: " + err.Error())
+	} else if MarbleAsBytes != nil {
+		fmt.Println("This Marble already exists: " + MarbleName)
+		return shim.Error("This Marble already exists: " + MarbleName)
 	}
 
-	// ==== Create marble object and marshal to JSON ====
-	objectType := "marble"
-	marble := &marble{objectType, marbleName, color, size, owner}
-	marbleJSONasBytes, err := json.Marshal(marble)
-	if err != nil {
-		return shim.Error(err.Error())
-	}
-	//Alternatively, build the marble json string manually if you don't want to use struct marshalling
-	//marbleJSONasString := `{"docType":"Marble",  "name": "` + marbleName + `", "color": "` + color + `", "size": ` + strconv.Itoa(size) + `, "owner": "` + owner + `"}`
-	//marbleJSONasBytes := []byte(str)
-
-	// === Save marble to state ===
-	err = stub.PutState(marbleName, marbleJSONasBytes)
+	// ==== Create Marble object and marshal to JSON ====
+	objectType := "Marble"
+	Marble := &Marble{objectType, MarbleName, color, size, owner}
+	MarbleJSONasBytes, err := json.Marshal(Marble)
 	if err != nil {
 		return shim.Error(err.Error())
 	}
+	//Alternatively, build the Marble json string manually if you don't want to use struct marshalling
+	//MarbleJSONasString := `{"docType":"Marble",  "name": "` + MarbleName + `", "color": "` + color + `", "size": ` + strconv.Itoa(size) + `, "owner": "` + owner + `"}`
+	//MarbleJSONasBytes := []byte(str)
 
-	//  ==== Index the marble to enable color-based range queries, e.g. return all blue marbles ====
+	// === Save Marble to state ===
+	err = stub.PutState(MarbleName, MarbleJSONasBytes)
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+
+	//  ==== Index the Marble to enable color-based range queries, e.g. return all blue Marbles ====
 	//  An 'index' is a normal key/value entry in state.
 	//  The key is a composite key, with the elements that you want to range query on listed first.
 	//  In our case, the composite key is based on indexName~color~name.
 	//  This will enable very efficient state range queries based on composite keys matching indexName~color~*
 	indexName := "color~name"
-	colorNameIndexKey, err := stub.CreateCompositeKey(indexName, []string{marble.Color, marble.Name})
+	colorNameIndexKey, err := stub.CreateCompositeKey(indexName, []string{Marble.Color, Marble.Name})
 	if err != nil {
 		return shim.Error(err.Error())
 	}
-	//  Save index entry to state. Only the key name is needed, no need to store a duplicate copy of the marble.
+	//  Save index entry to state. Only the key name is needed, no need to store a duplicate copy of the Marble.
 	//  Note - passing a 'nil' value will effectively delete the key from state, therefore we pass null character as value
 	value := []byte{0x00}
 	stub.PutState(colorNameIndexKey, value)
 
 	// ==== Marble saved and indexed. Return success ====
-	fmt.Println("- end init marble")
+	fmt.Println("- end init Marble")
 	return shim.Success(nil)
 }
 
 // ===============================================
-// readMarble - read a marble from chaincode state
+// readMarble - read a Marble from chaincode state
 // ===============================================
 func (t *SimpleChaincode) readMarble(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	var name, jsonResp string
 	var err error
 
 	if len(args) != 1 {
-		return shim.Error("Incorrect number of arguments. Expecting name of the marble to query")
+		return shim.Error("Incorrect number of arguments. Expecting name of the Marble to query")
 	}
 
 	name = args[0]
-	valAsbytes, err := stub.GetState(name) //get the marble from chaincode state
+	valAsbytes, err := stub.GetState(name) //get the Marble from chaincode state
 	if err != nil {
 		jsonResp = "{\"Error\":\"Failed to get state for " + name + "\"}"
 		return shim.Error(jsonResp)
@@ -277,40 +277,40 @@ func (t *SimpleChaincode) readMarble(stub shim.ChaincodeStubInterface, args []st
 }
 
 // ==================================================
-// delete - remove a marble key/value pair from state
+// delete - remove a Marble key/value pair from state
 // ==================================================
 func (t *SimpleChaincode) delete(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	var jsonResp string
-	var marbleJSON marble
+	var MarbleJSON Marble
 	if len(args) != 1 {
 		return shim.Error("Incorrect number of arguments. Expecting 1")
 	}
-	marbleName := args[0]
+	MarbleName := args[0]
 
-	// to maintain the color~name index, we need to read the marble first and get its color
-	valAsbytes, err := stub.GetState(marbleName) //get the marble from chaincode state
+	// to maintain the color~name index, we need to read the Marble first and get its color
+	valAsbytes, err := stub.GetState(MarbleName) //get the Marble from chaincode state
 	if err != nil {
-		jsonResp = "{\"Error\":\"Failed to get state for " + marbleName + "\"}"
+		jsonResp = "{\"Error\":\"Failed to get state for " + MarbleName + "\"}"
 		return shim.Error(jsonResp)
 	} else if valAsbytes == nil {
-		jsonResp = "{\"Error\":\"Marble does not exist: " + marbleName + "\"}"
+		jsonResp = "{\"Error\":\"Marble does not exist: " + MarbleName + "\"}"
 		return shim.Error(jsonResp)
 	}
 
-	err = json.Unmarshal([]byte(valAsbytes), &marbleJSON)
+	err = json.Unmarshal([]byte(valAsbytes), &MarbleJSON)
 	if err != nil {
-		jsonResp = "{\"Error\":\"Failed to decode JSON of: " + marbleName + "\"}"
+		jsonResp = "{\"Error\":\"Failed to decode JSON of: " + MarbleName + "\"}"
 		return shim.Error(jsonResp)
 	}
 
-	err = stub.DelState(marbleName) //remove the marble from chaincode state
+	err = stub.DelState(MarbleName) //remove the Marble from chaincode state
 	if err != nil {
 		return shim.Error("Failed to delete state:" + err.Error())
 	}
 
 	// maintain the index
 	indexName := "color~name"
-	colorNameIndexKey, err := stub.CreateCompositeKey(indexName, []string{marbleJSON.Color, marbleJSON.Name})
+	colorNameIndexKey, err := stub.CreateCompositeKey(indexName, []string{MarbleJSON.Color, MarbleJSON.Name})
 	if err != nil {
 		return shim.Error(err.Error())
 	}
@@ -324,7 +324,7 @@ func (t *SimpleChaincode) delete(stub shim.ChaincodeStubInterface, args []string
 }
 
 // ===========================================================
-// transfer a marble by setting a new owner name on the marble
+// transfer a Marble by setting a new owner name on the Marble
 // ===========================================================
 func (t *SimpleChaincode) transferMarble(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 
@@ -334,26 +334,26 @@ func (t *SimpleChaincode) transferMarble(stub shim.ChaincodeStubInterface, args 
 		return shim.Error("Incorrect number of arguments. Expecting 2")
 	}
 
-	marbleName := args[0]
+	MarbleName := args[0]
 	newOwner := strings.ToLower(args[1])
-	fmt.Println("- start transferMarble ", marbleName, newOwner)
+	fmt.Println("- start transferMarble ", MarbleName, newOwner)
 
-	marbleAsBytes, err := stub.GetState(marbleName)
+	MarbleAsBytes, err := stub.GetState(MarbleName)
 	if err != nil {
-		return shim.Error("Failed to get marble:" + err.Error())
-	} else if marbleAsBytes == nil {
+		return shim.Error("Failed to get Marble:" + err.Error())
+	} else if MarbleAsBytes == nil {
 		return shim.Error("Marble does not exist")
 	}
 
-	marbleToTransfer := marble{}
-	err = json.Unmarshal(marbleAsBytes, &marbleToTransfer) //unmarshal it aka JSON.parse()
+	MarbleToTransfer := Marble{}
+	err = json.Unmarshal(MarbleAsBytes, &MarbleToTransfer) //unmarshal it aka JSON.parse()
 	if err != nil {
 		return shim.Error(err.Error())
 	}
-	marbleToTransfer.Owner = newOwner //change the owner
+	MarbleToTransfer.Owner = newOwner //change the owner
 
-	marbleJSONasBytes, _ := json.Marshal(marbleToTransfer)
-	err = stub.PutState(marbleName, marbleJSONasBytes) //rewrite the marble
+	MarbleJSONasBytes, _ := json.Marshal(MarbleToTransfer)
+	err = stub.PutState(MarbleName, MarbleJSONasBytes) //rewrite the Marble
 	if err != nil {
 		return shim.Error(err.Error())
 	}
@@ -421,7 +421,7 @@ func (t *SimpleChaincode) getMarblesByRange(stub shim.ChaincodeStubInterface, ar
 }
 
 // ==== Example: GetStateByPartialCompositeKey/RangeQuery =========================================
-// transferMarblesBasedOnColor will transfer marbles of a given color to a certain new owner.
+// transferMarblesBasedOnColor will transfer Marbles of a given color to a certain new owner.
 // Uses a GetStateByPartialCompositeKey (range query) against color~name 'index'.
 // Committing peers will re-execute range queries to guarantee that result sets are stable
 // between endorsement time and commit time. The transaction is invalidated by the
@@ -448,10 +448,10 @@ func (t *SimpleChaincode) transferMarblesBasedOnColor(stub shim.ChaincodeStubInt
 	}
 	defer coloredMarbleResultsIterator.Close()
 
-	// Iterate through result set and for each marble found, transfer to newOwner
+	// Iterate through result set and for each Marble found, transfer to newOwner
 	var i int
 	for i = 0; coloredMarbleResultsIterator.HasNext(); i++ {
-		// Note that we don't get the value (2nd return variable), we'll just get the marble name from the composite key
+		// Note that we don't get the value (2nd return variable), we'll just get the Marble name from the composite key
 		responseRange, err := coloredMarbleResultsIterator.Next()
 		if err != nil {
 			return shim.Error(err.Error())
@@ -464,10 +464,10 @@ func (t *SimpleChaincode) transferMarblesBasedOnColor(stub shim.ChaincodeStubInt
 		}
 		returnedColor := compositeKeyParts[0]
 		returnedMarbleName := compositeKeyParts[1]
-		fmt.Printf("- found a marble from index:%s color:%s name:%s\n", objectType, returnedColor, returnedMarbleName)
+		fmt.Printf("- found a Marble from index:%s color:%s name:%s\n", objectType, returnedColor, returnedMarbleName)
 
-		// Now call the transfer function for the found marble.
-		// Re-use the same function that is used to transfer individual marbles
+		// Now call the transfer function for the found Marble.
+		// Re-use the same function that is used to transfer individual Marbles
 		response := t.transferMarble(stub, []string{returnedMarbleName, newOwner})
 		// if the transfer failed break out of loop and return error
 		if response.Status != shim.OK {
@@ -475,7 +475,7 @@ func (t *SimpleChaincode) transferMarblesBasedOnColor(stub shim.ChaincodeStubInt
 		}
 	}
 
-	responsePayload := fmt.Sprintf("Transferred %d %s marbles to %s", i, color, newOwner)
+	responsePayload := fmt.Sprintf("Transferred %d %s Marbles to %s", i, color, newOwner)
 	fmt.Println("- end transferMarblesBasedOnColor: " + responsePayload)
 	return shim.Success([]byte(responsePayload))
 }
@@ -494,7 +494,7 @@ func (t *SimpleChaincode) transferMarblesBasedOnColor(stub shim.ChaincodeStubInt
 // ============================================================================================
 
 // ===== Example: Parameterized rich query =================================================
-// queryMarblesByOwner queries for marbles based on a passed in owner.
+// queryMarblesByOwner queries for Marbles based on a passed in owner.
 // This is an example of a parameterized query where the query logic is baked into the chaincode,
 // and accepting a single query parameter (owner).
 // Only available on state databases that support rich query (e.g. CouchDB)
@@ -509,7 +509,7 @@ func (t *SimpleChaincode) queryMarblesByOwner(stub shim.ChaincodeStubInterface, 
 
 	owner := args[0]
 
-	queryString := fmt.Sprintf("{\"selector\":{\"docType\":\"marble\",\"owner\":\"%s\"}}", owner)
+	queryString := fmt.Sprintf("{\"selector\":{\"docType\":\"Marble\",\"owner\":\"%s\"}}", owner)
 
 	queryResults, err := getQueryResultForQueryString(stub, queryString)
 	if err != nil {
@@ -519,7 +519,7 @@ func (t *SimpleChaincode) queryMarblesByOwner(stub shim.ChaincodeStubInterface, 
 }
 
 // ===== Example: Ad hoc rich query ========================================================
-// queryMarbles uses a query string to perform a query for marbles.
+// queryMarbles uses a query string to perform a query for Marbles.
 // Query string matching state database syntax is passed in and executed as is.
 // Supports ad hoc queries that can be defined at runtime by the client.
 // If this is not desired, follow the queryMarblesForOwner example for parameterized queries.
@@ -594,17 +594,17 @@ func (t *SimpleChaincode) getHistoryForMarble(stub shim.ChaincodeStubInterface, 
 		return shim.Error("Incorrect number of arguments. Expecting 1")
 	}
 
-	marbleName := args[0]
+	MarbleName := args[0]
 
-	fmt.Printf("- start getHistoryForMarble: %s\n", marbleName)
+	fmt.Printf("- start getHistoryForMarble: %s\n", MarbleName)
 
-	resultsIterator, err := stub.GetHistoryForKey(marbleName)
+	resultsIterator, err := stub.GetHistoryForKey(MarbleName)
 	if err != nil {
 		return shim.Error(err.Error())
 	}
 	defer resultsIterator.Close()
 
-	// buffer is a JSON array containing historic values for the marble
+	// buffer is a JSON array containing historic values for the Marble
 	var buffer bytes.Buffer
 	buffer.WriteString("[")
 
@@ -626,7 +626,7 @@ func (t *SimpleChaincode) getHistoryForMarble(stub shim.ChaincodeStubInterface, 
 		buffer.WriteString(", \"Value\":")
 		// if it was a delete operation on given key, then we need to set the
 		//corresponding value null. Else, we will write the response.Value
-		//as-is (as the Value itself a JSON marble)
+		//as-is (as the Value itself a JSON Marble)
 		if response.IsDelete {
 			buffer.WriteString("null")
 		} else {
