@@ -44,6 +44,18 @@ func queryMarble(stub *shim.MockStub, name string) *Marble {
 	_ = json.Unmarshal(res.Payload,marble)
 	return marble
 }
+func queryDocument(stub *shim.MockStub, name string) *Document {
+
+	print("queryDocument")
+	res := stub.MockInvoke("1", [][]byte{[]byte("readDocument"), []byte(name)})
+
+	Expect(res.Status).To(BeEquivalentTo(shim.OK), fmt.Sprintf("queryDocument %s failed with %s" , name, string(res.Message)))
+	Expect(res.Payload).ToNot(BeNil(), fmt.Sprintf("queryDocument %s failed with %s ", name, string(res.Message)))
+
+	item := &Document{}
+	_ = json.Unmarshal(res.Payload,item)
+	return item
+}
 
 func getField(v *Marble, field string) string {
 	r := reflect.ValueOf(v)
@@ -100,6 +112,23 @@ var _ = Describe("GoChaincodeTemplate", func() {
 				fmt.Println(marble)
 				fmt.Println(m)
 				Expect(reflect.DeepEqual(m, marble)).To(BeTrue(), "DeepEqual should return true")
+			})
+		})
+
+		Context("given initDocument", func() {
+			It("query should return the default values", func() {
+				docu := NewDocument("index","document123")
+				scc := new(SimpleChaincode)
+				stub := shim.NewMockStub("ex02", scc)
+				command := []byte("initDocument")
+				arg1 := []byte(docu.Uuid)
+				arg2 := []byte(docu.Data)
+				args := [][]byte{command,arg1,arg2}
+
+				checkInvoke(stub,args)
+
+				var m = queryDocument(stub, docu.Uuid)
+				Expect(reflect.DeepEqual(m, docu)).To(BeTrue(), "DeepEqual should return true")
 			})
 		})
 	})
