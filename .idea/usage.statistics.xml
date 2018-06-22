@@ -32,20 +32,24 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="go" value="215" />
+          <entry key="sh" value="21" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
+          <entry key="Bash" value="21" />
           <entry key="Go" value="215" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="go" value="6" />
+          <entry key="sh" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
+          <entry key="Bash" value="1" />
           <entry key="Go" value="6" />
         </counts>
       </usages-collector>
