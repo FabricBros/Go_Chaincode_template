@@ -115,6 +115,8 @@ import (
 type SimpleChaincode struct {
 }
 
+var logger = shim.NewLogger("main logger")
+
 type Marble struct {
 	ObjectType string `json:"docType"` //docType is used to distinguish the various types of objects in state database
 	Name       string `json:"name"`    //the fieldtags are needed to keep case from bouncing around

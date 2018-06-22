@@ -31,26 +31,28 @@
     <session id="378700321">
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="go" value="215" />
-          <entry key="sh" value="21" />
+          <entry key="go" value="241" />
+          <entry key="sh" value="54" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Bash" value="21" />
-          <entry key="Go" value="215" />
+          <entry key="Bash" value="54" />
+          <entry key="Go" value="241" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="go" value="6" />
-          <entry key="sh" value="1" />
+          <entry key="gitignore" value="1" />
+          <entry key="go" value="9" />
+          <entry key="sh" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Bash" value="1" />
-          <entry key="Go" value="6" />
+          <entry key="Bash" value="3" />
+          <entry key="Go" value="9" />
+          <entry key="PLAIN_TEXT" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.go.postfix.template.usages.trigger" />
