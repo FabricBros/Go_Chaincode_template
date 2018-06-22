@@ -34,7 +34,7 @@ func NewUser( GroupId, UserId string  ) *User {
 // ============================================================
 // initDocument - creates a new document and stores it in the chaincode state
 // ============================================================
-func InitUser (stub shim.ChaincodeStubInterface, args []string) pb.Response {
+func (t *SimpleChaincode) initUser (stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	var err error
 
 	//   0			1
@@ -86,7 +86,7 @@ func InitUser (stub shim.ChaincodeStubInterface, args []string) pb.Response {
 // ===============================================
 // readMarble - read a Marble from chaincode state
 // ===============================================
-func ReadUser(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+func (t *SimpleChaincode) readUser(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	var name, jsonResp string
 	var err error
 
@@ -105,4 +105,32 @@ func ReadUser(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	}
 
 	return shim.Success(valAsbytes)
+}
+
+
+
+// query callback representing the query of a chaincode
+func (t *SimpleChaincode) updateUser(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+	logger.Debug("Enter updateUser")
+	defer logger.Debug("Exited updateUser")
+	var users []User
+
+	err := json.Unmarshal([]byte(args[0]), &users)
+	if err != nil {
+		logger.Error("Error unmarshing users json:", err)
+		return shim.Error(err.Error())
+	}
+
+	for _, v := range users{
+		pk := v.UserId
+		vBytes, err := json.Marshal(v)
+
+		if err!= nil{
+			logger.Debug("error marshaling", err)
+			return shim.Error(err.Error())
+		}
+		stub.PutState(pk, vBytes)
+	}
+
+	return shim.Success(nil)
 }

@@ -33,12 +33,14 @@
         <counts>
           <entry key="go" value="241" />
           <entry key="sh" value="54" />
+          <entry key="txt" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Bash" value="54" />
           <entry key="Go" value="241" />
+          <entry key="PLAIN_TEXT" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
