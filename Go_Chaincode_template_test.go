@@ -1,8 +1,7 @@
-package main_test
+package main
 
 import (
 	. "github.com/onsi/ginkgo"
-		. "github.com/Go_Chaincode_template"
 	//. "github.com/Go_Chaincode_template"
 	. "github.com/onsi/gomega"
 	"github.com/hyperledger/fabric/core/chaincode/shim"
@@ -53,6 +52,19 @@ func queryDocument(stub *shim.MockStub, name string) *Document {
 	Expect(res.Payload).ToNot(BeNil(), fmt.Sprintf("queryDocument %s failed with %s ", name, string(res.Message)))
 
 	item := &Document{}
+	_ = json.Unmarshal(res.Payload,item)
+	return item
+}
+
+func queryUser(stub *shim.MockStub, name string) *User {
+
+	print("queryUser")
+	res := stub.MockInvoke("1", [][]byte{[]byte("readUser"), []byte(name)})
+
+	Expect(res.Status).To(BeEquivalentTo(shim.OK), fmt.Sprintf("queryUser %s failed with %s" , name, string(res.Message)))
+	Expect(res.Payload).ToNot(BeNil(), fmt.Sprintf("queryUser %s failed with %s ", name, string(res.Message)))
+
+	item := &User{}
 	_ = json.Unmarshal(res.Payload,item)
 	return item
 }
@@ -115,8 +127,8 @@ var _ = Describe("GoChaincodeTemplate", func() {
 			})
 		})
 
-		Context("given initDocument", func() {
-			It("query should return the default values", func() {
+		Context("given a Document", func() {
+			It("query should return an identical document", func() {
 				docu := NewDocument("index","document123")
 				scc := new(SimpleChaincode)
 				stub := shim.NewMockStub("ex02", scc)
@@ -129,6 +141,26 @@ var _ = Describe("GoChaincodeTemplate", func() {
 
 				var m = queryDocument(stub, docu.Uuid)
 				Expect(reflect.DeepEqual(m, docu)).To(BeTrue(), "DeepEqual should return true")
+			})
+		})
+
+
+		Context("given a User registers with the system", func() {
+			It("query should return the default values", func() {
+				scc := new(SimpleChaincode)
+				stub := shim.NewMockStub("ex02", scc)
+
+				item := NewUser("org1","userId1")
+				command := []byte("initUser")
+				arg1 := []byte(item.GroupId)
+				arg2 := []byte(item.UserId)
+				args := [][]byte{command,arg1,arg2}
+
+				checkInvoke(stub,args)
+
+				var m = queryUser(stub, item.UserId)
+				Expect(m.GroupId).To(Equal(item.GroupId), "the GroupId doesn't match")
+				Expect(m.UserId).To(Equal(item.UserId), "the UserId doesn't match")
 			})
 		})
 	})

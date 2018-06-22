@@ -109,7 +109,7 @@ import (
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	pb "github.com/hyperledger/fabric/protos/peer"
-	)
+)
 
 // SimpleChaincode example simple Chaincode implementation
 type SimpleChaincode struct {
@@ -138,6 +138,7 @@ func NewDocument( uuid,data string ) *Document {
 		Data: data,
 	}
 }
+
 // ===================================================================================
 // Main
 // ===================================================================================
@@ -185,10 +186,22 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 		return t.getMarblesByRange(stub, args)
 	}else if function == "initDocument" {
 		return t.initDocument(stub, args)
+	}else if function == "initUser" {
+		return t.initUser(stub, args)
+	}else if function == "readUser" {
+		return t.readUser(stub, args)
 	}
 
 	fmt.Println("invoke did not find func: " + function) //error
 	return shim.Error("Received unknown function invocation")
+}
+
+func (t *SimpleChaincode) initUser(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+	return InitUser(stub,args)
+}
+
+func (t *SimpleChaincode) readUser(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+	return ReadUser(stub,args)
 }
 
 // ============================================================
