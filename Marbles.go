@@ -20,8 +20,6 @@ type Marble struct {
 	Owner      string `json:"owner"`
 }
 
-
-
 // ============================================================
 // initMarble - create a new Marble, store into chaincode state
 // ============================================================
