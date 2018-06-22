@@ -1,4 +1,4 @@
 ccgo
-src
-pkg
-old
+src/
+pkg/
+old/
