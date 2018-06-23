@@ -1,51 +1,82 @@
 package main
 
 import (
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
-		"github.com/hyperledger/fabric/core/chaincode/shim"
+	"github.com/hyperledger/fabric/core/chaincode/shim"
 	"reflect"
 	"encoding/json"
+	"testing"
+	"os"
+	"fmt"
 )
 
-var _ = Describe("Document operations", func() {
-	var (
-		documents []*Document
-	)
+var (
+	documents []*Document
+	stub *shim.MockStub
+	scc *SimpleChaincode
+)
 
-	BeforeEach(func() {
-		documents = []*Document{ NewDocument("Document1","Sample Data")}
-	})
+func mySetupFunction() {
+	//print("Setup")
+	documents = []*Document{ NewDocument("Document1","Sample Data")}
+	scc = new(SimpleChaincode)
+	stub = shim.NewMockStub("ex02", scc)
+}
 
-	Describe("Basic Document operations", func() {
-		Context("given a Document", func() {
-			scc := new(SimpleChaincode)
-			stub := shim.NewMockStub("ex02", scc)
+func myTeardownFunction() {
+	//print("Teardown")
+}
 
-			It("query should return an identical document", func() {
-				command := []byte("AddDocuments")
-				arg1,_ := json.Marshal(documents)
-				args := [][]byte{command, arg1}
+func TestMain(m *testing.M) {
+	mySetupFunction()
+	retCode := m.Run()
+	myTeardownFunction()
+	os.Exit(retCode)
+}
 
-				checkInvoke(stub, args)
 
-				var m = queryDocument(stub, documents[0].Uuid)
-				Expect(reflect.DeepEqual(m, documents[0])).To(BeTrue(), "DeepEqual should return true")
-			})
-			It("then update should modify the document", func() {
-				command := []byte("UpdateDocument")
-				var updateValue = "1234"
+func TestInvoke(t *testing.T) {
+	command := []byte("AddDocuments")
+	arg1,_ := json.Marshal(documents)
+	args := [][]byte{command, arg1}
 
-				documents[0].Data = updateValue
+	checkInvoke(stub, args)
 
-				arg1,_ := json.Marshal(documents)
-				args := [][]byte{command, arg1}
+	var m = queryDocument(stub, documents[0].Uuid)
+	if ! reflect.DeepEqual(m, documents[0]) {
+		t.Fail()
+	}
+}
+func TestDocumentUpdate(t *testing.T){
+			command := []byte("UpdateDocument")
+			var updateValue = "1234"
 
-				checkInvoke(stub, args)
+			documents[0].Data = updateValue
 
-				var m = queryDocument(stub, documents[0].Uuid)
-				Expect(m.Data).Should(Equal(updateValue), "should equal to the new value")
-			})
-		})
-	})
-})
+			arg1,_ := json.Marshal(documents)
+			args := [][]byte{command, arg1}
+
+			checkInvoke(stub, args)
+
+			var m = queryDocument(stub, documents[0].Uuid)
+			if m.Data != updateValue {
+					t.Fail() //("Value should reflect updated value.")
+			}
+}
+
+
+func queryDocument(stub *shim.MockStub, name string) *Document {
+
+	res := stub.MockInvoke("1", [][]byte{[]byte("RetrieveDocument"), []byte(name)})
+	if res.Status != shim.OK {
+		fmt.Printf("queryDocument %s failed with %s" , name, string(res.Message))
+		return nil
+	}
+	if res.Payload == nil {
+		fmt.Printf("queryDocument %s failed with %s ", name, string(res.Message))
+		return nil
+	}
+
+	item := &Document{}
+	_ = json.Unmarshal(res.Payload,item)
+	return item
+}

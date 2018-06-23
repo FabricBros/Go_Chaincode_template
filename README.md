@@ -8,6 +8,6 @@ $ ginkgo
 Run in devmode:
 ```
 $ ./fabric.sh up
-$ ./fabric startCC ccname
-$ ./fabric runCC ccname
+$ ./fabric.sh startCC ccname v1
+$ ./fabric.sh runCC ccname v1
 ```
