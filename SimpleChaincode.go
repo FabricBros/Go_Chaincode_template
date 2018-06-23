@@ -25,26 +25,26 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 	function, args := stub.GetFunctionAndParameters()
 	//fmt.Println("invoke is running " + function)
 
-	// Handle different functions
-	if function == "initMarble" { //create a new Marble
-		return t.initMarble(stub, args)
-	} else if function == "transferMarble" { //change owner of a specific Marble
-		return t.transferMarble(stub, args)
-	} else if function == "transferMarblesBasedOnColor" { //transfer all Marbles of a certain color
-		return t.transferMarblesBasedOnColor(stub, args)
-	} else if function == "delete" { //delete a Marble
-		return t.delete(stub, args)
-	} else if function == "readMarble" { //read a Marble
-		return t.readMarble(stub, args)
-	} else if function == "queryMarblesByOwner" { //find Marbles for owner X using rich query
-		return t.queryMarblesByOwner(stub, args)
-	} else if function == "queryMarbles" { //find Marbles based on an ad hoc rich query
-		return t.queryMarbles(stub, args)
-	} else if function == "getHistoryForMarble" { //get history of values for a Marble
-		return t.getHistoryForMarble(stub, args)
-	} else if function == "getMarblesByRange" { //get Marbles based on range query
-		return t.getMarblesByRange(stub, args)
-	}
+	//// Handle different functions
+	//if function == "initMarble" { //create a new Marble
+	//	return t.initMarble(stub, args)
+	//} else if function == "transferMarble" { //change owner of a specific Marble
+	//	return t.transferMarble(stub, args)
+	//} else if function == "transferMarblesBasedOnColor" { //transfer all Marbles of a certain color
+	//	return t.transferMarblesBasedOnColor(stub, args)
+	//} else if function == "delete" { //delete a Marble
+	//	return t.delete(stub, args)
+	//} else if function == "readMarble" { //read a Marble
+	//	return t.readMarble(stub, args)
+	//} else if function == "queryMarblesByOwner" { //find Marbles for owner X using rich query
+	//	return t.queryMarblesByOwner(stub, args)
+	//} else if function == "queryMarbles" { //find Marbles based on an ad hoc rich query
+	//	return t.queryMarbles(stub, args)
+	//} else if function == "getHistoryForMarble" { //get history of values for a Marble
+	//	return t.getHistoryForMarble(stub, args)
+	//} else if function == "getMarblesByRange" { //get Marbles based on range query
+	//	return t.getMarblesByRange(stub, args)
+	//}
 
 	// Check for health
 	if function == "Ping" {
@@ -70,11 +70,11 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 	}
 
 	// Settlement operations
-	if function == "AddSetlements" {
+	if function == "AddSettlements" {
 		return t.initSettlements(stub, args)
 	}else if function == "RetrieveSettlement" { //read a Marble
 		return t.readSettlements(stub, args)
-	}else if function == "UpdateSettlement"{
+	}else if function == "UpdateSettlements"{
 		return t.updateSettlements(stub, args)
 	}
 	// Accrual operations
