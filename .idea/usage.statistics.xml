@@ -59,5 +59,17 @@
       </usages-collector>
       <usages-collector id="statistics.go.postfix.template.usages.trigger" />
     </session>
+    <session id="-1704020533">
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="go" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Go" value="2" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
 </project>
