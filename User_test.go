@@ -52,10 +52,14 @@ func TestUserInit(t *testing.T){
 				arg2 := []byte(item.UserId)
 				args := [][]byte{command, arg1, arg2}
 
-				checkInvoke(stub, args)
+				err := checkInvoke(stub, args)
+				if err != nil {
+					fmt.Printf("Failed to create user: %s", err)
+				}
 
 				var m = queryUser(stub, item.UserId)
 				if m.UserId != item.UserId {
+					fmt.Printf("Failed to retrieve User %s ", item.UserId)
 					t.Fail()
 				}
 				//Expect(m.GroupId).To(Equal(item.GroupId), "the GroupId doesn't match")

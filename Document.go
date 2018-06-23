@@ -58,6 +58,8 @@ func (t *SimpleChaincode) initDocuments(stub shim.ChaincodeStubInterface, args [
 func (t *SimpleChaincode) readDocument(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	var name, jsonResp string
 	var err error
+	logger.Debug("Enter readDocument")
+	defer logger.Debug("Exited readDocument")
 
 	if len(args) != 1 {
 		return shim.Error("Incorrect number of arguments. Expecting name of the Document to query")

@@ -83,7 +83,7 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 	// Settlement operations
 	if function == "AddSettlements" {
 		return t.initSettlements(stub, args)
-	}else if function == "RetrieveSettlement" { //read a Marble
+	}else if function == "RetrieveSettlement" {
 		return t.readSettlements(stub, args)
 	}else if function == "UpdateSettlements"{
 		return t.updateSettlements(stub, args)

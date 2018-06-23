@@ -55,6 +55,8 @@ func (t *SimpleChaincode) initPOs(stub shim.ChaincodeStubInterface, args []strin
 func (t *SimpleChaincode) readPO(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	var name, jsonResp string
 	var err error
+	logger.Debug("Enter readPO")
+	defer logger.Debug("Exited readPO")
 
 	if len(args) != 1 {
 		return shim.Error("Incorrect number of arguments. Expecting name of the PO to query")

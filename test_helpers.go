@@ -40,8 +40,7 @@ func getField(v *Marble, field string) string {
 func checkInvoke(stub *shim.MockStub, args [][]byte) error{
 	resp := stub.MockInvoke("1", args)
 	if resp.Status != shim.OK {
-		//assert
-		return fmt.Errorf("Expected 200 got %d", resp.Status)
+		return fmt.Errorf("expected 200 got %d", resp.Status)
 	}
 	return nil
 	//Expect(resp.Status).To(BeEquivalentTo(shim.OK), fmt.Sprintf("checkInvoke %s failed with: %s", args, string(res.Message)))

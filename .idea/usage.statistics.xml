@@ -62,28 +62,32 @@
     <session id="-1704020533">
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="go" value="40" />
+          <entry key="go" value="69" />
           <entry key="json" value="1" />
           <entry key="md" value="2" />
+          <entry key="sh" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Go" value="40" />
+          <entry key="Bash" value="1" />
+          <entry key="Go" value="69" />
           <entry key="JSON" value="1" />
           <entry key="Markdown" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="go" value="1189" />
+          <entry key="go" value="1894" />
           <entry key="md" value="12" />
+          <entry key="txt" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Go" value="1189" />
+          <entry key="Go" value="1894" />
           <entry key="Markdown" value="12" />
+          <entry key="PLAIN_TEXT" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.go.postfix.template.usages.trigger" />
