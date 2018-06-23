@@ -33,7 +33,9 @@ func (t *SimpleChaincode) initMarble(stub shim.ChaincodeStubInterface, args []st
 	}
 
 	// ==== Input sanitation ====
-	fmt.Println("- start init Marble")
+	//fmt.Println("- start init Marble")
+	//defer 	fmt.Println("- end init Marble")
+
 	if len(args[0]) <= 0 {
 		return shim.Error("1st argument must be a non-empty string")
 	}
@@ -96,7 +98,6 @@ func (t *SimpleChaincode) initMarble(stub shim.ChaincodeStubInterface, args []st
 	stub.PutState(colorNameIndexKey, value)
 
 	// ==== Marble saved and indexed. Return success ====
-	fmt.Println("- end init Marble")
 	return shim.Success(nil)
 }
 

@@ -6,32 +6,30 @@ import (
 	pb "github.com/hyperledger/fabric/protos/peer"
 )
 
-// For storing arbitrary documents.
-type Document struct {
+// For storing arbitrary POs.
+type PO struct {
 	ObjectType string `json:"docType"`
 	Uuid 	   string	`json:"uuid"`
 	Data		string `json:"data"`
 }
 
-func NewDocument( uuid,data string ) *Document {
-	return &Document{
-		ObjectType: "document",
+func NewPO( uuid,data string ) *PO {
+	return &PO{
+		ObjectType: "PO",
 		Uuid: uuid,
 		Data: data,
 	}
 }
 
-//var ObjectType="document"
-
 
 // ============================================================
-// initDocument - creates a new document and stores it in the chaincode state
+// initPO - creates a new PO and stores it in the chaincode state
 // ============================================================
-func (t *SimpleChaincode) initDocuments(stub shim.ChaincodeStubInterface, args []string) pb.Response {
-	logger.Debug("adding Document")
-	defer logger.Debug("exit adding Document")
+func (t *SimpleChaincode) initPOs(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+	logger.Debug("adding PO")
+	defer logger.Debug("exit adding PO")
 
-	var items []Document
+	var items []PO
 
 	err := json.Unmarshal([]byte(args[0]), &items)
 	if err != nil {
@@ -40,7 +38,6 @@ func (t *SimpleChaincode) initDocuments(stub shim.ChaincodeStubInterface, args [
 	}
 
 	for _, v := range items{
-		v.ObjectType="document"
 		pk := v.Uuid
 		vBytes, err := json.Marshal(v)
 
@@ -55,16 +52,16 @@ func (t *SimpleChaincode) initDocuments(stub shim.ChaincodeStubInterface, args [
 }
 
 
-func (t *SimpleChaincode) readDocument(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+func (t *SimpleChaincode) readPO(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	var name, jsonResp string
 	var err error
 
 	if len(args) != 1 {
-		return shim.Error("Incorrect number of arguments. Expecting name of the Document to query")
+		return shim.Error("Incorrect number of arguments. Expecting name of the PO to query")
 	}
 
 	name = args[0]
-	valAsbytes, err := stub.GetState(name) //get the Document from chaincode state
+	valAsbytes, err := stub.GetState(name) //get the PO from chaincode state
 	if err != nil {
 		jsonResp = "{\"Error\":\"Failed to get state for " + name + "\"}"
 		return shim.Error(jsonResp)
@@ -79,14 +76,14 @@ func (t *SimpleChaincode) readDocument(stub shim.ChaincodeStubInterface, args []
 
 
 // query callback representing the query of a chaincode
-func (t *SimpleChaincode) updateDocuments(stub shim.ChaincodeStubInterface, args []string) pb.Response {
-	logger.Debug("Enter updateDocuments")
-	defer logger.Debug("Exited updateDocuments")
-	var items []Document
+func (t *SimpleChaincode) updatePOs(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+	logger.Debug("Enter updatePOs")
+	defer logger.Debug("Exited updatePOs")
+	var items []PO
 
 	err := json.Unmarshal([]byte(args[0]), &items)
 	if err != nil {
-		logger.Error("Error unmarshing documents json:", err)
+		logger.Error("Error unmarshing POs json:", err)
 		return shim.Error(err.Error())
 	}
 

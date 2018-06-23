@@ -9,5 +9,5 @@ import (
 
 func TestGoChaincodeTemplate(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "GoChaincodeTemplate Suite")
+	RunSpecs(t, "chaincode suite")
 }

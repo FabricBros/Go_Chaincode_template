@@ -85,7 +85,7 @@ type Invoice struct {
 
 
 // Transaction makes payment of X units from A to B
-func (t *SimpleChaincode) addInvoice(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+func (t *SimpleChaincode) addInvoices(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	logger.Debug("adding invoice")
 	defer logger.Debug("exit adding invoice")
 
@@ -139,9 +139,9 @@ func (t *SimpleChaincode) getInvoice(stub shim.ChaincodeStubInterface, args []st
 }
 
 // query callback representing the query of a chaincode
-func (t *SimpleChaincode) updateInvoice(stub shim.ChaincodeStubInterface, args []string) pb.Response {
-	logger.Debug("Enter updateInvoice")
-	defer logger.Debug("Exited updateInvoice")
+func (t *SimpleChaincode) updateInvoices(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+	logger.Debug("Enter updateInvoices")
+	defer logger.Debug("Exited updateInvoices")
 	var invoices []Invoice
 
 	err := json.Unmarshal([]byte(args[0]), &invoices)

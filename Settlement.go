@@ -6,32 +6,30 @@ import (
 	pb "github.com/hyperledger/fabric/protos/peer"
 )
 
-// For storing arbitrary documents.
-type Document struct {
+// For storing arbitrary Settlements.
+type Settlement struct {
 	ObjectType string `json:"docType"`
 	Uuid 	   string	`json:"uuid"`
 	Data		string `json:"data"`
 }
 
-func NewDocument( uuid,data string ) *Document {
-	return &Document{
-		ObjectType: "document",
+func NewSettlement( uuid,data string ) *Settlement {
+	return &Settlement{
+		ObjectType: "settlement",
 		Uuid: uuid,
 		Data: data,
 	}
 }
 
-//var ObjectType="document"
-
 
 // ============================================================
-// initDocument - creates a new document and stores it in the chaincode state
+// initSettlement - creates a new settlement and stores it in the chaincode state
 // ============================================================
-func (t *SimpleChaincode) initDocuments(stub shim.ChaincodeStubInterface, args []string) pb.Response {
-	logger.Debug("adding Document")
-	defer logger.Debug("exit adding Document")
+func (t *SimpleChaincode) initSettlements(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+	logger.Debug("adding settlements")
+	defer logger.Debug("exit adding settlements")
 
-	var items []Document
+	var items []Settlement
 
 	err := json.Unmarshal([]byte(args[0]), &items)
 	if err != nil {
@@ -40,7 +38,6 @@ func (t *SimpleChaincode) initDocuments(stub shim.ChaincodeStubInterface, args [
 	}
 
 	for _, v := range items{
-		v.ObjectType="document"
 		pk := v.Uuid
 		vBytes, err := json.Marshal(v)
 
@@ -55,21 +52,24 @@ func (t *SimpleChaincode) initDocuments(stub shim.ChaincodeStubInterface, args [
 }
 
 
-func (t *SimpleChaincode) readDocument(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+// ===============================================
+// readMarble - read a Marble from chaincode state
+// ===============================================
+func (t *SimpleChaincode) readSettlements(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	var name, jsonResp string
 	var err error
 
 	if len(args) != 1 {
-		return shim.Error("Incorrect number of arguments. Expecting name of the Document to query")
+		return shim.Error("Incorrect number of arguments. Expecting name of the Settlement to query")
 	}
 
 	name = args[0]
-	valAsbytes, err := stub.GetState(name) //get the Document from chaincode state
+	valAsbytes, err := stub.GetState(name) //get the Marble from chaincode state
 	if err != nil {
 		jsonResp = "{\"Error\":\"Failed to get state for " + name + "\"}"
 		return shim.Error(jsonResp)
 	} else if valAsbytes == nil {
-		jsonResp = "{\"Error\":\"Marble does not exist: " + name + "\"}"
+		jsonResp = "{\"Error\":\"Settlement does not exist: " + name + "\"}"
 		return shim.Error(jsonResp)
 	}
 
@@ -77,16 +77,15 @@ func (t *SimpleChaincode) readDocument(stub shim.ChaincodeStubInterface, args []
 }
 
 
-
 // query callback representing the query of a chaincode
-func (t *SimpleChaincode) updateDocuments(stub shim.ChaincodeStubInterface, args []string) pb.Response {
-	logger.Debug("Enter updateDocuments")
-	defer logger.Debug("Exited updateDocuments")
-	var items []Document
+func (t *SimpleChaincode) updateSettlements(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+	logger.Debug("Enter updateSettlements")
+	defer logger.Debug("Exited updateSettlements")
+	var items []Settlement
 
 	err := json.Unmarshal([]byte(args[0]), &items)
 	if err != nil {
-		logger.Error("Error unmarshing documents json:", err)
+		logger.Error("Error unmarshing Settlements json:", err)
 		return shim.Error(err.Error())
 	}
 

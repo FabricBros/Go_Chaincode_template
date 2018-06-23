@@ -135,7 +135,7 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface) pb.Response {
 // ========================================
 func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 	function, args := stub.GetFunctionAndParameters()
-	fmt.Println("invoke is running " + function)
+	//fmt.Println("invoke is running " + function)
 
 	// Handle different functions
 	if function == "initMarble" { //create a new Marble
@@ -148,8 +148,6 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 		return t.delete(stub, args)
 	} else if function == "readMarble" { //read a Marble
 		return t.readMarble(stub, args)
-	} else if function == "readDocument" { //read a Marble
-		return t.readDocument(stub, args)
 	} else if function == "queryMarblesByOwner" { //find Marbles for owner X using rich query
 		return t.queryMarblesByOwner(stub, args)
 	} else if function == "queryMarbles" { //find Marbles based on an ad hoc rich query
@@ -158,15 +156,61 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 		return t.getHistoryForMarble(stub, args)
 	} else if function == "getMarblesByRange" { //get Marbles based on range query
 		return t.getMarblesByRange(stub, args)
-	}else if function == "initDocument" {
-		return t.initDocument(stub, args)
-	}else if function == "initUser" {
+	}
+
+	// PO operations
+	if function == "AddPOs" {
+		return t.initPOs(stub, args)
+	}else if function == "RetrievePO" {
+		return t.readPO(stub, args)
+	}else if function == "UpdatePOs" {
+		return t.updatePOs(stub, args)
+	}
+
+	// User operations
+	if function == "initUser" {
 		return t.initUser(stub, args)
 	}else if function == "readUser" {
 		return t.readUser(stub, args)
 	}else if function == "updateUser" {
 		return t.updateUser(stub, args)
 	}
+
+	// Settlement operations
+	if function == "AddSetlements" {
+		return t.initSettlements(stub, args)
+	}else if function == "RetrieveSettlement" { //read a Marble
+		return t.readSettlements(stub, args)
+	}else if function == "UpdateSettlement"{
+		return t.updateSettlements(stub, args)
+	}
+	// Accrual operations
+	if function == "AddAccruals" {
+		return t.initAccruals(stub, args)
+	}else if function == "RetrieveAccrual" {
+		return t.readAccrual(stub, args)
+	}else if function == "UpdateAccrual"{
+		return t.updateAccruals(stub, args)
+	}
+
+	// Document operations
+	if function == "AddDocuments" {
+		return t.initDocuments(stub, args)
+	}else if function == "RetrieveDocument" { //read a Marble
+		return t.readDocument(stub, args)
+	}else if function == "UpdateDocument"{
+		return t.updateDocuments(stub, args)
+	}
+
+	// Invoice operations
+	if function == "AddInvoices" {
+		return t.addInvoices(stub, args)
+	} else if function == "RetrieveInvoice" {
+		return t.getInvoice(stub, args)
+	} else if function == "UpdateInvoices" {
+		return t.updateInvoices(stub, args)
+	}
+
 
 	fmt.Println("invoke did not find func: " + function) //error
 	return shim.Error("Received unknown function invocation")

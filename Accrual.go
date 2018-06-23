@@ -6,32 +6,30 @@ import (
 	pb "github.com/hyperledger/fabric/protos/peer"
 )
 
-// For storing arbitrary documents.
-type Document struct {
+// For storing arbitrary Accruals.
+type Accrual struct {
 	ObjectType string `json:"docType"`
 	Uuid 	   string	`json:"uuid"`
 	Data		string `json:"data"`
 }
 
-func NewDocument( uuid,data string ) *Document {
-	return &Document{
-		ObjectType: "document",
+func NewAccrual( uuid,data string ) *Accrual {
+	return &Accrual{
+		ObjectType: "Accrual",
 		Uuid: uuid,
 		Data: data,
 	}
 }
 
-//var ObjectType="document"
-
 
 // ============================================================
-// initDocument - creates a new document and stores it in the chaincode state
+// initAccrual - creates a new Accrual and stores it in the chaincode state
 // ============================================================
-func (t *SimpleChaincode) initDocuments(stub shim.ChaincodeStubInterface, args []string) pb.Response {
-	logger.Debug("adding Document")
-	defer logger.Debug("exit adding Document")
+func (t *SimpleChaincode) initAccruals(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+	logger.Debug("adding Accrual")
+	defer logger.Debug("exit adding Accrual")
 
-	var items []Document
+	var items []Accrual
 
 	err := json.Unmarshal([]byte(args[0]), &items)
 	if err != nil {
@@ -40,7 +38,6 @@ func (t *SimpleChaincode) initDocuments(stub shim.ChaincodeStubInterface, args [
 	}
 
 	for _, v := range items{
-		v.ObjectType="document"
 		pk := v.Uuid
 		vBytes, err := json.Marshal(v)
 
@@ -55,16 +52,16 @@ func (t *SimpleChaincode) initDocuments(stub shim.ChaincodeStubInterface, args [
 }
 
 
-func (t *SimpleChaincode) readDocument(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+func (t *SimpleChaincode) readAccrual(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	var name, jsonResp string
 	var err error
 
 	if len(args) != 1 {
-		return shim.Error("Incorrect number of arguments. Expecting name of the Document to query")
+		return shim.Error("Incorrect number of arguments. Expecting name of the Accrual to query")
 	}
 
 	name = args[0]
-	valAsbytes, err := stub.GetState(name) //get the Document from chaincode state
+	valAsbytes, err := stub.GetState(name) //get the Accrual from chaincode state
 	if err != nil {
 		jsonResp = "{\"Error\":\"Failed to get state for " + name + "\"}"
 		return shim.Error(jsonResp)
@@ -79,14 +76,14 @@ func (t *SimpleChaincode) readDocument(stub shim.ChaincodeStubInterface, args []
 
 
 // query callback representing the query of a chaincode
-func (t *SimpleChaincode) updateDocuments(stub shim.ChaincodeStubInterface, args []string) pb.Response {
-	logger.Debug("Enter updateDocuments")
-	defer logger.Debug("Exited updateDocuments")
-	var items []Document
+func (t *SimpleChaincode) updateAccruals(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+	logger.Debug("Enter updateAccruals")
+	defer logger.Debug("Exited updateAccruals")
+	var items []Accrual
 
 	err := json.Unmarshal([]byte(args[0]), &items)
 	if err != nil {
-		logger.Error("Error unmarshing documents json:", err)
+		logger.Error("Error unmarshing Accruals json:", err)
 		return shim.Error(err.Error())
 	}
 
