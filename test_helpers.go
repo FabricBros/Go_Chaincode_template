@@ -42,6 +42,7 @@ func queryMarble(stub *shim.MockStub, name string) *Marble {
 	_ = json.Unmarshal(res.Payload,marble)
 	return marble
 }
+
 func queryDocument(stub *shim.MockStub, name string) *Document {
 
 	//print("queryDocument")
