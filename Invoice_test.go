@@ -5,6 +5,7 @@ import (
 		"encoding/json"
 	"testing"
 	"fmt"
+	"io/ioutil"
 	)
 
 var (
@@ -13,6 +14,24 @@ var (
 func init () {
 	scc = new(SimpleChaincode)
 	stub = shim.NewMockStub("ex02", scc)
+}
+
+func TestUnmarshalInvoice(t *testing.T ){
+	b, err := ioutil.ReadFile("./fixtures/invoice_ex1.json")
+	if err != nil {
+		fmt.Printf("failed to load example file. ")
+		t.Fail()
+	}
+	json_example := []Invoice{}
+	err = json.Unmarshal(b, &json_example)
+	if err != nil {
+		fmt.Printf("failed to Unmarshal example file. Error: %s ", err.Error())
+		t.Fail()
+	}
+	if json_example[0].FromCoCo!="CO2" || json_example[0].ToCoCo!="CO1" || len(json_example[0].LineLevel) != 1 {
+		fmt.Printf("failed to Unmarshal data from example file. ")
+		t.Fail()
+	}
 }
 
 func TestAddInvoices(t *testing.T) {

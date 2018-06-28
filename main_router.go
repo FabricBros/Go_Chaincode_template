@@ -64,11 +64,11 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 
 	// PO operations
 	if function == "AddPOs" {
-		return t.initPOs(stub, args)
+		return t.initPurchaseOrders(stub, args)
 	}else if function == "RetrievePO" {
-		return t.readPO(stub, args)
+		return t.readPurchaseOrder(stub, args)
 	}else if function == "UpdatePOs" {
-		return t.updatePOs(stub, args)
+		return t.updatePurchaseOrders(stub, args)
 	}
 
 	// User operations
@@ -82,11 +82,11 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 
 	// Settlement operations
 	if function == "AddSettlements" {
-		return t.initSettlements(stub, args)
+		return t.initSettlementOrders(stub, args)
 	}else if function == "RetrieveSettlement" {
-		return t.readSettlements(stub, args)
+		return t.readSettlementOrders(stub, args)
 	}else if function == "UpdateSettlements"{
-		return t.updateSettlements(stub, args)
+		return t.updateSettlementOrders(stub, args)
 	}
 	// Accrual operations
 	if function == "AddAccruals" {

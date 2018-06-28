@@ -1,0 +1,8 @@
+{
+  "Group_Name": "string",
+  "Group_ID": "string_(6_Digit_alpha_numeric)_PK",
+  "Group_Contact_person_Name": "string",
+  "Group_Contact_person_email_ID": "string",
+  "Parent_Entity_Name": "string",
+  "Group_Contact_person_Address": "string"
+}

@@ -1,0 +1,30 @@
+[{
+  "Ship_From_Entity_Code": "string",
+  "Ship_To_Entity_Code": "string",
+  "Contact_Name": "string",
+  "Goods_Information": "string",
+  "PO_Number": "string",
+  "SO_Number": "string",
+  "Invoice_Number": "string",
+  "Sent_Date": "string",
+  "Receipt_Date": "string",
+  "Total_Received_Qty": "string",
+  "Total_Acceptable_Qty": "string",
+  "Total_Rejected_Qty": "string",
+  "Return_Qty": "string",
+  "Under_Testing_Qty": "string",
+  "Comments": "string",
+  "line_level":[{
+    "Lineno": "string_PK",
+    "Product_Code": "string",
+    "Description": "string",
+    "Qty_Ordered": "string",
+    "Qty_Shipped": "string",
+    "Qty_Received": "string",
+    "Qty_Acceptable": "string",
+    "Qty_Rejected": "string",
+    "Qty_Returned": "string",
+    "Qty_Under_Testing": "string",
+    "Comments": "string"
+  }]
+}]

@@ -1,0 +1,33 @@
+[{
+  "Uuid": "PO3201",
+  "PO_no": "PO3201",
+  "From_CoCo": "CO1",
+  "To_CoCo": "CO2",
+  "PO_Date": "03/01/2018 08:12:40Z",
+  "PO_Type": "PO",
+  "PO_Valid_till_date": "05/02/2018 08:12:40Z",
+  "Currency": "USD",
+  "Total_PO_Amount": "1000",
+  "line_level": [
+    {
+      "Line_No.": "1",
+      "Product_Code": "EXPC1",
+      "Description": "Something nice",
+      "Quantity": "9",
+      "Measurement_Unit": "EA",
+      "Price_per_Unit": "100",
+      "Total_Price": "900",
+      "Line_item_Tax_1": "US Tax",
+      "Line_item_Tax_Amount_1_": "0",
+      "Line_item_Tax_2": "Corporate Tax",
+      "Line_item_Tax_Amount_2": "0",
+      "Line_item_Tax_3": "Texas Tax",
+      "Line_item_Tax_Amount_3": "0",
+      "Line_item_Tax_4": "Florida Tax",
+      "Line_item_Tax_Amount_4": "0",
+      "Line_item_Tax_5": "Tea Tax",
+      "Line_item_Tax_Amount_5": "100",
+      "Line_item_total_Price": "1000"
+    }
+  ]
+}]
