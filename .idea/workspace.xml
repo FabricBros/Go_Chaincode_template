@@ -2,25 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1692966d-a1f2-4a2d-8f21-56146cbbf315" name="Default" comment="a">
-      <change afterPath="$PROJECT_DIR$/OtherStructs.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SettlementOrder.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fixtures/groupMaster_ex1.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fixtures/inspection_ex1.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fixtures/invoice_ex1.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fixtures/purchaseOrder_ex1.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fixtures/settlementOrder_ex1.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fixtures/userTable_ex1.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/e2e.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/usage.statistics.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/usage.statistics.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Invoice.go" beforeDir="false" afterPath="$PROJECT_DIR$/Invoice.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Invoice_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/Invoice_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PO.go" beforeDir="false" afterPath="$PROJECT_DIR$/PurchaseOrder.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PO_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/PurchaseOrder_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Settlement.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Settlement_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/SettlementOrder_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_router.go" beforeDir="false" afterPath="$PROJECT_DIR$/main_router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_helpers.go" beforeDir="false" afterPath="$PROJECT_DIR$/test_helpers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fixtures/invoice_ex1.json" beforeDir="false" afterPath="$PROJECT_DIR$/fixtures/invoice_ex1.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/e2e.sh" beforeDir="false" afterPath="$PROJECT_DIR$/tests/e2e.sh" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,20 +16,20 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/chaincode$go_test_chaincode.out" NAME="go test chaincode Coverage Results" MODIFIED="1529795057729" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/chaincode$go_test_github_com_FabricBros_chaincode.out" NAME="go test github.com/FabricBros/chaincode Coverage Results" MODIFIED="1530134647906" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/chaincode$go_test_github_com_FabricBros_chaincode.out" NAME="go test github.com/FabricBros/chaincode Coverage Results" MODIFIED="1530156051295" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/chaincode$TestGoChaincodeTemplate_in_github_com_FabricBros_chaincode_tests.out" NAME="TestGoChaincodeTemplate in github.com/FabricBros/chaincode/tests Coverage Results" MODIFIED="1529765184245" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/Go_Chaincode_template$go_test_github_com_Go_Chaincode_template.out" NAME="go test github.com/Go_Chaincode_template Coverage Results" MODIFIED="1529188814889" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
   <component name="CoverageViewManager">
-    <option name="myElementSize" value="511" />
+    <option name="myElementSize" value="561" />
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/e2e.sh">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret selection-end-line="3" selection-end-column="62" />
+              <caret selection-end-line="9" />
             </state>
           </provider>
         </entry>
@@ -51,8 +37,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fixtures/invoice_ex1.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="62" column="22" selection-start-line="62" selection-start-column="22" selection-end-line="62" selection-end-column="22" />
+            <state>
+              <caret column="22" selection-start-column="21" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="FIRST">
+              <first_editor relative-caret-position="345">
+                <caret line="24" column="71" selection-start-line="24" selection-start-column="71" selection-end-line="24" selection-end-column="71" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -88,7 +86,7 @@
         <entry file="file://$PROJECT_DIR$/SettlementOrder_test.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="195">
-              <caret line="42" column="16" lean-forward="true" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="16" />
+              <caret line="42" column="16" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -113,8 +111,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>UpdateInvoice</find>
-      <find>(</find>
       <find>purchase</find>
       <find>Line_item_Tax_Amount_1_</find>
       <find>newInv</find>
@@ -143,6 +139,8 @@
       <find>SettlementOrder</find>
       <find>AddSettlements</find>
       <find>invoice</find>
+      <find />
+      <find>\n</find>
     </findStrings>
     <replaceStrings>
       <replace>Marble</replace>
@@ -174,7 +172,6 @@
         <option value="$PROJECT_DIR$/Go_Chaincode_template_test.go" />
         <option value="$PROJECT_DIR$/marbles_chaincode.go" />
         <option value="$PROJECT_DIR$/sourceme.sh" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/tests/test_helpers.go" />
         <option value="$PROJECT_DIR$/tests/chaincode_suite_test.go" />
         <option value="$PROJECT_DIR$/tests/marbles_test.go" />
@@ -205,14 +202,15 @@
         <option value="$PROJECT_DIR$/test_helpers.go" />
         <option value="$PROJECT_DIR$/fixtures/groupMaster_ex1.json" />
         <option value="$PROJECT_DIR$/fixtures/userTable_ex1.json" />
-        <option value="$PROJECT_DIR$/fixtures/invoice_ex1.json" />
         <option value="$PROJECT_DIR$/fixtures/purchaseOrder_ex1.json" />
         <option value="$PROJECT_DIR$/fixtures/settlementOrder_ex1.json" />
         <option value="$PROJECT_DIR$/fixtures/inspection_ex1.json" />
         <option value="$PROJECT_DIR$/Invoice_test.go" />
         <option value="$PROJECT_DIR$/PurchaseOrder_test.go" />
         <option value="$PROJECT_DIR$/SettlementOrder_test.go" />
+        <option value="$PROJECT_DIR$/fixtures/invoice_ex1.json" />
         <option value="$PROJECT_DIR$/tests/e2e.sh" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -223,8 +221,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="29" />
-    <option name="y" value="63" />
+    <option name="x" value="9" />
+    <option name="y" value="24" />
     <option name="width" value="1583" />
     <option name="height" value="960" />
   </component>
@@ -392,15 +390,6 @@
     </recent_temporary>
   </component>
   <component name="TestHistory">
-    <history-entry file="go_test_github_com_FabricBros_chaincode - 2018.06.27 at 20h 00m 24s.xml">
-      <configuration name="go test github.com/FabricBros/chaincode" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="go_test_github_com_FabricBros_chaincode - 2018.06.27 at 20h 01m 04s.xml">
-      <configuration name="go test github.com/FabricBros/chaincode" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="go_test_github_com_FabricBros_chaincode - 2018.06.27 at 20h 01m 16s.xml">
-      <configuration name="go test github.com/FabricBros/chaincode" configurationId="GoTestRunConfiguration" />
-    </history-entry>
     <history-entry file="go_test_github_com_FabricBros_chaincode - 2018.06.27 at 20h 06m 51s.xml">
       <configuration name="go test github.com/FabricBros/chaincode" configurationId="GoTestRunConfiguration" />
     </history-entry>
@@ -422,16 +411,26 @@
     <history-entry file="go_test_github_com_FabricBros_chaincode - 2018.06.27 at 20h 12m 49s.xml">
       <configuration name="go test github.com/FabricBros/chaincode" configurationId="GoTestRunConfiguration" />
     </history-entry>
+    <history-entry file="go_test_github_com_FabricBros_chaincode - 2018.06.27 at 22h 18m 53s.xml">
+      <configuration name="go test github.com/FabricBros/chaincode" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="go_test_github_com_FabricBros_chaincode - 2018.06.27 at 22h 19m 01s.xml">
+      <configuration name="go test github.com/FabricBros/chaincode" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="go_test_github_com_FabricBros_chaincode - 2018.06.27 at 22h 20m 51s.xml">
+      <configuration name="go test github.com/FabricBros/chaincode" configurationId="GoTestRunConfiguration" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="29" y="63" width="1583" height="960" extended-state="0" />
+    <frame x="9" y="24" width="1583" height="960" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19273199" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19273199" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49928263" weight="0.3289941" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49772874" visible="true" weight="0.45798817" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49772874" visible="true" weight="0.45798817" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49967554" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -445,8 +444,8 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Graph Database" order="3" />
       <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="right" id="Coverage" order="5" sideWeight="0.51310045" side_tool="true" visible="true" weight="0.21804023" />
-      <window_info anchor="right" id="Terminal" order="6" sideWeight="0.48689955" visible="true" weight="0.21804023" />
+      <window_info anchor="right" id="Coverage" order="5" sideWeight="0.51310045" side_tool="true" visible="true" weight="0.32576248" />
+      <window_info anchor="right" id="Terminal" order="6" sideWeight="0.48689955" visible="true" weight="0.32576248" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -529,16 +528,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/book_test.go" />
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="105">
-            <caret line="7" selection-start-line="7" selection-end-line="7" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../onsi/ginkgo/ginkgo_dsl.go" />
     <entry file="file://$PROJECT_DIR$/cmd/main_router.go" />
     <entry file="file://$PROJECT_DIR$/cmd/main_router_.json" />
@@ -745,7 +734,7 @@
     <entry file="file://$PROJECT_DIR$/SettlementOrder_test.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
-          <caret line="42" column="16" lean-forward="true" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="16" />
+          <caret line="42" column="16" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -758,15 +747,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/fixtures/invoice_ex1.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="62" column="22" selection-start-line="62" selection-start-column="22" selection-end-line="62" selection-end-column="22" />
+        <state>
+          <caret column="22" selection-start-column="21" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/e2e.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret selection-end-line="3" selection-end-column="62" />
+          <caret selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="345">
+            <caret line="24" column="71" selection-start-line="24" selection-start-column="71" selection-end-line="24" selection-end-column="71" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
