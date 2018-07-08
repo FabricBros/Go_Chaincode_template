@@ -28,12 +28,19 @@ type PurchaseOrder struct {
 	Ref           string `json:"Ref"` // PO#
 	Seller        string `json:"Seller"`
 	SKU           string `json:"SKU"`
-	Qty           string `json:"Qty"`
+	Qty           float32 `json:"Qty,string"`
 	Curr          string `json:"Curr" `//EUR USD
 	UnitCost	 float32 `json:"UnitCost,string"`
 	Amount	 float32 `json:"Amount,string"`
-	Type	 string `json:"Type"` // STD NTE
+	Type	 POType `json:"Type"` // STD NTE
 }
+
+//
+type POType string
+const (
+	STDTYPE = "STD"
+	NTETYPE = "NTETYPE"
+)
 
 func NewPurchaseOrder(uuid string) *PurchaseOrder {
 	return &PurchaseOrder{
@@ -56,6 +63,7 @@ func (t *SimpleChaincode) initPurchaseOrders(stub shim.ChaincodeStubInterface, a
 		logger.Error("Error unmarshing invoice json:", err)
 		return shim.Error(err.Error())
 	}
+
 	logger.Debugf("We have: %d items", len(items))
 	for _, v := range items {
 		pk := v.Uuid

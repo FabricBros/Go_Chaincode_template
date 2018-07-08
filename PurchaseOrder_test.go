@@ -10,11 +10,23 @@ import (
 )
 
 var (
-	pos = []*PurchaseOrder{NewPurchaseOrder("C1_PO1")}
+	pos = []*PurchaseOrder{}
 )
 
 func init() {
-	pos[0].PONo = "PO1"
+	po1 := NewPurchaseOrder("C1_PO1")
+	po1.PONo = "PO1"
+	po1.Buyer="A1"
+	po1.Seller="B1"
+	po1.Doc="Document"
+	po1.Ref="Reference"
+	po1.SKU="1910"
+	po1.Qty=10.0
+	po1.Curr="USD"
+	po1.UnitCost=10.0
+	po1.Amount=10.0
+	po1.Type=STDTYPE
+	pos = append(pos,po1)
 }
 
 func queryPurchaseOrder(stub *shim.MockStub, name string) *PurchaseOrder {
@@ -53,7 +65,7 @@ func TestUnmarshalPurchaseOrder(t *testing.T) {
 	}
 }
 
-func TestAddPurchaseOrders(t *testing.T) {
+func AddPo(){
 	command := []byte("AddPOs")
 	arg1, _ := json.Marshal(pos)
 	args := [][]byte{command, arg1}
@@ -61,14 +73,23 @@ func TestAddPurchaseOrders(t *testing.T) {
 	checkInvoke(stub, args)
 }
 
+func TestAddPurchaseOrders(t *testing.T) {
+		AddPo()
+}
+
 func TestQueryPurchaseOrders(t *testing.T) {
+	AddPo()
+
 	var m = queryPurchaseOrder(stub, pos[0].Uuid)
-	if (! reflect.DeepEqual(m, pos[0])) {
+
+	if ! reflect.DeepEqual(m, pos[0]) {
 		t.Fail()
 	}
 }
 
 func TestUpdatePO(t *testing.T) {
+	AddPo()
+
 	command := []byte("UpdatePOs")
 	var updateValue = "1234"
 

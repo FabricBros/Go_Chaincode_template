@@ -21,9 +21,6 @@ func NewDocument( uuid,data string ) *Document {
 	}
 }
 
-//var ObjectType="document"
-
-
 // ============================================================
 // initDocument - creates a new document and stores it in the chaincode state
 // ============================================================
@@ -71,7 +68,7 @@ func (t *SimpleChaincode) readDocument(stub shim.ChaincodeStubInterface, args []
 		jsonResp = "{\"Error\":\"Failed to get state for " + name + "\"}"
 		return shim.Error(jsonResp)
 	} else if valAsbytes == nil {
-		jsonResp = "{\"Error\":\"Marble does not exist: " + name + "\"}"
+		jsonResp = "{\"Error\":\"Document does not exist: " + name + "\"}"
 		return shim.Error(jsonResp)
 	}
 

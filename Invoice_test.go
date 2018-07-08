@@ -9,12 +9,15 @@ import (
 	)
 
 var (
-	invoices = []Invoice {{Uuid: "invoice123", Ref:"123",Seller:"Foo", Buyer:"Bar"}}
+	invoices = []Invoice {}
 )
 func init () {
 	scc = new(SimpleChaincode)
 	stub = shim.NewMockStub("ex02", scc)
 	logger.SetLevel(shim.LogDebug)
+
+	invoices = append(invoices, Invoice{Uuid: "invoice123", Ref:"123",Seller:"Foo", Buyer:"Bar"})
+
 }
 
 func TestUnmarshalInvoice(t *testing.T ){
@@ -35,12 +38,17 @@ func TestUnmarshalInvoice(t *testing.T ){
 	}
 }
 
-func TestAddInvoices(t *testing.T) {
+func addInvoice() error{
 	command := []byte("AddInvoices")
 	arg1,_ := json.Marshal(invoices)
 	args := [][]byte{command, arg1}
 
 	err := checkInvoke(stub, args)
+	return err
+}
+
+func TestAddInvoices(t *testing.T) {
+	var err = addInvoice()
 	if err!=nil {
 		fmt.Printf("Failed to AddInvoices: %s", err)
 	}
@@ -53,35 +61,39 @@ func TestAddInvoices(t *testing.T) {
 }
 
 func TestInvoiceUpdate(t *testing.T){
-			command := []byte("UpdateInvoices")
-			var updateValue = "1234"
+	addInvoice()
 
-			invoices[0].Seller = updateValue
+	command := []byte("UpdateInvoices")
+	var updateValue = "1234"
 
-			arg1,_ := json.Marshal(invoices)
-			args := [][]byte{command, arg1}
+	invoices[0].Seller = updateValue
 
-			checkInvoke(stub, args)
+	arg1,_ := json.Marshal(invoices)
+	args := [][]byte{command, arg1}
 
-			var m = queryInvoice(stub, invoices[0].Uuid)
-			if m == nil || m[0].Seller != updateValue {
-					t.Fail() //("Value should reflect updated value.")
-			}
+	checkInvoke(stub, args)
+
+	var m = queryInvoice(stub, invoices[0].Uuid)
+	if m == nil || m[0].Seller != updateValue {
+			t.Fail() //("Value should reflect updated value.")
+	}
 }
 
-
 func queryInvoice(stub *shim.MockStub, name string) []Invoice {
-	logger.Debugf("Retrieve: %s", name)
+	logger.Debugf("queryInvoice: %s", name)
+	defer logger.Debug("queryInvoice out")
 
 	res := stub.MockInvoke("1", [][]byte{[]byte("RetrieveInvoice"), []byte(name)})
 	if res.Status != shim.OK {
 		fmt.Printf("queryInvoice %s failed with %s" , name, string(res.Message))
 		return nil
 	}
+
 	if res.Payload == nil {
 		fmt.Printf("queryInvoice %s failed with %s ", name, string(res.Message))
 		return nil
 	}
+
 	logger.Debugf("Payload: %s", res.Payload)
 	item := make([]Invoice, 0)
 	//item := Invoice{}
