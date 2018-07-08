@@ -9,11 +9,12 @@ import (
 	)
 
 var (
-	invoices = []Invoice {{InvoiceNumber: "invoice123",FromCoCo:"hello"}}
+	invoices = []Invoice {{Uuid: "invoice123", Ref:"123",Seller:"Foo", Buyer:"Bar"}}
 )
 func init () {
 	scc = new(SimpleChaincode)
 	stub = shim.NewMockStub("ex02", scc)
+	logger.SetLevel(shim.LogDebug)
 }
 
 func TestUnmarshalInvoice(t *testing.T ){
@@ -28,7 +29,7 @@ func TestUnmarshalInvoice(t *testing.T ){
 		fmt.Printf("failed to Unmarshal example file. Error: %s ", err.Error())
 		t.Fail()
 	}
-	if json_example[0].FromCoCo!="CO2" || json_example[0].ToCoCo!="CO1" || len(json_example[0].LineLevel) != 1 {
+	if json_example[0].Seller!="A3" || json_example[0].Buyer!="A5" || len(json_example) != 21 {
 		fmt.Printf("failed to Unmarshal data from example file. ")
 		t.Fail()
 	}
@@ -44,9 +45,9 @@ func TestAddInvoices(t *testing.T) {
 		fmt.Printf("Failed to AddInvoices: %s", err)
 	}
 
-	var m = queryInvoice(stub, invoices[0].InvoiceNumber)
+	var m = queryInvoice(stub, invoices[0].Uuid)
 
-	if len(m)==0 ||  m[0].InvoiceNumber != invoices[0].InvoiceNumber || m[0].FromCoCo != invoices[0].FromCoCo {
+	if m == nil ||  m[0].Ref != invoices[0].Ref || m[0].Seller != invoices[0].Seller {
 		t.Fail()
 	}
 }
@@ -55,21 +56,22 @@ func TestInvoiceUpdate(t *testing.T){
 			command := []byte("UpdateInvoices")
 			var updateValue = "1234"
 
-			invoices[0].FromCoCo = updateValue
+			invoices[0].Seller = updateValue
 
 			arg1,_ := json.Marshal(invoices)
 			args := [][]byte{command, arg1}
 
 			checkInvoke(stub, args)
 
-			var m = queryInvoice(stub, invoices[0].InvoiceNumber)
-			if len(m) == 0 || m[0].FromCoCo != updateValue {
+			var m = queryInvoice(stub, invoices[0].Uuid)
+			if m == nil || m[0].Seller != updateValue {
 					t.Fail() //("Value should reflect updated value.")
 			}
 }
 
 
 func queryInvoice(stub *shim.MockStub, name string) []Invoice {
+	logger.Debugf("Retrieve: %s", name)
 
 	res := stub.MockInvoke("1", [][]byte{[]byte("RetrieveInvoice"), []byte(name)})
 	if res.Status != shim.OK {
@@ -80,11 +82,13 @@ func queryInvoice(stub *shim.MockStub, name string) []Invoice {
 		fmt.Printf("queryInvoice %s failed with %s ", name, string(res.Message))
 		return nil
 	}
-	//fmt.Printf("Payload: %s", res.Payload)
+	logger.Debugf("Payload: %s", res.Payload)
 	item := make([]Invoice, 0)
+	//item := Invoice{}
 	err := json.Unmarshal(res.Payload,&item)
 	if err != nil {
 		fmt.Printf("Failed to unmarshal: %s", err)
 	}
+
 	return item
 }

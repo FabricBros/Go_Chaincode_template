@@ -1,52 +1,46 @@
 package main
 
 import (
-		"encoding/json"
+	"encoding/json"
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	pb "github.com/hyperledger/fabric/protos/peer"
 )
 
+//FabricKey
+// 	Buyer
+// Doc
+// Ref (PO#)
+// 	Seller
+// SKU
+// Qty
+// Curr
+// Unit cost
+// Amount
+// Type
+
 // For storing arbitrary POs.
 type PurchaseOrder struct {
-	ObjectType		string
-	Uuid			string
-	PONo            string `json:"PO_no"`
-	FromCoCo        string `json:"From_CoCo"`
-	ToCoCo          string `json:"To_CoCo"`
-	PODate          string `json:"PO_Date"`
-	POType          string `json:"PO_Type"`
-	POValidTillDate string `json:"PO_Valid_till_date"`
-	Currency        string `json:"Currency"`
-	TotalPOAmount   string `json:"Total_PO_Amount"`
-	LineLevel []struct {
-		LineNo             string `json:"Line_No."`
-		ProductCode        string `json:"Product_Code"`
-		Description        string `json:"Description"`
-		Quantity           string `json:"Quantity"`
-		MeasurementUnit    string `json:"Measurement_Unit"`
-		PricePerUnit       string `json:"Price_per_Unit"`
-		TotalPrice         string `json:"Total_Price"`
-		LineItemTax1       string `json:"Line_item_Tax_1"`
-		LineItemTaxAmount1 string `json:"Line_item_Tax_Amount_1_"`
-		LineItemTax2       string `json:"Line_item_Tax_2"`
-		LineItemTaxAmount2 string `json:"Line_item_Tax_Amount_2"`
-		LineItemTax3       string `json:"Line_item_Tax_3"`
-		LineItemTaxAmount3 string `json:"Line_item_Tax_Amount_3"`
-		LineItemTax4       string `json:"Line_item_Tax_4"`
-		LineItemTaxAmount4 string `json:"Line_item_Tax_Amount_4"`
-		LineItemTax5       string `json:"Line_item_Tax_5"`
-		LineItemTaxAmount5 string `json:"Line_item_Tax_Amount_5"`
-		LineItemTotalPrice string `json:"Line_item_total_Price"`
-	} `json:"line_level"`
+	ObjectType    string
+	Uuid          string `json:"FabricKey"`
+	Buyer          string `json:"Buyer"`
+	PONo          string `json:"PO_no"`
+	Doc           string `json:"Doc"`  // "PO"
+	Ref           string `json:"Ref"` // PO#
+	Seller        string `json:"Seller"`
+	SKU           string `json:"SKU"`
+	Qty           string `json:"Qty"`
+	Curr          string `json:"Curr" `//EUR USD
+	UnitCost	 float32 `json:"UnitCost,string"`
+	Amount	 float32 `json:"Amount,string"`
+	Type	 string `json:"Type"` // STD NTE
 }
 
-func NewPurchaseOrder( uuid string ) *PurchaseOrder {
+func NewPurchaseOrder(uuid string) *PurchaseOrder {
 	return &PurchaseOrder{
 		ObjectType: "PurchaseOrder",
-		Uuid: uuid,
+		Uuid:       uuid,
 	}
 }
-
 
 // ============================================================
 // initPO - creates a new PO and stores it in the chaincode state
@@ -62,14 +56,14 @@ func (t *SimpleChaincode) initPurchaseOrders(stub shim.ChaincodeStubInterface, a
 		logger.Error("Error unmarshing invoice json:", err)
 		return shim.Error(err.Error())
 	}
-
-	for _, v := range items{
-		pk := v.PONo
-		v.ObjectType="PurchaseOrder"
+	logger.Debugf("We have: %d items", len(items))
+	for _, v := range items {
+		pk := v.Uuid
+		v.ObjectType = "PurchaseOrder"
 		vBytes, err := json.Marshal(v)
 
-		if err!= nil{
-			logger.Debug("error marshaling", err)
+		if err != nil {
+			logger.Error("error marshaling", err)
 			return shim.Error(err.Error())
 		}
 		stub.PutState(pk, vBytes)
@@ -77,7 +71,6 @@ func (t *SimpleChaincode) initPurchaseOrders(stub shim.ChaincodeStubInterface, a
 
 	return shim.Success(nil)
 }
-
 
 func (t *SimpleChaincode) readPurchaseOrder(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	var name, jsonResp string
@@ -102,8 +95,6 @@ func (t *SimpleChaincode) readPurchaseOrder(stub shim.ChaincodeStubInterface, ar
 	return shim.Success(valAsbytes)
 }
 
-
-
 // query callback representing the query of a chaincode
 func (t *SimpleChaincode) updatePurchaseOrders(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	logger.Debug("Enter updatePOs")
@@ -116,12 +107,12 @@ func (t *SimpleChaincode) updatePurchaseOrders(stub shim.ChaincodeStubInterface,
 		return shim.Error(err.Error())
 	}
 
-	for _, v := range items{
+	for _, v := range items {
 		pk := v.Uuid
-		v.ObjectType="PurchaseOrder"
+		v.ObjectType = "PurchaseOrder"
 		vBytes, err := json.Marshal(v)
 
-		if err!= nil{
+		if err != nil {
 			logger.Debug("error marshaling", err)
 			return shim.Error(err.Error())
 		}
@@ -130,4 +121,3 @@ func (t *SimpleChaincode) updatePurchaseOrders(stub shim.ChaincodeStubInterface,
 
 	return shim.Success(nil)
 }
-

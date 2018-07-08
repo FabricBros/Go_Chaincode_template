@@ -38,12 +38,12 @@ func getField(v *Marble, field string) string {
 }
 
 func checkInvoke(stub *shim.MockStub, args [][]byte) error{
+	//logger.Debugf("checkInvoke: %s", args)
 	resp := stub.MockInvoke("1", args)
 	if resp.Status != shim.OK {
-		fmt.Printf("Failed to Invoke %s", args)
+		logger.Errorf("Failed to Invoke %s", args)
 		return fmt.Errorf("expected 200 got %d", resp.Status)
 	}
 	return nil
-	//Expect(resp.Status).To(BeEquivalentTo(shim.OK), fmt.Sprintf("checkInvoke %s failed with: %s", args, string(res.Message)))
 }
 

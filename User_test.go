@@ -1,27 +1,11 @@
 package main
 
-//. "github.com/onsi/ginkgo"
-//. "github.com/onsi/gomega"
-
 import (
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	"testing"
 	"encoding/json"
 	"fmt"
 )
-
-//var _ = Describe("User operations", func() {
-//	var (
-//		users []*User
-//	)
-//
-//	BeforeEach(func() {
-//		users = []*User{ NewUser("User1","Sample Data")}
-//	})
-//
-//	Describe("User operations", func() {
-//		Context("given a User registers with the system", func() {
-//			It("query should return the default values", func() {
 
 func queryUser(stub *shim.MockStub, name string) *User {
 
@@ -62,6 +46,4 @@ func TestUserInit(t *testing.T){
 					fmt.Printf("Failed to retrieve User %s ", item.UserId)
 					t.Fail()
 				}
-				//Expect(m.GroupId).To(Equal(item.GroupId), "the GroupId doesn't match")
-				//Expect(m.UserId).To(Equal(item.UserId), "the UserId doesn't match")
 }
