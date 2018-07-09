@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	pb "github.com/hyperledger/fabric/protos/peer"
+	"bytes"
 )
 
 //FabricKey
@@ -20,27 +21,24 @@ import (
 
 // For storing arbitrary POs.
 type PurchaseOrder struct {
-	ObjectType    string
-	Uuid          string `json:"FabricKey"`
-	Buyer          string `json:"Buyer"`
-	PONo          string `json:"PO_no"`
-	Doc           string `json:"Doc"`  // "PO"
-	Ref           string `json:"Ref"` // PO#
-	Seller        string `json:"Seller"`
-	SKU           string `json:"SKU"`
-	Qty           string `json:"Qty"`
-	Curr          string `json:"Curr" `//EUR USD
-	UnitCost	 float32 `json:"UnitCost,string"`
-	Amount	 float32 `json:"Amount,string"`
-	Type	 string `json:"Type"` // STD NTE
+	Amount   string `json:"amount"`
+	Buyer    string `json:"buyer"`
+	Currency string `json:"currency"`
+	Doc      string `json:"doc"`
+	Quantity string    `json:"quantity"`
+	RefID    string `json:"refId"`
+	Seller   string `json:"seller"`
+	Sku      string    `json:"sku"`
+	Type     string `json:"type"`
+	UnitCost string    `json:"unitCost"`
 }
 
-func NewPurchaseOrder(uuid string) *PurchaseOrder {
-	return &PurchaseOrder{
-		ObjectType: "PurchaseOrder",
-		Uuid:       uuid,
-	}
-}
+//func NewPurchaseOrder(uuid string) *PurchaseOrder {
+//	return &PurchaseOrder{
+//		ObjectType: "PurchaseOrder",
+//		Uuid:       uuid,
+//	}
+//}
 
 // ============================================================
 // initPO - creates a new PO and stores it in the chaincode state
@@ -58,8 +56,8 @@ func (t *SimpleChaincode) initPurchaseOrders(stub shim.ChaincodeStubInterface, a
 	}
 	logger.Debugf("We have: %d items", len(items))
 	for _, v := range items {
-		pk := v.Uuid
-		v.ObjectType = "PurchaseOrder"
+		pk := v.RefID
+		//v.ObjectType = "PurchaseOrder"
 		vBytes, err := json.Marshal(v)
 
 		if err != nil {
@@ -92,7 +90,13 @@ func (t *SimpleChaincode) readPurchaseOrder(stub shim.ChaincodeStubInterface, ar
 		return shim.Error(jsonResp)
 	}
 
-	return shim.Success(valAsbytes)
+	logger.Debug("writing returned payload")
+	var buffer bytes.Buffer
+	buffer.WriteString("[")
+	buffer.WriteString(string(valAsbytes))
+	buffer.WriteString("]")
+
+	return shim.Success([]byte(buffer.Bytes()))
 }
 
 // query callback representing the query of a chaincode
@@ -108,8 +112,8 @@ func (t *SimpleChaincode) updatePurchaseOrders(stub shim.ChaincodeStubInterface,
 	}
 
 	for _, v := range items {
-		pk := v.Uuid
-		v.ObjectType = "PurchaseOrder"
+		pk := v.RefID
+		//v.ObjectType = "PurchaseOrder"
 		vBytes, err := json.Marshal(v)
 
 		if err != nil {

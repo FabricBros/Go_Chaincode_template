@@ -9,19 +9,16 @@ import (
 
 //FabricKey	Seller	Date	Ref	Buyer	PO #	SKU	Qty	Curr	Unit cost	Amount
 type Invoice struct {
-	ObjectType string
-	Uuid       string `json:"FabricKey"`
-	Seller     string `json:"Seller"`
-	Date       string `json:"Date"`
-	Ref        string `json:"Ref"`
-	Buyer      string `json:"Buyer"`
-	PONum      string `json:"PONum"`
-	SKU        string `json:"SKU"`
-	Qty        int `json:"Qty,string"`
-	Curr       string `json:"Curr"`
-	UnitCost   string `json:"UnitCost"`
-	Amount     string `json:"Amount"`
-	State		string `json:"State"`
+	Amount   string `json:"amount"`
+	Buyer    string `json:"buyer"`
+	Currency string `json:"currency"`
+	Date     string `json:"date"`
+	PoNumber string `json:"poNumber"`
+	Quantity string    `json:"quantity"`
+	RefID    string    `json:"refId"`
+	Seller   string `json:"seller"`
+	Sku      string    `json:"sku"`
+	UnitCost string    `json:"unitCost"`
 }
 
 func init(){
@@ -41,9 +38,11 @@ func (t *SimpleChaincode) addInvoices(stub shim.ChaincodeStubInterface, args []s
 	}
 
 	logger.Debugf("We have: %d items", len(items))
+
+	//create PK CN+REF+PO
 	for _, v := range items {
 		//logger.Debugf("Adding: %-v", v)
-		pk := v.Uuid
+		pk := v.RefID
 		vBytes, err := json.Marshal(v)
 
 		if err != nil {
@@ -96,7 +95,7 @@ func (t *SimpleChaincode) updateInvoices(stub shim.ChaincodeStubInterface, args 
 	}
 
 	for _, v := range invoices {
-		pk := v.Uuid
+		pk := v.RefID
 		vBytes, err := json.Marshal(v)
 
 		if err != nil {

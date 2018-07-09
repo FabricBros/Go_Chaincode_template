@@ -63,11 +63,11 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 	}
 
 	// PO operations
-	if function == "AddPOs" {
+	if function == "AddPO" {
 		return t.initPurchaseOrders(stub, args)
 	}else if function == "RetrievePO" {
 		return t.readPurchaseOrder(stub, args)
-	}else if function == "UpdatePOs" {
+	}else if function == "UpdatePO" {
 		return t.updatePurchaseOrders(stub, args)
 	}
 
