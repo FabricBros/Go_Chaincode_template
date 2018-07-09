@@ -35,7 +35,7 @@ func TestMain(m *testing.M) {
 
 
 func TestInvoke(t *testing.T) {
-	command := []byte("AddDocuments")
+	command := []byte(ADD_DOCUMENTS)
 	arg1,_ := json.Marshal(documents)
 	args := [][]byte{command, arg1}
 
@@ -47,7 +47,7 @@ func TestInvoke(t *testing.T) {
 	}
 }
 func TestDocumentUpdate(t *testing.T){
-			command := []byte("UpdateDocument")
+			command := []byte(UPDATE_DOCUMENTS)
 			var updateValue = "1234"
 
 			documents[0].Data = updateValue
@@ -66,7 +66,7 @@ func TestDocumentUpdate(t *testing.T){
 
 func queryDocument(stub *shim.MockStub, name string) *Document {
 
-	res := stub.MockInvoke("1", [][]byte{[]byte("RetrieveDocument"), []byte(name)})
+	res := stub.MockInvoke("1", [][]byte{[]byte(GET_DOCUMENTS), []byte(name)})
 	if res.Status != shim.OK {
 		fmt.Printf("queryDocument %s failed with %s" , name, string(res.Message))
 		return nil

@@ -4,37 +4,35 @@ import (
 	"fmt"
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	pb "github.com/hyperledger/fabric/protos/peer"
-
 )
 
 var logger = shim.NewLogger("main logger")
 
 const (
 	// INVOICE FC
-	ADD_INVOICES = "AddInvoices"
-	GET_INVOICES = "RetreiveInvoice"
+	ADD_INVOICES    = "AddInvoices"
+	GET_INVOICES    = "RetreiveInvoice"
 	UPDATE_INVOICES = "UpdateInvoices"
 
 	//POs
-	ADD_PO = "AddPO"
-	GET_PO = "RetreivePO" // ( poNumber )
-	UPDATE_PO = "UpdatePO"//( PurchaseOrder[] )
+	ADD_PO    = "AddPO"
+	GET_PO    = "RetreivePO" // ( poNumber )
+	UPDATE_PO = "UpdatePO"   //( PurchaseOrder[] )
 
 	//EntityMaster
-	ADD_ENTITYMASTER = "AddEntityMaster" // ( ImportBlob[] )
-	GET_ENTITYMASTER = "RetreiveEntityMaster" // ( importNumber )
-	UPDATE_ENTITYMASTER = "UpdateEntityMaster" // ( ImportBlob[] )
+	ADD_ENTITYMASTER    = "AddEntityMaster"      // ( ImportBlob[] )
+	GET_ENTITYMASTER    = "RetreiveEntityMaster" // ( importNumber )
+	UPDATE_ENTITYMASTER = "UpdateEntityMaster"   // ( ImportBlob[] )
 
 	// Unmatched
 	GET_UNMATCHED = "GetUnmatched" // ()
 
 	//Documents
 
-	ADD_DOCUMENTS = "AddDocuments" // (args, documentPK)
-	GET_DOCUMENTS = "RetreiveDocuments" // (documentPK)
-	UPDATE_DOCUMENTS = "UpdateDocument" // (args, documentPK)
+	ADD_DOCUMENTS    = "AddDocuments"      // (args, documentPK)
+	GET_DOCUMENTS    = "RetreiveDocuments" // (documentPK)
+	UPDATE_DOCUMENTS = "UpdateDocument"    // (args, documentPK)
 )
-
 
 // ===================================================================================
 // Main
@@ -46,8 +44,7 @@ func main() {
 	}
 }
 
-type SimpleChaincode struct {}
-
+type SimpleChaincode struct{}
 
 // Init initializes chaincode
 // ===========================
@@ -92,27 +89,27 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 	// PO operations
 	if function == ADD_PO {
 		return t.initPurchaseOrders(stub, args)
-	}else if function == GET_PO {
+	} else if function == GET_PO {
 		return t.readPurchaseOrder(stub, args)
-	}else if function == UPDATE_PO {
+	} else if function == UPDATE_PO {
 		return t.updatePurchaseOrders(stub, args)
 	}
 
 	// User operations
 	if function == "initUser" {
 		return t.initUser(stub, args)
-	}else if function == "readUser" {
+	} else if function == "readUser" {
 		return t.readUser(stub, args)
-	}else if function == "updateUser" {
+	} else if function == "updateUser" {
 		return t.updateUser(stub, args)
 	}
 
 	// Document operations
 	if function == ADD_DOCUMENTS {
 		return t.initDocuments(stub, args)
-	}else if function == GET_DOCUMENTS {
+	} else if function == GET_DOCUMENTS {
 		return t.readDocument(stub, args)
-	}else if function == UPDATE_DOCUMENTS{
+	} else if function == UPDATE_DOCUMENTS {
 		return t.updateDocuments(stub, args)
 	}
 
@@ -133,11 +130,9 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 	return shim.Error("Received unknown function invocation")
 }
 
-
 func (this *SimpleChaincode) Ping(stub shim.ChaincodeStubInterface) pb.Response {
 	logger.Info("Ping: enter")
 	defer logger.Info("Ping: exit")
 
 	return shim.Success([]byte("Ok"))
 }
-

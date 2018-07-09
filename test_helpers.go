@@ -28,7 +28,7 @@ func checkState(t *testing.T, stub *shim.MockStub, name string, value string) {
 }
 
 
-func getField(v *Marble, field string) string {
+func getField(v *interface{}, field string) string {
 	r := reflect.ValueOf(v)
 	f := reflect.Indirect(r).FieldByName(field)
 	if field == "Size"{

@@ -4,9 +4,8 @@ import (
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	"testing"
 	"io/ioutil"
-	)
-
-var ()
+		"github.com/balin_ttracker/pkg/dep/sources/https---github.com-cloudflare-cfssl/log"
+)
 
 func init() {
 	scc = new(SimpleChaincode)
@@ -20,7 +19,7 @@ func loadDataset(t *testing.T) error {
 		t.Fail()
 	}
 
-	command := []byte("AddInvoices")
+	command := []byte(ADD_INVOICES)
 	args := [][]byte{command, b}
 	err = checkInvoke(stub, args)
 	if err != nil {
@@ -82,7 +81,7 @@ func TestMatching_InvoiceWithoutPO(t *testing.T) {
     "Amount": "30000"
   }]`)
 
-	command2 := []byte("AddInvoices")
+	command2 := []byte(ADD_INVOICES)
 	args2 := [][]byte{command2, invoices_str}
 
 	err := checkInvoke(stub, args2)
@@ -96,17 +95,24 @@ func TestMatching_InvoiceWithoutPO(t *testing.T) {
 		t.Errorf("Failed to retrieve Invoice")
 	}
 
-	queryUnmatched(stub)
+	var items = queryUnmatched(stub)
 
+	log.Debug("Items: %-s", items )
 
-	if getInv == nil {
-		t.Errorf("Failed to retrieve Invoice")
+	if items == nil || len(items)!=2{
+		t.Errorf("Failed to retrieve unmatched invoices ~ len(%d)", len(items))
+	}
+
+	//var inv =
+
+	if items[0]["Seller"] != "A6" {
+			t.Errorf("Unmatched invoice should have seller A6")
 	}
 }
 
 func TestMatching_Invoice2Po(t *testing.T) {
 	var pos_str = []byte(`[{"FabricKey": "CN_AtlasUSAA9854", "Buyer": "A2", "Doc": "PO", "Ref": "A9854","Seller": "A6","SKU": "23598","Qty": "1,000","Curr": "USD","UnitCost": "100","Amount": "100000.00", "Type": "NTE"}]`)
-	command := []byte("AddPOs")
+	command := []byte(ADD_PO)
 	args := [][]byte{command, pos_str}
 
 	var invoices_str = []byte(`[{
@@ -123,7 +129,7 @@ func TestMatching_Invoice2Po(t *testing.T) {
     "Amount": "30,000"
   }]`)
 
-	command2 := []byte("AddInvoices")
+	command2 := []byte(ADD_INVOICES)
 	args2 := [][]byte{command2, invoices_str}
 
 	err := checkInvoke(stub, args)
