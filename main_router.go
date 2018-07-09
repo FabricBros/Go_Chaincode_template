@@ -107,23 +107,6 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 		return t.updateUser(stub, args)
 	}
 
-	// Settlement operations
-	if function == "AddSettlements" {
-		return t.initSettlementOrders(stub, args)
-	}else if function == "RetrieveSettlement" {
-		return t.readSettlementOrders(stub, args)
-	}else if function == "UpdateSettlements"{
-		return t.updateSettlementOrders(stub, args)
-	}
-	// Accrual operations
-	if function == "AddAccruals" {
-		return t.initAccruals(stub, args)
-	}else if function == "RetrieveAccrual" {
-		return t.readAccrual(stub, args)
-	}else if function == "UpdateAccrual"{
-		return t.updateAccruals(stub, args)
-	}
-
 	// Document operations
 	if function == ADD_DOCUMENTS {
 		return t.initDocuments(stub, args)
