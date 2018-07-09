@@ -79,11 +79,36 @@ func TestInvoiceUpdate(t *testing.T){
 	}
 }
 
+func queryUnmatched(stub *shim.MockStub) *[]interface{} {
+	logger.Debugf("queryUnmatched")
+	defer logger.Debug("queryUnmatched out")
+
+	res := stub.MockInvoke("1", [][]byte{[]byte(GET_UNMATCHED), []byte("")})
+	if res.Status != shim.OK {
+		fmt.Printf("queryUnmatched failed with %s" , string(res.Message))
+		return nil
+	}
+
+	if res.Payload == nil {
+		fmt.Printf("queryInvoice failed with %s ", string(res.Message))
+		return nil
+	}
+
+	logger.Debugf("Payload: %s", res.Payload)
+	item := make([]interface{}, 0)
+	err := json.Unmarshal(res.Payload,&item)
+	if err != nil {
+		fmt.Printf("Failed to unmarshal: %s", err)
+	}
+
+	return &item
+}
+
 func queryInvoice(stub *shim.MockStub, name string) []Invoice {
 	logger.Debugf("queryInvoice: %s", name)
 	defer logger.Debug("queryInvoice out")
 
-	res := stub.MockInvoke("1", [][]byte{[]byte("RetrieveInvoice"), []byte(name)})
+	res := stub.MockInvoke("1", [][]byte{[]byte("RetreiveInvoice"), []byte(name)})
 	if res.Status != shim.OK {
 		fmt.Printf("queryInvoice %s failed with %s" , name, string(res.Message))
 		return nil

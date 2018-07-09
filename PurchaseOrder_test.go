@@ -32,7 +32,7 @@ func init() {
 func queryPurchaseOrder(stub *shim.MockStub, name string) *PurchaseOrder {
 
 	//print("queryDocument")
-	res := stub.MockInvoke("1", [][]byte{[]byte("RetrievePO"), []byte(name)})
+	res := stub.MockInvoke("1", [][]byte{[]byte(GET_PO), []byte(name)})
 	if res.Status != shim.OK {
 		fmt.Printf("queryPO %s failed with %s", name, string(res.Message))
 		return nil
@@ -66,7 +66,7 @@ func TestUnmarshalPurchaseOrder(t *testing.T) {
 }
 
 func AddPo(){
-	command := []byte("AddPOs")
+	command := []byte(ADD_PO)
 	arg1, _ := json.Marshal(pos)
 	args := [][]byte{command, arg1}
 
@@ -90,7 +90,7 @@ func TestQueryPurchaseOrders(t *testing.T) {
 func TestUpdatePO(t *testing.T) {
 	AddPo()
 
-	command := []byte("UpdatePOs")
+	command := []byte(UPDATE_PO)
 	var updateValue = "1234"
 
 	pos[0].Buyer = updateValue

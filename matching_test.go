@@ -4,7 +4,7 @@ import (
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	"testing"
 	"io/ioutil"
-)
+	)
 
 var ()
 
@@ -34,7 +34,7 @@ func loadDataset(t *testing.T) error {
 		t.Fail()
 	}
 
-	command = []byte("AddPOs")
+	command = []byte(ADD_PO)
 	args = [][]byte{command, b}
 	err = checkInvoke(stub, args)
 	if err != nil {
@@ -67,7 +67,19 @@ func TestMatching_InvoiceWithoutPO(t *testing.T) {
     "Qty": "300",
     "Curr": "USD",
     "UnitCost": "100",
-    "Amount": "30,000"
+    "Amount": "30000"
+  },{
+    "FabricKey": "CN_AtlasT1ading80199A9855",
+    "Seller": "A6",
+    "Date": "2-Jan",
+    "Ref": "80199",
+    "Buyer": "A2",
+    "PONum": "A9854",
+    "SKU": "23598",
+    "Qty": "300",
+    "Curr": "USD",
+    "UnitCost": "100",
+    "Amount": "30000"
   }]`)
 
 	command2 := []byte("AddInvoices")
@@ -79,6 +91,13 @@ func TestMatching_InvoiceWithoutPO(t *testing.T) {
 	}
 
 	getInv := queryInvoice(stub, "CN_AtlasTrading80199A9854")
+
+	if getInv == nil {
+		t.Errorf("Failed to retrieve Invoice")
+	}
+
+	queryUnmatched(stub)
+
 
 	if getInv == nil {
 		t.Errorf("Failed to retrieve Invoice")

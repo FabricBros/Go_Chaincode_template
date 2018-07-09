@@ -58,7 +58,7 @@ func TestDocumentUpdate(t *testing.T){
 			checkInvoke(stub, args)
 
 			var m = queryDocument(stub, documents[0].Uuid)
-			if m.Data != updateValue {
+			if m==nil || m.Data != updateValue {
 					t.Fail() //("Value should reflect updated value.")
 			}
 }

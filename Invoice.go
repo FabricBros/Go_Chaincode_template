@@ -44,13 +44,31 @@ func (t *SimpleChaincode) addInvoices(stub shim.ChaincodeStubInterface, args []s
 	for _, v := range items {
 		//logger.Debugf("Adding: %-v", v)
 		pk := v.Uuid
+		v.ObjectType="Invoice"
 		vBytes, err := json.Marshal(v)
 
 		if err != nil {
 			logger.Debug("error marshaling", err)
 			return shim.Error(err.Error())
 		}
+
 		stub.PutState(pk, vBytes)
+
+		//  ==== Index the Invoice to enable unmatched-based range queries ====
+		//  An 'index' is a normal key/value entry in state.
+		//  The key is a composite key, with the elements that you want to range query on listed first.
+		//  In our case, the composite key is based on indexName~color~name.
+		//  This will enable very efficient state range queries based on composite keys matching indexName~color~*
+		indexName := "unmatched~type~uuid"
+		colorNameIndexKey, err := stub.CreateCompositeKey(indexName, []string{"invoice",v.Uuid})
+		if err != nil {
+			return shim.Error(err.Error())
+		}
+		//  Save index entry to state. Only the key name is needed, no need to store a duplicate copy of the Marble.
+		//  Note - passing a 'nil' value will effectively delete the key from state, therefore we pass null character as value
+		value := []byte{0x00}
+		stub.PutState(colorNameIndexKey, value)
+
 	}
 
 	return shim.Success(nil)
