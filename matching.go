@@ -6,6 +6,7 @@ import (
 	"fmt"
 			"bytes"
 	"strings"
+	"encoding/json"
 )
 
 type ErrorTransactions struct{
@@ -24,6 +25,37 @@ func NewErrorTransactions() *ErrorTransactions{
 
 	return &ret
 }
+func (t *SimpleChaincode)  match_invoice(stub shim.ChaincodeStubInterface, v *Invoice) {
+	if v.PONum == "A9854" {
+		var pk = "CN_AtlasUSAA9854"
+		var postr,err = stub.GetState(pk)
+		if err != nil {
+			logger.Errorf("Failed to find %s", pk)
+		}
+		po := &PurchaseOrder{}
+		err = json.Unmarshal(postr, po)
+		if err != nil {
+			logger.Errorf("Failed to unmarshal PO %s", po)
+		}
+
+		if po.Qty > v.Qty {
+			po.Qty= po.Qty + (-1 * v.Qty)
+		}else{
+			v.Qty = po.Qty
+			po.Qty = 0
+			v.Amount = v.Qty*v.UnitCost
+		}
+		po.Amount=po.UnitCost*po.Qty
+
+		vBytes, _ := json.Marshal(po)
+		//fmt.Printf("PurchaseOrder: %-v\n", po)
+		err = stub.PutState(pk, vBytes)
+		if err != nil {
+			logger.Errorf("Failed to save %s", vBytes)
+		}
+	}
+}
+
 
 func (t *SimpleChaincode) getUnmatchedKeys(stub shim.ChaincodeStubInterface, args []string) []string {
 	logger.Debug("enter getUnmatchedKeys")

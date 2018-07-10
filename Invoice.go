@@ -5,28 +5,29 @@ import (
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	pb "github.com/hyperledger/fabric/protos/peer"
 	"encoding/json"
-	)
+)
 
 //FabricKey	Seller	Date	Ref	Buyer	PO #	SKU	Qty	Curr	Unit cost	Amount
 type Invoice struct {
 	ObjectType string
-	Uuid       string `json:"FabricKey"`
-	Seller     string `json:"Seller"`
-	Date       string `json:"Date"`
-	Ref        string `json:"Ref"`
-	Buyer      string `json:"Buyer"`
-	PONum      string `json:"PONum"`
-	SKU        string `json:"SKU"`
-	Qty        int `json:"Qty,string"`
-	Curr       string `json:"Curr"`
-	UnitCost   string `json:"UnitCost"`
-	Amount     string `json:"Amount"`
-	State		string `json:"State"`
+	Uuid       string  `json:"FabricKey"`
+	Seller     string  `json:"Seller"`
+	Date       string  `json:"Date"`
+	Ref        string  `json:"Ref"`
+	Buyer      string  `json:"Buyer"`
+	PONum      string  `json:"PONum"`
+	SKU        string  `json:"SKU"`
+	Qty        float32 `json:"Qty,string"`
+	Curr       string  `json:"Curr"`
+	UnitCost   float32 `json:"UnitCost,string"`
+	Amount     float32 `json:"Amount,string"`
+	State      string  `json:"State"`
 }
 
-func init(){
+func init() {
 	//logger.SetLevel(shim.LogDebug)
 }
+
 // Transaction makes payment of X units from A to B
 func (t *SimpleChaincode) addInvoices(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	logger.Debug("adding invoice")
@@ -44,30 +45,40 @@ func (t *SimpleChaincode) addInvoices(stub shim.ChaincodeStubInterface, args []s
 	for _, v := range items {
 		//logger.Debugf("Adding: %-v", v)
 		pk := v.Uuid
-		v.ObjectType="Invoice"
-		vBytes, err := json.Marshal(v)
+		v.ObjectType = "Invoice"
 
 		if err != nil {
 			logger.Debug("error marshaling", err)
 			return shim.Error(err.Error())
 		}
 
-		stub.PutState(pk, vBytes)
+		t.match_invoice(stub, &v)
 
+		vBytes, err := json.Marshal(v)
+
+		err = stub.PutState(pk, vBytes)
+		if err != nil {
+			logger.Errorf("Failed to save Invoice %s", vBytes)
+		}
 		//  ==== Index the Invoice to enable unmatched-based range queries ====
 		//  An 'index' is a normal key/value entry in state.
 		//  The key is a composite key, with the elements that you want to range query on listed first.
 		//  In our case, the composite key is based on indexName~color~name.
 		//  This will enable very efficient state range queries based on composite keys matching indexName~color~*
 		indexName := "unmatched~type~uuid"
-		colorNameIndexKey, err := stub.CreateCompositeKey(indexName, []string{"invoice",v.Uuid})
+		colorNameIndexKey, err := stub.CreateCompositeKey(indexName, []string{"invoice", v.Uuid})
 		if err != nil {
+			logger.Errorf("Failed to create composite key %s", err)
 			return shim.Error(err.Error())
 		}
 		//  Save index entry to state. Only the key name is needed, no need to store a duplicate copy of the Marble.
 		//  Note - passing a 'nil' value will effectively delete the key from state, therefore we pass null character as value
 		value := []byte{0x00}
-		stub.PutState(colorNameIndexKey, value)
+		err = stub.PutState(colorNameIndexKey, value)
+		if err != nil {
+			logger.Errorf("Failed to create composite key %s", err)
+			return shim.Error(err.Error())
+		}
 
 	}
 

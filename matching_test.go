@@ -4,8 +4,7 @@ import (
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	"testing"
 	"io/ioutil"
-		"github.com/balin_ttracker/pkg/dep/sources/https---github.com-cloudflare-cfssl/log"
-)
+		)
 
 func init() {
 	scc = new(SimpleChaincode)
@@ -13,34 +12,37 @@ func init() {
 }
 
 func loadDataset(t *testing.T) error {
-	b, err := ioutil.ReadFile("./fixtures/invoice_ex1.json")
-	if err != nil {
-		logger.Error("failed to load example file. ")
-		t.Fail()
-	}
 
-	command := []byte(ADD_INVOICES)
-	args := [][]byte{command, b}
-	err = checkInvoke(stub, args)
-	if err != nil {
-		logger.Errorf("Failed to AddInvoices: %s", err)
-		t.Fail()
-	}
-
-	b, err = ioutil.ReadFile("./fixtures/purchaseOrder_ex1.json")
+	b, err := ioutil.ReadFile("./fixtures/purchaseOrder_ex1.json")
 	if err != nil {
 		logger.Errorf("failed to load example file. ")
 		t.Fail()
 	}
 
-	command = []byte(ADD_PO)
-	args = [][]byte{command, b}
+	command := []byte(ADD_PO)
+	args := [][]byte{command, b}
 	err = checkInvoke(stub, args)
 	if err != nil {
 		logger.Errorf("Failed to PurchaseOrders: %s", err)
 		t.Fail()
 
 	}
+
+
+	b, err = ioutil.ReadFile("./fixtures/invoice_ex1.json")
+	if err != nil {
+		logger.Error("failed to load example file. ")
+		t.Fail()
+	}
+
+	command = []byte(ADD_INVOICES)
+	args = [][]byte{command, b}
+	err = checkInvoke(stub, args)
+	if err != nil {
+		logger.Errorf("Failed to AddInvoices: %s", err)
+		t.Fail()
+	}
+
 
 	return err
 }
@@ -97,8 +99,6 @@ func TestMatching_InvoiceWithoutPO(t *testing.T) {
 
 	var items = queryUnmatched(stub)
 
-	log.Debug("Items: %-s", items )
-
 	if items == nil || len(items)!=2{
 		t.Errorf("Failed to retrieve unmatched invoices ~ len(%d)", len(items))
 	}
@@ -111,7 +111,12 @@ func TestMatching_InvoiceWithoutPO(t *testing.T) {
 }
 
 func TestMatching_Invoice2Po(t *testing.T) {
-	var pos_str = []byte(`[{"FabricKey": "CN_AtlasUSAA9854", "Buyer": "A2", "Doc": "PO", "Ref": "A9854","Seller": "A6","SKU": "23598","Qty": "1,000","Curr": "USD","UnitCost": "100","Amount": "100000.00", "Type": "NTE"}]`)
+	var pos_str = []byte(`[{"FabricKey": "CN_AtlasUSAA9854",
+"Buyer": "A2", "Doc": "PO", "Ref": "A9854",
+"Seller": "A6","SKU": "23598","Qty": "1000",
+"Curr": "USD","UnitCost": "100","Amount": "100000.00",
+"Type": "NTE"}]`)
+
 	command := []byte(ADD_PO)
 	args := [][]byte{command, pos_str}
 
@@ -126,7 +131,7 @@ func TestMatching_Invoice2Po(t *testing.T) {
     "Qty": "300",
     "Curr": "USD",
     "UnitCost": "100",
-    "Amount": "30,000"
+    "Amount": "30000"
   }]`)
 
 	command2 := []byte(ADD_INVOICES)
@@ -152,6 +157,15 @@ func TestMatching_Invoice2Po(t *testing.T) {
 	if getInv == nil {
 		t.Errorf("Failed to retrieve Invoice")
 	}
+
+	var items = queryUnmatched(stub)
+
+	if items == nil || len(items)!=0{
+		t.Errorf("Failed to match invoice to PO ~ len(%d)", len(items))
+	}
+
+
+
 }
 
 // Test case 1.
@@ -182,7 +196,7 @@ func TestMatching_POExceedsNTE(t *testing.T) {
 	//CN_AtlasTrading80203A9854	A6	20-Jan	80203	A2	A9854	23598	180	USD	100	18,000
 	inv := queryInvoice(stub, "CN_AtlasTrading80203A9854")
 	if inv[0].Qty != 150 {
-		t.Errorf("Failed to match invoice, qty should be 150")
+		t.Errorf("Failed to match invoice, qty should be 150 is %f", inv[0].Qty)
 	}
 }
 
