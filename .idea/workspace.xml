@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1692966d-a1f2-4a2d-8f21-56146cbbf315" name="Default" comment="a">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Document_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/Document_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Invoice_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/Invoice_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_router.go" beforeDir="false" afterPath="$PROJECT_DIR$/main_router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/matching.go" beforeDir="false" afterPath="$PROJECT_DIR$/matching.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/matching_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/matching_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_helpers.go" beforeDir="false" afterPath="$PROJECT_DIR$/test_helpers.go" afterDir="false" />
-    </list>
+    <list default="true" id="1692966d-a1f2-4a2d-8f21-56146cbbf315" name="Default" comment="a" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,13 +23,14 @@
     <session id="-1704020533">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="1" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.opened" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="go" value="72" />
+          <entry key="go" value="73" />
           <entry key="json" value="12" />
           <entry key="md" value="1" />
           <entry key="sh" value="1" />
@@ -46,7 +39,7 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Bash" value="1" />
-          <entry key="Go" value="72" />
+          <entry key="Go" value="73" />
           <entry key="JSON" value="12" />
           <entry key="Markdown" value="1" />
         </counts>
@@ -73,7 +66,7 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.49457505">
+    <splitter split-orientation="horizontal" split-proportion="0.48164147">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
@@ -91,8 +84,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/matching_test.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="325">
-                  <caret line="107" column="25" selection-start-line="107" selection-start-column="25" selection-end-line="107" selection-end-column="25" />
+                <state relative-caret-position="505">
+                  <caret line="114" column="28" selection-start-line="114" selection-start-column="28" selection-end-line="114" selection-end-column="28" />
                 </state>
               </provider>
             </entry>
@@ -113,20 +106,29 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/invoice.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="420">
-                  <caret line="100" column="46" lean-forward="true" selection-start-line="100" selection-start-column="24" selection-end-line="100" selection-end-column="46" />
+                <state relative-caret-position="67">
+                  <caret line="30" column="37" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="37" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/invoice_test.go">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="276">
+                  <caret line="86" column="53" selection-start-line="86" selection-start-column="53" selection-end-line="86" selection-end-column="53" />
+                  <folding>
+                    <element signature="e#14#127#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/invoice_test.go">
+            <entry file="file://$PROJECT_DIR$/main_router.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="158">
-                  <caret line="82" column="61" selection-start-line="82" selection-start-column="61" selection-end-line="82" selection-end-column="61" />
-                  <folding>
-                    <element signature="e#14#127#0" expanded="true" />
-                  </folding>
+                <state relative-caret-position="204">
+                  <caret line="27" column="33" selection-start-line="27" selection-start-column="21" selection-end-line="27" selection-end-column="33" />
                 </state>
               </provider>
             </entry>
@@ -144,8 +146,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>complex</find>
-      <find>state</find>
       <find>color</find>
       <find>rich qu</find>
       <find>compo</find>
@@ -174,6 +174,8 @@
       <find>length</find>
       <find>len</find>
       <find>queryUnmatched</find>
+      <find>compos</find>
+      <find>composi</find>
     </findStrings>
     <replaceStrings>
       <replace>Marble</replace>
@@ -257,9 +259,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="301" />
-    <option name="y" value="23" />
-    <option name="width" value="1379" />
+    <option name="x" value="173" />
+    <option name="y" value="117" />
+    <option name="width" value="1680" />
     <option name="height" value="960" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -418,9 +420,6 @@
     </recent_temporary>
   </component>
   <component name="TestHistory">
-    <history-entry file="TestMatching_InvoiceWithoutPO_in_github_com_FabricBros_chaincode - 2018.07.08 at 22h 08m 44s.xml">
-      <configuration name="TestMatching_InvoiceWithoutPO in github.com/FabricBros/chaincode" configurationId="GoTestRunConfiguration" />
-    </history-entry>
     <history-entry file="TestMatching_InvoiceWithoutPO_in_github_com_FabricBros_chaincode - 2018.07.08 at 22h 09m 05s.xml">
       <configuration name="TestMatching_InvoiceWithoutPO in github.com/FabricBros/chaincode" configurationId="GoTestRunConfiguration" />
     </history-entry>
@@ -448,9 +447,12 @@
     <history-entry file="TestMatching_InvoiceWithoutPO_in_github_com_FabricBros_chaincode - 2018.07.09 at 07h 00m 25s.xml">
       <configuration name="TestMatching_InvoiceWithoutPO in github.com/FabricBros/chaincode" configurationId="GoTestRunConfiguration" />
     </history-entry>
+    <history-entry file="TestMatching_InvoiceWithoutPO_in_github_com_FabricBros_chaincode - 2018.07.09 at 07h 02m 22s.xml">
+      <configuration name="TestMatching_InvoiceWithoutPO in github.com/FabricBros/chaincode" configurationId="GoTestRunConfiguration" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1680" height="960" extended-state="6" />
+    <frame x="173" y="117" width="1680" height="960" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4983871" visible="true" weight="0.16361417" />
@@ -458,7 +460,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49928263" weight="0.3289941" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49772874" visible="true" weight="0.2662722" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49772874" weight="0.2662722" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49967554" weight="0.20118344" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -749,16 +751,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main_router.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="14" column="30" lean-forward="true" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
-          <folding>
-            <element signature="e#14#133#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/marbles_test.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
@@ -794,13 +786,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/invoice.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="100" column="46" lean-forward="true" selection-start-line="100" selection-start-column="24" selection-end-line="100" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/matching.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="314">
@@ -811,20 +796,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/invoice.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="67">
+          <caret line="30" column="37" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/invoice_test.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="82" column="61" selection-start-line="82" selection-start-column="61" selection-end-line="82" selection-end-column="61" />
+        <state relative-caret-position="276">
+          <caret line="86" column="53" selection-start-line="86" selection-start-column="53" selection-end-line="86" selection-end-column="53" />
           <folding>
             <element signature="e#14#127#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/main_router.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="27" column="33" selection-start-line="27" selection-start-column="21" selection-end-line="27" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/matching_test.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="107" column="25" selection-start-line="107" selection-start-column="25" selection-end-line="107" selection-end-column="25" />
+        <state relative-caret-position="505">
+          <caret line="114" column="28" selection-start-line="114" selection-start-column="28" selection-end-line="114" selection-end-column="28" />
         </state>
       </provider>
     </entry>
