@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/hyperledger/fabric/core/chaincode/shim"
-	"reflect"
 	"fmt"
 	"testing"
 	)
@@ -27,15 +26,6 @@ func checkState(t *testing.T, stub *shim.MockStub, name string, value string) {
 	}
 }
 
-
-func getField(v *Marble, field string) string {
-	r := reflect.ValueOf(v)
-	f := reflect.Indirect(r).FieldByName(field)
-	if field == "Size"{
-		return fmt.Sprintf("%d", f.Int())
-	}
-	return f.String()
-}
 
 func checkInvoke(stub *shim.MockStub, args [][]byte) error{
 	//logger.Debugf("checkInvoke: %s", args)

@@ -7,17 +7,6 @@ import (
 	"bytes"
 )
 
-//FabricKey
-// 	Buyer
-// Doc
-// Ref (PO#)
-// 	Seller
-// SKU
-// Qty
-// Curr
-// Unit cost
-// Amount
-// Type
 
 // For storing arbitrary POs.
 type PurchaseOrder struct {
