@@ -45,7 +45,20 @@ func (t *SimpleChaincode) initPurchaseOrders(stub shim.ChaincodeStubInterface, a
 	}
 	logger.Debugf("We have: %d items", len(items))
 	for _, v := range items {
-		pk := v.RefID
+
+		cn, err := getCN(stub)
+		if err != nil{
+			logger.Error(err.Error())
+			return shim.Error(err.Error())
+		}
+		var attr = []string{cn, v.RefID}
+		pk, err := buildPK(stub, "PurchaseOrder", attr)
+		if err != nil{
+			logger.Error(err.Error())
+			return shim.Error(err.Error())
+		}
+		logger.Debug("using pk "+pk)
+
 		//v.ObjectType = "PurchaseOrder"
 		vBytes, err := json.Marshal(v)
 
@@ -69,8 +82,16 @@ func (t *SimpleChaincode) readPurchaseOrder(stub shim.ChaincodeStubInterface, ar
 		return shim.Error("Incorrect number of arguments. Expecting name of the PO to query")
 	}
 
-	name = args[0]
-	valAsbytes, err := stub.GetState(name) //get the PO from chaincode state
+	//name = args[0]
+	cn, err := getCN(stub)
+	if err!=nil{
+		logger.Error(err)
+		return shim.Error(err.Error())
+	}
+	var attr = []string{cn, args[0]}
+	pk, err := buildPK(stub, "PurchaseOrder", attr)
+
+	valAsbytes, err := stub.GetState(pk) //get the PO from chaincode state
 	if err != nil {
 		jsonResp = "{\"Error\":\"Failed to get state for " + name + "\"}"
 		return shim.Error(jsonResp)

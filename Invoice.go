@@ -83,6 +83,7 @@ func (t *SimpleChaincode) getInvoice(stub shim.ChaincodeStubInterface, args []st
 
 	logger.Debug("getInvoice using pk:"+pk)
 
+
 	invoiceByte, err := stub.GetState(pk)
 	logger.Debugf("got back from state %s", invoiceByte)
 	if err != nil {
