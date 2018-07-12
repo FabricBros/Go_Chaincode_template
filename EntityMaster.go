@@ -46,18 +46,29 @@ func (t *SimpleChaincode) addEntity(stub shim.ChaincodeStubInterface, args []str
 		return shim.Error(err.Error())
 	}
 
-	cn, err := idTool.GetID()
+	cert, err:= idTool.GetX509Certificate()
 	if err != nil{
-		return shim.Error(err.Error())
+		fmt.Println("error getting cert")
 	}
-	logger.Debug("Common Name is :"+cn)
-	fmt.Print("cmmon name is : " + cn)
 
+	nameOfcaller :=cert.Subject
+	cn := nameOfcaller.CommonName
+
+	logger.Debug("name of caller is :"+nameOfcaller.CommonName )
 
 	//create PK CN+REF+PO
+
+
 	for _, v := range items {
+		var attr []string = []string{cn}
+
+		pks, err := buildPK(stub, "EntityMaster", attr)
+		if err != nil{
+			logger.Debug(err.Error())
+			return shim.Error(err.Error())
+		}
 		//logger.Debugf("Adding: %-v", v)
-		pk := cn
+		pk := pks
 		vBytes, err := json.Marshal(v)
 
 		if err != nil {
@@ -75,19 +86,24 @@ func (t *SimpleChaincode) getEntity(stub shim.ChaincodeStubInterface, args []str
 	logger.Debug("enter get invoice")
 	defer logger.Debug("exited get invoice")
 
-	pk := args[0]
+	pks, err := buildPK(stub, "EntityMaster", args)
+	if err != nil{
+		logger.Debug(err.Error())
+		return shim.Error(err.Error())
+	}
+
 	var entityMaster EntityMaster
 
-	entityId, err := stub.GetState(pk)
+	entityId, err := stub.GetState(pks)
 	if err != nil {
 		return shim.Error(err.Error())
 	}
 	err = json.Unmarshal(entityId, &entityMaster)
 	if err != nil {
 		logger.Error(err)
-		shim.Error(err.Error())
+		return shim.Error(err.Error())
 	}
-	logger.Debug("getInvoice:")
+	logger.Debug("getEntity:")
 	logger.Debug(entityMaster)
 	var buffer bytes.Buffer
 	buffer.WriteString("[")

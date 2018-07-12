@@ -30,6 +30,7 @@ func (t *SimpleChaincode) addInvoices(stub shim.ChaincodeStubInterface, args []s
 	defer logger.Debug("exit adding invoice")
 
 	var items []Invoice
+	logger.Debug("addInvoice:"+args[0])
 
 	err := json.Unmarshal([]byte(args[0]), &items)
 	if err != nil {
@@ -42,7 +43,20 @@ func (t *SimpleChaincode) addInvoices(stub shim.ChaincodeStubInterface, args []s
 	//create PK CN+REF+PO
 	for _, v := range items {
 		//logger.Debugf("Adding: %-v", v)
-		pk := v.RefID
+		cn , err:= getCN(stub)
+		if err != nil{
+			logger.Debug(err.Error())
+			shim.Error(err.Error())
+		}
+		logger.Debug("adding item:")
+		logger.Debug(v)
+
+		var attr = []string{cn, v.RefID, v.PoNumber}
+
+		pk, err := buildPK(stub, "Invoice", attr)
+
+		logger.Debug("Invoice has pk: "+pk)
+
 		vBytes, err := json.Marshal(v)
 
 		if err != nil {
@@ -60,18 +74,26 @@ func (t *SimpleChaincode) getInvoice(stub shim.ChaincodeStubInterface, args []st
 	logger.Debug("enter get invoice")
 	defer logger.Debug("exited get invoice")
 
-	pk := args[0]
+	//key := args[0]
+	cn, err := getCN(stub)
+
+	var attr = []string{cn, args[0], args[1]}
+	pk, err := buildPK(stub, "Invoice", attr)
 	var invoice Invoice
 
+	logger.Debug("getInvoice using pk:"+pk)
+
 	invoiceByte, err := stub.GetState(pk)
+	logger.Debugf("got back from state %s", invoiceByte)
 	if err != nil {
 		return shim.Error(err.Error())
 	}
 	err = json.Unmarshal(invoiceByte, &invoice)
 	if err != nil {
 		logger.Error(err)
-		shim.Error(err.Error())
+		return shim.Error(err.Error())
 	}
+
 	logger.Debug("getInvoice:")
 	logger.Debug(invoice)
 	var buffer bytes.Buffer

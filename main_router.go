@@ -71,6 +71,15 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 		return t.updatePurchaseOrders(stub, args)
 	}
 
+	// Entity operations
+	if function == "AddEntityMaster" {
+		return t.addEntity(stub, args)
+	}else if function == "RetrieveEntityMaster" {
+		return t.getEntity(stub, args)
+	}else if function == "UpdateEntityMaster" {
+		return t.updateEntities(stub, args)
+	}
+
 
 	// Document operations
 	if function == "AddDocuments" {
