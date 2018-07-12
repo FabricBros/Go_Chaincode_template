@@ -122,7 +122,19 @@ func (t *SimpleChaincode) updatePurchaseOrders(stub shim.ChaincodeStubInterface,
 	}
 
 	for _, v := range items {
-		pk := v.RefID
+		cn, err := getCN(stub)
+		if err != nil{
+			logger.Error(err.Error())
+			return shim.Error(err.Error())
+		}
+		var attr = []string{cn, v.RefID}
+		pk, err := buildPK(stub, "PurchaseOrder", attr)
+		if err != nil{
+			logger.Error(err.Error())
+			return shim.Error(err.Error())
+		}
+		logger.Debug("using pk "+pk)
+
 		//v.ObjectType = "PurchaseOrder"
 		vBytes, err := json.Marshal(v)
 

@@ -84,10 +84,8 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 	// Document operations
 	if function == "AddDocuments" {
 		return t.initDocuments(stub, args)
-	}else if function == "RetrieveDocument" {
+	}else if function == "RetrieveDocuments" {
 		return t.readDocument(stub, args)
-	}else if function == "UpdateDocument"{
-		return t.updateDocuments(stub, args)
 	}
 
 	// Invoice operations

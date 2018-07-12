@@ -126,7 +126,21 @@ func (t *SimpleChaincode) updateEntities(stub shim.ChaincodeStubInterface, args 
 	}
 
 	for _, v := range invoices {
-		pk := v.RefID
+		cn, err := getCN(stub)
+		if err != nil{
+			logger.Debug(err)
+			return shim.Error(err.Error())
+		}
+		var attr []string = []string{cn}
+
+		pks, err := buildPK(stub, "EntityMaster", attr)
+		if err != nil{
+			logger.Debug(err.Error())
+			return shim.Error(err.Error())
+		}
+		//logger.Debugf("Adding: %-v", v)
+		pk := pks
+
 		vBytes, err := json.Marshal(v)
 
 		if err != nil {

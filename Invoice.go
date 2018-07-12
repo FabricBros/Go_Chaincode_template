@@ -118,7 +118,18 @@ func (t *SimpleChaincode) updateInvoices(stub shim.ChaincodeStubInterface, args 
 	}
 
 	for _, v := range invoices {
-		pk := v.RefID
+		cn , err:= getCN(stub)
+		if err != nil{
+			logger.Debug(err.Error())
+			shim.Error(err.Error())
+		}
+		logger.Debug("updating item:")
+		logger.Debug(v)
+
+		var attr = []string{cn, v.RefID, v.PoNumber}
+
+		pk, err := buildPK(stub, "Invoice", attr)
+
 		vBytes, err := json.Marshal(v)
 
 		if err != nil {
