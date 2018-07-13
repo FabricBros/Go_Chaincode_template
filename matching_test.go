@@ -4,7 +4,8 @@ import (
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	"testing"
 	"io/ioutil"
-		)
+	"strings"
+	)
 
 func init() {
 	scc = new(SimpleChaincode)
@@ -28,7 +29,6 @@ func loadDataset(t *testing.T) error {
 
 	}
 
-
 	b, err = ioutil.ReadFile("./fixtures/invoice_ex1.json")
 	if err != nil {
 		logger.Error("failed to load example file. ")
@@ -43,7 +43,6 @@ func loadDataset(t *testing.T) error {
 		t.Fail()
 	}
 
-
 	return err
 }
 
@@ -55,118 +54,115 @@ func TestLoadDataset(t *testing.T) {
 	logger.Debugf("Inv: %s", inv)
 }
 
+//func TestMatching_InvoiceWithoutPO(t *testing.T) {
+//	var invoices_str = []byte(`[{
+//    "FabricKey": "CN_AtlasTrading80199A9854",
+//    "Seller": "A6",
+//    "Date": "2-Jan",
+//    "Ref": "80199",
+//    "Buyer": "A2",
+//    "PONum": "A9854",
+//    "SKU": "23598",
+//    "Qty": "300",
+//    "Curr": "USD",
+//    "UnitCost": "100",
+//    "Amount": "30000"
+//  },{
+//    "FabricKey": "CN_AtlasT1ading80199A9855",
+//    "Seller": "A6",
+//    "Date": "2-Jan",
+//    "Ref": "80199",
+//    "Buyer": "A2",
+//    "PONum": "A9854",
+//    "SKU": "23598",
+//    "Qty": "300",
+//    "Curr": "USD",
+//    "UnitCost": "100",
+//    "Amount": "30000"
+//  }]`)
+//
+//	command2 := []byte(ADD_INVOICES)
+//	args2 := [][]byte{command2, invoices_str}
+//
+//	err := checkInvoke(stub, args2)
+//	if err != nil {
+//		t.Errorf("failed to create Invoice")
+//	}
+//
+//	getInv := queryInvoice(stub, "CN_AtlasTrading80199A9854")
+//
+//	if getInv == nil {
+//		t.Errorf("failed to retrieve Invoice")
+//	}
+//
+//	var items = queryUnmatched(stub)
+//
+//	if items == nil || len(items) != 2 {
+//		t.Errorf("failed to retrieve unmatched invoices ~ len(%d)", len(items))
+//	}
+//
+//	//var inv =
+//
+//	if items[0]["Seller"] != "A6" {
+//		t.Errorf("unmatched invoice should have seller A6")
+//	}
+//}
 
-func TestMatching_InvoiceWithoutPO(t *testing.T) {
-	var invoices_str = []byte(`[{
-    "FabricKey": "CN_AtlasTrading80199A9854",
-    "Seller": "A6",
-    "Date": "2-Jan",
-    "Ref": "80199",
-    "Buyer": "A2",
-    "PONum": "A9854",
-    "SKU": "23598",
-    "Qty": "300",
-    "Curr": "USD",
-    "UnitCost": "100",
-    "Amount": "30000"
-  },{
-    "FabricKey": "CN_AtlasT1ading80199A9855",
-    "Seller": "A6",
-    "Date": "2-Jan",
-    "Ref": "80199",
-    "Buyer": "A2",
-    "PONum": "A9854",
-    "SKU": "23598",
-    "Qty": "300",
-    "Curr": "USD",
-    "UnitCost": "100",
-    "Amount": "30000"
-  }]`)
-
-	command2 := []byte(ADD_INVOICES)
-	args2 := [][]byte{command2, invoices_str}
-
-	err := checkInvoke(stub, args2)
-	if err != nil {
-		t.Errorf("Failed to create Invoice")
-	}
-
-	getInv := queryInvoice(stub, "CN_AtlasTrading80199A9854")
-
-	if getInv == nil {
-		t.Errorf("Failed to retrieve Invoice")
-	}
-
-	var items = queryUnmatched(stub)
-
-	if items == nil || len(items)!=2{
-		t.Errorf("Failed to retrieve unmatched invoices ~ len(%d)", len(items))
-	}
-
-	//var inv =
-
-	if items[0]["Seller"] != "A6" {
-			t.Errorf("Unmatched invoice should have seller A6")
-	}
-}
-
-func TestMatching_Invoice2Po(t *testing.T) {
-	var pos_str = []byte(`[{"FabricKey": "CN_AtlasUSAA9854",
-"Buyer": "A2", "Doc": "PO", "Ref": "A9854",
-"Seller": "A6","SKU": "23598","Qty": "1000",
-"Curr": "USD","UnitCost": "100","Amount": "100000.00",
-"Type": "NTE"}]`)
-
-	command := []byte(ADD_PO)
-	args := [][]byte{command, pos_str}
-
-	var invoices_str = []byte(`[{
-    "FabricKey": "CN_AtlasTrading80199A9854",
-    "Seller": "A6",
-    "Date": "2-Jan",
-    "Ref": "80199",
-    "Buyer": "A2",
-    "PONum": "A9854",
-    "SKU": "23598",
-    "Qty": "300",
-    "Curr": "USD",
-    "UnitCost": "100",
-    "Amount": "30000"
-  }]`)
-
-	command2 := []byte(ADD_INVOICES)
-	args2 := [][]byte{command2, invoices_str}
-
-	err := checkInvoke(stub, args)
-	if err != nil {
-		t.Errorf("Failed to create PO")
-	}
-
-	err = checkInvoke(stub, args2)
-	if err != nil {
-		t.Errorf("Failed to create Invoice")
-	}
-
-	getPO := queryPurchaseOrder(stub, "CN_AtlasUSAA9854")
-	if getPO == nil {
-		t.Errorf("Failed to retrieve PO")
-	}
-
-	getInv := queryInvoice(stub, "CN_AtlasTrading80199A9854")
-
-	if getInv == nil {
-		t.Errorf("Failed to retrieve Invoice")
-	}
-
-	var items = queryUnmatched(stub)
-
-	if items == nil || len(items)!=0{
-		t.Errorf("Failed to match invoice to PO ~ len(%d)", len(items))
-	}
-
-
-
-}
+//func TestMatching_Invoice2Po(t *testing.T) {
+//	var pos_str = []byte(`[{"FabricKey": "CN_AtlasUSAA9854",
+//"Buyer": "A2", "Doc": "PO", "Ref": "A9854",
+//"Seller": "A6","SKU": "23598","Qty": "1000",
+//"Curr": "USD","UnitCost": "100","Amount": "100000.00",
+//"Type": "NTE"}]`)
+//
+//	command := []byte(ADD_PO)
+//	args := [][]byte{command, pos_str}
+//
+//	var invoices_str = []byte(`[{
+//    "FabricKey": "CN_AtlasTrading80199A9854",
+//    "Seller": "A6",
+//    "Date": "2-Jan",
+//    "Ref": "80199",
+//    "Buyer": "A2",
+//    "PONum": "A9854",
+//    "SKU": "23598",
+//    "Qty": "300",
+//    "Curr": "USD",
+//    "UnitCost": "100",
+//    "Amount": "30000"
+//  }]`)
+//
+//	command2 := []byte(ADD_INVOICES)
+//	args2 := [][]byte{command2, invoices_str}
+//
+//	err := checkInvoke(stub, args)
+//	if err != nil {
+//		t.Errorf("Failed to create PO")
+//	}
+//
+//	err = checkInvoke(stub, args2)
+//	if err != nil {
+//		t.Errorf("Failed to create Invoice")
+//	}
+//
+//	getPO := queryPurchaseOrder(stub, "CN_AtlasUSAA9854")
+//	if getPO == nil {
+//		t.Errorf("Failed to retrieve PO")
+//	}
+//
+//	getInv := queryInvoice(stub, "CN_AtlasTrading80199A9854")
+//
+//	if getInv == nil {
+//		t.Errorf("Failed to retrieve Invoice")
+//	}
+//
+//	var items = queryUnmatched(stub)
+//
+//	if items == nil || len(items) != 0 {
+//		t.Errorf("Failed to match invoice to PO ~ len(%d)", len(items))
+//	}
+//
+//}
 
 // Test case 1.
 // FabricKey  CN_AtlasTrading80203A9854
@@ -216,7 +212,7 @@ func TestMatching_POExceedsNTE(t *testing.T) {
 //5-Jan
 //CPTY corrected
 
-func TestMatching_InvalidPONumber(t *testing.T) {
+func TestMatching_CorrectedInvoiceBuyer(t *testing.T) {
 	loadDataset(t)
 	//PO:
 	//"CN_AtlasUSAA9854	A2	PO	A9854	A6	23598	1,000	USD	100	 $100,000.00 	NTE"
@@ -315,8 +311,8 @@ func TestMatching_InvMatch(t *testing.T) {
 	//Inv:
 	//FabricKey	Seller	Date	Ref	Buyer	PO #	SKU	Qty	Curr	Unit cost	Amount
 	//CN_AtlasUSA1354651A5686	A2	3-Jan	1354651	A6	A5686	654864	100	USD	200	20,000
-	item := queryInvoice(stub, "CN_AtlasTrading56546A691000")
-	if item[0].State != "err" {
+	item := queryInvoice(stub, "CN_AtlasUSA1354651A5686")
+	if strings.Contains(item[0].State, "Ok") {
 		t.Errorf("Failed to Invoice should be in error unmatched state is %s", item[0].State)
 	}
 }
@@ -344,7 +340,20 @@ func TestMatching_InvMismatchExternal(t *testing.T) {
 	//FabricKey	Seller	Date	Ref	Buyer	PO #	SKU	Qty	Curr	Unit cost	Amount
 	//CN_AtlasUSA1354651A5686	A2	3-Jan	1354651	A6	A5686	654864	100	USD	200	20,000
 	item := queryInvoice(stub, "CN_AtlasAmericas4684A69879")
-	if item[0].State != "err" {
+
+	if strings.Contains(item[0].State, "Ok") {
 		t.Errorf("Failed to Invoice should be in error state is %s", item[0].State)
+	}
+}
+func TestMatching_List_Unmatched(t *testing.T) {
+	loadDataset(t)
+	//PO:
+	//CN_AtlasGlobalA6909	A4	PO	A6909	A6	23598	150	USD	100	15000.00	STD				//"CN_AtlasUSAA9854	A2	PO	A9854	A6	23598	1,000	USD	100	 $100,000.00 	NTE"
+	//Inv:
+	//FabricKey	Seller	Date	Ref	Buyer	PO #	SKU	Qty	Curr	Unit cost	Amount
+	//CN_AtlasUSA1354651A5686	A2	3-Jan	1354651	A6	A5686	654864	100	USD	200	20,000
+	item := queryUnmatched(stub)
+	if len(item) != 2 {
+		t.Errorf("unmatched should return 2 items not %d", len(item))
 	}
 }

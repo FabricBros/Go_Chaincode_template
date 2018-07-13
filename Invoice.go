@@ -5,6 +5,7 @@ import (
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	pb "github.com/hyperledger/fabric/protos/peer"
 	"encoding/json"
+	"strings"
 )
 
 //FabricKey	Seller	Date	Ref	Buyer	PO #	SKU	Qty	Curr	Unit cost	Amount
@@ -73,11 +74,13 @@ func (t *SimpleChaincode) addInvoices(stub shim.ChaincodeStubInterface, args []s
 		}
 		//  Save index entry to state. Only the key name is needed, no need to store a duplicate copy of the Marble.
 		//  Note - passing a 'nil' value will effectively delete the key from state, therefore we pass null character as value
-		value := []byte{0x00}
-		err = stub.PutState(colorNameIndexKey, value)
-		if err != nil {
-			logger.Errorf("Failed to create composite key %s", err)
-			return shim.Error(err.Error())
+		if ! strings.Contains(v.State,"Ok"){
+			value := []byte{0x00}
+			err = stub.PutState(colorNameIndexKey, value)
+			if err != nil {
+				logger.Errorf("Failed to create composite key %s", err)
+				return shim.Error(err.Error())
+			}
 		}
 
 	}

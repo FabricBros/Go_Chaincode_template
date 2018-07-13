@@ -20,23 +20,25 @@ import (
 
 // For storing arbitrary POs.
 type PurchaseOrder struct {
-	ObjectType    string
-	Uuid          string `json:"FabricKey"`
-	Buyer          string `json:"Buyer"`
-	PONo          string `json:"PO_no"`
-	Doc           string `json:"Doc"`  // "PO"
-	Ref           string `json:"Ref"` // PO#
-	Seller        string `json:"Seller"`
-	SKU           string `json:"SKU"`
-	Qty           float32 `json:"Qty,string"`
-	Curr          string `json:"Curr" `//EUR USD
-	UnitCost	 float32 `json:"UnitCost,string"`
-	Amount	 float32 `json:"Amount,string"`
-	Type	 POType `json:"Type"` // STD NTE
+	ObjectType string
+	Uuid       string  `json:"FabricKey"`
+	Buyer      string  `json:"Buyer"`
+	PONo       string  `json:"PO_no"`
+	Doc        string  `json:"Doc"` // "PO"
+	Ref        string  `json:"Ref"` // PO#
+	Seller     string  `json:"Seller"`
+	SKU        string  `json:"SKU"`
+	Qty        float32 `json:"Qty,string"`
+	Curr       string  `json:"Curr" ` //EUR USD
+	UnitCost   float32 `json:"UnitCost,string"`
+	Amount     float32 `json:"Amount,string"`
+	Type       POType  `json:"Type"` // STD NTE
+	State      string  `json:"State"`
 }
 
 //
 type POType string
+
 const (
 	STDTYPE = "STD"
 	NTETYPE = "NTETYPE"
