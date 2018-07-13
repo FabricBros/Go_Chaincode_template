@@ -13,9 +13,6 @@ type Document struct {
 }
 
 
-//var ObjectType="document"  AddDocuments(args, documentPK)
-
-
 // ============================================================
 // initDocument - creates a new document and stores it in the chaincode state
 // ============================================================
@@ -44,6 +41,3 @@ func (t *SimpleChaincode) readDocument(stub shim.ChaincodeStubInterface, args []
 
 	return shim.Success(v)
 }
-
-
-

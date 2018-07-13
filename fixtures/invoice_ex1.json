@@ -10,7 +10,7 @@
     "Qty": "200",
     "Curr": "EUR",
     "UnitCost": "200",
-    "Amount": "40,000"
+    "Amount": "40000"
   },
   {
     "FabricKey": "CN_AtlasEurope38689A1452",
@@ -23,7 +23,7 @@
     "Qty": "100",
     "Curr": "EUR",
     "UnitCost": "200",
-    "Amount": "20,000"
+    "Amount": "20000"
   },
   {
     "FabricKey": "CN_AtlasAmericas15733A2254",
@@ -36,7 +36,7 @@
     "Qty": "120",
     "Curr": "USD",
     "UnitCost": "300",
-    "Amount": "36,000"
+    "Amount": "36000"
   },
   {
     "FabricKey": "CN_AtlasUSA1354651A5686",
@@ -49,7 +49,7 @@
     "Qty": "100",
     "Curr": "USD",
     "UnitCost": "200",
-    "Amount": "20,000"
+    "Amount": "20000"
   },
   {
     "FabricKey": "CN_AtlasUSA1354651A6908",
@@ -62,7 +62,7 @@
     "Qty": "100",
     "Curr": "USD",
     "UnitCost": "200",
-    "Amount": "20,000"
+    "Amount": "20000"
   },
   {
     "FabricKey": "CN_AtlasAmericas546568A6910",
@@ -75,7 +75,7 @@
     "Qty": "125",
     "Curr": "USD",
     "UnitCost": "400",
-    "Amount": "50,000"
+    "Amount": "50000"
   },
   {
     "FabricKey": "CN_AtlasTrading56546A691000",
@@ -88,7 +88,7 @@
     "Qty": "150",
     "Curr": "USD",
     "UnitCost": "100",
-    "Amount": "15,000"
+    "Amount": "15000"
   },
   {
     "FabricKey": "CN_AtlasAmericas4684A69879",
@@ -101,7 +101,7 @@
     "Qty": "100",
     "Curr": "USD",
     "UnitCost": "180",
-    "Amount": "18,000"
+    "Amount": "18000"
   },
   {
     "FabricKey": "CN_AtlasUSA86770A9635",
@@ -114,7 +114,7 @@
     "Qty": "100",
     "Curr": "USD",
     "UnitCost": "200",
-    "Amount": "20,000"
+    "Amount": "20000"
   },
   {
     "FabricKey": "CN_AtlasTrading80199A9854",
@@ -127,7 +127,7 @@
     "Qty": "300",
     "Curr": "USD",
     "UnitCost": "100",
-    "Amount": "30,000"
+    "Amount": "30000"
   },
   {
     "FabricKey": "CN_AtlasTrading80200A9854",
@@ -140,7 +140,7 @@
     "Qty": "200",
     "Curr": "USD",
     "UnitCost": "100",
-    "Amount": "20,000"
+    "Amount": "20000"
   },
   {
     "FabricKey": "CN_AtlasTrading80201A9854",
@@ -153,7 +153,7 @@
     "Qty": "150",
     "Curr": "USD",
     "UnitCost": "100",
-    "Amount": "15,000"
+    "Amount": "15000"
   },
   {
     "FabricKey": "CN_AtlasTrading80202A9854",
@@ -166,7 +166,7 @@
     "Qty": "200",
     "Curr": "USD",
     "UnitCost": "100",
-    "Amount": "20,000"
+    "Amount": "20000"
   },
   {
     "FabricKey": "CN_AtlasTrading80203A9854",
@@ -179,7 +179,7 @@
     "Qty": "180",
     "Curr": "USD",
     "UnitCost": "100",
-    "Amount": "18,000"
+    "Amount": "18000"
   },
   {
     "FabricKey": "CN_CasablancaCorp49869AX1234",
@@ -192,7 +192,7 @@
     "Qty": "500",
     "Curr": "USD",
     "UnitCost": "100",
-    "Amount": "50,000"
+    "Amount": "50000"
   },
   {
     "FabricKey": "CN_CasablancaCorp49870AX1234",
@@ -205,7 +205,7 @@
     "Qty": "400",
     "Curr": "USD",
     "UnitCost": "100",
-    "Amount": "40,000"
+    "Amount": "40000"
   },
   {
     "FabricKey": "CN_CasablancaCorp49871AX1234",
@@ -218,7 +218,7 @@
     "Qty": "500",
     "Curr": "USD",
     "UnitCost": "100",
-    "Amount": "50,000"
+    "Amount": "50000"
   },
   {
     "FabricKey": "CN_CasablancaCorp49872AX1234",
@@ -231,7 +231,7 @@
     "Qty": "800",
     "Curr": "USD",
     "UnitCost": "100",
-    "Amount": "80,000"
+    "Amount": "80000"
   },
   {
     "FabricKey": "CN_CasablancaCorp49873AX1234",
@@ -244,7 +244,7 @@
     "Qty": "1000",
     "Curr": "USD",
     "UnitCost": "100",
-    "Amount": "100,000"
+    "Amount": "100000"
   },
   {
     "FabricKey": "CN_CasablancaCorp49875AX78456",
@@ -257,7 +257,7 @@
     "Qty": "100",
     "Curr": "USD",
     "UnitCost": "100",
-    "Amount": "10,000"
+    "Amount": "10000"
   },
   {
     "FabricKey": "CN_BasicUSA2328B12355",
@@ -270,6 +270,6 @@
     "Qty": "1000",
     "Curr": "USD",
     "UnitCost": "120",
-    "Amount": "120,000"
+    "Amount": "120000"
   }
 ]

@@ -1,29 +1,30 @@
 package main
 
 import (
-	"bytes"
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	pb "github.com/hyperledger/fabric/protos/peer"
-	"encoding/json"
-	)
+	"strings"
+)
 
 //FabricKey	Seller	Date	Ref	Buyer	PO #	SKU	Qty	Curr	Unit cost	Amount
 type Invoice struct {
-	Amount   string `json:"amount"`
+	Amount     float32 `json:"Amount,string"`
 	Buyer    string `json:"buyer"`
 	Currency string `json:"currency"`
 	Date     string `json:"date"`
 	PoNumber string `json:"poNumber"`
-	Quantity string    `json:"quantity"`
+	Quantity float32    `json:"quantity"`
 	RefID    string    `json:"refId"`
 	Seller   string `json:"seller"`
 	Sku      string    `json:"sku"`
-	UnitCost string    `json:"unitCost"`
+	UnitCost float32    `json:"unitCost"`
+	State      string  `json:"State"`
 }
 
 func init(){
 	//logger.SetLevel(shim.LogDebug)
 }
+
 // Transaction makes payment of X units from A to B
 func (t *SimpleChaincode) addInvoices(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	logger.Debug("adding invoice")
@@ -57,6 +58,8 @@ func (t *SimpleChaincode) addInvoices(stub shim.ChaincodeStubInterface, args []s
 
 		logger.Debug("Invoice has pk: "+pk)
 
+		t.match_invoice(stub, &v)
+
 		vBytes, err := json.Marshal(v)
 
 		if err != nil {
@@ -64,6 +67,24 @@ func (t *SimpleChaincode) addInvoices(stub shim.ChaincodeStubInterface, args []s
 			return shim.Error(err.Error())
 		}
 		stub.PutState(pk, vBytes)
+
+		indexName := "unmatched~type~uuid"
+		colorNameIndexKey, err := stub.CreateCompositeKey(indexName, []string{"invoice", v.Uuid})
+		if err != nil {
+			logger.Errorf("Failed to create composite key %s", err)
+			return shim.Error(err.Error())
+		}
+		//  Save index entry to state. Only the key name is needed, no need to store a duplicate copy of the Marble.
+		//  Note - passing a 'nil' value will effectively delete the key from state, therefore we pass null character as value
+		if ! strings.Contains(v.State,"Ok"){
+			value := []byte{0x00}
+			err = stub.PutState(colorNameIndexKey, value)
+			if err != nil {
+				logger.Errorf("Failed to create composite key %s", err)
+				return shim.Error(err.Error())
+			}
+		}
+
 	}
 
 	return shim.Success(nil)

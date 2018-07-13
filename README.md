@@ -12,7 +12,18 @@ $ ./fabric.sh startCC ccname v1
 $ ./fabric.sh runCC ccname v1
 ```
 
-Create/Query Invoice E2E
+## Create/Query Invoice E2E
+
+All from Fixture:
+```
+#!/usr/bin/env bash
+
+./fabric.sh invoke '{"Args":["AddInvoices","[{\"FabricKey\":\"CN_AtlasEurope68109A1235\",\"Seller\":\"A3\",\"Date\":\"2-Jan\",\"Ref\":\"68109\",\"Buyer\":\"A5\",\"PONum\":\"A1235\",\"SKU\":\"85412\",\"Qty\":\"200\",\"Curr\":\"EUR\",\"UnitCost\":\"200\",\"Amount\":\"40,000\"}]"]}'
+./fabric.sh query '{"Args":["RetrieveInvoice","CN_AtlasEurope68109A1235"]}'
+```
+
+
+All from Fixture:
 ```
 #!/usr/bin/env bash
 

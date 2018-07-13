@@ -28,7 +28,6 @@ func checkState(t *testing.T, stub *shim.MockStub, name string, value string) {
 
 
 func checkInvoke(stub *shim.MockStub, args [][]byte) error{
-	//logger.Debugf("checkInvoke: %s", args)
 	resp := stub.MockInvoke("1", args)
 	if resp.Status != shim.OK {
 		logger.Errorf("Failed to Invoke %s", args)
