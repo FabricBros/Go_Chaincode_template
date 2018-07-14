@@ -5,7 +5,8 @@ import (
 	"testing"
 	"io/ioutil"
 	"strings"
-	)
+	"fmt"
+)
 
 func init() {
 	scc = new(SimpleChaincode)
@@ -49,7 +50,7 @@ func loadDataset(t *testing.T) error {
 func TestLoadDataset(t *testing.T) {
 	loadDataset(t)
 	po := queryPurchaseOrder(stub, "CN_AtlasIndiaA1235")
-	inv := queryInvoice(stub, "CN_AtlasEurope","68109","A1235")
+	inv := queryInvoice(stub,"68109","A1235")
 	logger.Debugf("PO: %s", po)
 	logger.Debugf("Inv: %s", inv)
 }
@@ -190,7 +191,7 @@ func TestMatching_POExceedsNTE(t *testing.T) {
 	//CN_AtlasTrading80201A9854	A6	10-Jan	80201	A2	A9854	23598	150	USD	100	15,000
 	//CN_AtlasTrading80202A9854	A6	19-Jan	80202	A2	A9854	23598	200	USD	100	20,000
 	//CN_AtlasTrading80203A9854	A6	20-Jan	80203	A2	A9854	23598	180	USD	100	18,000
-	inv := queryInvoice(stub, "CN_AtlasTrading","80203","A9854")
+	inv := queryInvoice(stub,"80203","A9854")
 	if inv[0].Quantity != 150 {
 		t.Errorf("Failed to match invoice, qty should be 150 is %f", inv[0].Quantity)
 	}
@@ -223,7 +224,7 @@ func TestMatching_CorrectedInvoiceBuyer(t *testing.T) {
 	//CN_AtlasTrading80201A9854	A6	10-Jan	80201	A2	A9854	23598	150	USD	100	15,000
 	//CN_AtlasTrading80202A9854	A6	19-Jan	80202	A2	A9854	23598	200	USD	100	20,000
 	//CN_AtlasTrading80203A9854	A6	20-Jan	80203	A2	A9854	23598	180	USD	100	18,000
-	inv := queryInvoice(stub, "CN_AtlasUSA","1354651","A6908")
+	inv := queryInvoice(stub,"1354651","A6908")
 	if inv[0].Buyer != "A4" {
 		t.Errorf("Failed to match and update invoice-> Buyer should be A4 is %s", inv[0].Buyer)
 	}
@@ -256,9 +257,10 @@ func TestMatching_InvPriceExceedsPOPrice(t *testing.T) {
 	//CN_AtlasTrading80201A9854	A6	10-Jan	80201	A2	A9854	23598	150	USD	100	15,000
 	//CN_AtlasTrading80202A9854	A6	19-Jan	80202	A2	A9854	23598	200	USD	100	20,000
 	//CN_AtlasTrading80203A9854	A6	20-Jan	80203	A2	A9854	23598	180	USD	100	18,000
-	item := queryPurchaseOrder(stub, "CN_AtlasGlobalA6910")
-	if item.UnitCost != 400.0 {
-		t.Errorf("Failed to update purchase order with new Unit cost should be 400.0 is %f", item.UnitCost)
+	item := queryPurchaseOrder(stub, "A6910")
+	fmt.Printf("\n%-v\n", item)
+	if item[0].UnitCost != 400.0 {
+		t.Errorf("Failed to update purchase order with new Unit cost should be 400.0 is %f", item[0].UnitCost)
 	}
 }
 
@@ -284,9 +286,9 @@ func TestMatching_InvMatchAndUpdatePONum(t *testing.T) {
 	//Inv:
 	//FabricKey	Seller	Date	Ref	Buyer	PO #	SKU	Qty	Curr	Unit cost	Amount
 	//CN_AtlasTrading56546A691000	A6	3-Jan	56546	A4	A691000	23598	150	USD	100	15,000
-	item := queryInvoice(stub, "CN_AtlasTrading","56546","A691000")
-	if item[0].RefID != "A6909" {
-		t.Errorf("Failed to update Invoice PONum. Should be A6909 is %s", item[0].RefID)
+	item := queryInvoice(stub,"56546","A691000")
+	if item[0].PoNumber != "A6909" {
+		t.Errorf("Failed to update Invoice PONum. Should be A6909 is %s", item[0].PoNumber)
 	}
 }
 
@@ -311,7 +313,7 @@ func TestMatching_InvMatch(t *testing.T) {
 	//Inv:
 	//FabricKey	Seller	Date	Ref	Buyer	PO #	SKU	Qty	Curr	Unit cost	Amount
 	//CN_AtlasUSA1354651A5686	A2	3-Jan	1354651	A6	A5686	654864	100	USD	200	20,000
-	item := queryInvoice(stub, "CN_AtlasUSA","1354651","A5686")
+	item := queryInvoice(stub, "1354651","A5686")
 	if strings.Contains(item[0].State, "Ok") {
 		t.Errorf("Failed to Invoice should be in error unmatched state is %s", item[0].State)
 	}
@@ -339,7 +341,7 @@ func TestMatching_InvMismatchExternal(t *testing.T) {
 	//Inv:
 	//FabricKey	Seller	Date	Ref	Buyer	PO #	SKU	Qty	Curr	Unit cost	Amount
 	//CN_AtlasUSA1354651A5686	A2	3-Jan	1354651	A6	A5686	654864	100	USD	200	20,000
-	item := queryInvoice(stub, "CN_AtlasAmericas","4684","A69879")
+	item := queryInvoice(stub, "4684","A69879")
 
 	if strings.Contains(item[0].State, "Ok") {
 		t.Errorf("Failed to Invoice should be in error state is %s", item[0].State)

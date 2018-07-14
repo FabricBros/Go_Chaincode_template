@@ -29,11 +29,11 @@ func init(){
 
 // Transaction makes payment of X units from A to B
 func (t *SimpleChaincode) addInvoices(stub shim.ChaincodeStubInterface, args []string) pb.Response {
-	logger.Debug("adding invoice")
+	logger.Debug("adding invoice: %d", len(args))
 	defer logger.Debug("exit adding invoice")
 
 	var items []Invoice
-	logger.Debug("addInvoice:"+args[0])
+	//logger.Debug("addInvoice:"+args[0])
 
 	err := json.Unmarshal([]byte(args[0]), &items)
 	if err != nil {
@@ -51,14 +51,15 @@ func (t *SimpleChaincode) addInvoices(stub shim.ChaincodeStubInterface, args []s
 			logger.Debug(err.Error())
 			shim.Error(err.Error())
 		}
-		logger.Debug("adding item:")
-		logger.Debug(v)
+
+		//logger.Debug("adding item:")
+		//logger.Debug(v)
 
 		var attr = []string{cn, v.RefID, v.PoNumber}
 
 		pk, err := buildPK(stub, "Invoice", attr)
 
-		logger.Debug("Invoice has pk: "+pk)
+		//logger.Debug("Invoice has pk: "+pk)
 
 		t.match_invoice(stub, pk, &v)
 
@@ -70,8 +71,8 @@ func (t *SimpleChaincode) addInvoices(stub shim.ChaincodeStubInterface, args []s
 		}
 		stub.PutState(pk, vBytes)
 
-		indexName := "unmatched~type~uuid"
-		colorNameIndexKey, err := stub.CreateCompositeKey(indexName, []string{"invoice", pk})
+		indexName := "unmatched~cn~ref~po"
+		colorNameIndexKey, err := stub.CreateCompositeKey(indexName, attr)
 		if err != nil {
 			logger.Errorf("Failed to create composite key %s", err)
 			return shim.Error(err.Error())
@@ -79,6 +80,7 @@ func (t *SimpleChaincode) addInvoices(stub shim.ChaincodeStubInterface, args []s
 		//  Save index entry to state. Only the key name is needed, no need to store a duplicate copy of the Marble.
 		//  Note - passing a 'nil' value will effectively delete the key from state, therefore we pass null character as value
 		if ! strings.Contains(v.State,"Ok"){
+			//logger.Errorf("Unmatched: %s\n%s",indexName, attr)
 			value := []byte{0x00}
 			err = stub.PutState(colorNameIndexKey, value)
 			if err != nil {
@@ -110,16 +112,18 @@ func (t *SimpleChaincode) getInvoice(stub shim.ChaincodeStubInterface, args []st
 	invoiceByte, err := stub.GetState(pk)
 	logger.Debugf("got back from state %s", invoiceByte)
 	if err != nil {
+		logger.Errorf("error from state %s", err)
 		return shim.Error(err.Error())
 	}
+
 	err = json.Unmarshal(invoiceByte, &invoice)
 	if err != nil {
 		logger.Error(err)
 		return shim.Error(err.Error())
 	}
 
-	logger.Debug("getInvoice:")
-	logger.Debug(invoice)
+	//logger.Debug("getInvoice:")
+	//logger.Debug(invoice)
 	var buffer bytes.Buffer
 	buffer.WriteString("[")
 	buffer.WriteString(string(invoiceByte))
@@ -146,8 +150,8 @@ func (t *SimpleChaincode) updateInvoices(stub shim.ChaincodeStubInterface, args 
 			logger.Debug(err.Error())
 			shim.Error(err.Error())
 		}
-		logger.Debug("updating item:")
-		logger.Debug(v)
+		//logger.Debug("updating item:")
+		//logger.Debug(v)
 
 		var attr = []string{cn, v.RefID, v.PoNumber}
 

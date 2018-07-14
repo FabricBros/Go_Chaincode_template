@@ -27,21 +27,22 @@ func init() {
 	pos = append(pos,po1)
 }
 
-func queryPurchaseOrder(stub *shim.MockStub, name string) *PurchaseOrder {
+func queryPurchaseOrder(stub *shim.MockStub, ref string) []PurchaseOrder {
 
 	//print("queryDocument")
-	res := stub.MockInvoke("1", [][]byte{[]byte(GET_PO), []byte(name)})
+	res := stub.MockInvoke("1", [][]byte{[]byte(GET_PO), []byte(ref)})
 	if res.Status != shim.OK {
-		fmt.Printf("queryPO %s failed with %s", name, string(res.Message))
+		fmt.Printf("queryPO %s failed with %s", ref, string(res.Message))
 		return nil
 	}
 	if res.Payload == nil {
-		fmt.Printf("queryPO %s failed with %s ", name, string(res.Message))
+		fmt.Printf("queryPO %s failed with %s ", ref, string(res.Message))
 		return nil
 	}
+	//fmt.Printf("queryPO %s\n %s ", ref, string(res.Payload))
 
-	item := &PurchaseOrder{}
-	_ = json.Unmarshal(res.Payload, item)
+	item := []PurchaseOrder{}
+	_ = json.Unmarshal(res.Payload, &item)
 	return item
 }
 

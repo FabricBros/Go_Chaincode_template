@@ -57,17 +57,19 @@ func (t *SimpleChaincode) initPurchaseOrders(stub shim.ChaincodeStubInterface, a
 	for _, v := range items {
 
 		cn, err := getCN(stub)
-		if err != nil{
-			logger.Error(err.Error())
+
+		if err != nil {
+			logger.Errorf("err: %-v", err.Error())
 			return shim.Error(err.Error())
 		}
 		var attr = []string{cn, v.RefID}
+		//logger.Debugf("attr: %-v",attr )
 		pk, err := buildPK(stub, "PurchaseOrder", attr)
 		if err != nil{
 			logger.Error(err.Error())
 			return shim.Error(err.Error())
 		}
-		logger.Debug("using pk "+pk)
+		//logger.Debug("using pk "+pk)
 
 		//v.ObjectType = "PurchaseOrder"
 		vBytes, err := json.Marshal(v)
@@ -85,7 +87,7 @@ func (t *SimpleChaincode) initPurchaseOrders(stub shim.ChaincodeStubInterface, a
 func (t *SimpleChaincode) readPurchaseOrder(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	var name, jsonResp string
 	var err error
-	logger.Debug("Enter readPO")
+	logger.Debug("Enter readPO: %s", args)
 	defer logger.Debug("Exited readPO")
 
 	if len(args) != 1 {
@@ -99,8 +101,10 @@ func (t *SimpleChaincode) readPurchaseOrder(stub shim.ChaincodeStubInterface, ar
 		return shim.Error(err.Error())
 	}
 	var attr = []string{cn, args[0]}
+
 	pk, err := buildPK(stub, "PurchaseOrder", attr)
 
+	//logger.Errorf("find %s", pk)
 	valAsbytes, err := stub.GetState(pk) //get the PO from chaincode state
 	if err != nil {
 		jsonResp = "{\"Error\":\"Failed to get state for " + name + "\"}"
@@ -110,7 +114,7 @@ func (t *SimpleChaincode) readPurchaseOrder(stub shim.ChaincodeStubInterface, ar
 		return shim.Error(jsonResp)
 	}
 
-	logger.Debug("writing returned payload")
+	logger.Debug("writing returned payload %s",string(valAsbytes))
 	var buffer bytes.Buffer
 	buffer.WriteString("[")
 	buffer.WriteString(string(valAsbytes))
