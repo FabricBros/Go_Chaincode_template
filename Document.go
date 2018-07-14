@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	pb "github.com/hyperledger/fabric/protos/peer"
-)
+	)
 
 // For storing arbitrary documents.
 type Document struct {
@@ -30,7 +30,7 @@ func (t *SimpleChaincode) initDocuments(stub shim.ChaincodeStubInterface, args [
 
 
 func (t *SimpleChaincode) readDocument(stub shim.ChaincodeStubInterface, args []string) pb.Response {
-	logger.Debug("Enter readDocument")
+	logger.Debugf("Enter readDocument %s", args)
 	defer logger.Debug("Exited readDocument")
 
 	v,err := stub.GetState(args[0])
@@ -40,4 +40,17 @@ func (t *SimpleChaincode) readDocument(stub shim.ChaincodeStubInterface, args []
 	}
 
 	return shim.Success(v)
+}
+
+
+func (t *SimpleChaincode) updateDocuments(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+	logger.Debug("Enter updateDocuments")
+	defer logger.Debug("Exited updateDocuments")
+	logger.Debug("adding: "+args[0])
+	logger.Debug("with pk :"+args[1])
+
+	stub.PutState(args[1], []byte(args[0]))
+
+
+	return shim.Success(nil)
 }

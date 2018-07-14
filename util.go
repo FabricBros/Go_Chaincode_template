@@ -8,8 +8,11 @@ import (
 func getCN(stub shim.ChaincodeStubInterface)(string, error){
 	cert, err := cid.GetX509Certificate(stub)
 	if err != nil{
-		logger.Debug(err.Error())
+		logger.Error(err.Error())
 		return "", err
+	}
+	if cert == nil { //Will be nill for testing.
+		return "", nil
 	}
 	return cert.Subject.CommonName, nil
 }

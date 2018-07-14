@@ -4,6 +4,8 @@ import (
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	pb "github.com/hyperledger/fabric/protos/peer"
 	"strings"
+	"encoding/json"
+	"bytes"
 )
 
 //FabricKey	Seller	Date	Ref	Buyer	PO #	SKU	Qty	Curr	Unit cost	Amount
@@ -13,11 +15,11 @@ type Invoice struct {
 	Currency string `json:"currency"`
 	Date     string `json:"date"`
 	PoNumber string `json:"poNumber"`
-	Quantity float32    `json:"quantity"`
+	Quantity float32    `json:"quantity,string"`
 	RefID    string    `json:"refId"`
 	Seller   string `json:"seller"`
 	Sku      string    `json:"sku"`
-	UnitCost float32    `json:"unitCost"`
+	UnitCost float32    `json:"unitCost,string"`
 	State      string  `json:"State"`
 }
 
@@ -58,7 +60,7 @@ func (t *SimpleChaincode) addInvoices(stub shim.ChaincodeStubInterface, args []s
 
 		logger.Debug("Invoice has pk: "+pk)
 
-		t.match_invoice(stub, &v)
+		t.match_invoice(stub, pk, &v)
 
 		vBytes, err := json.Marshal(v)
 
@@ -69,7 +71,7 @@ func (t *SimpleChaincode) addInvoices(stub shim.ChaincodeStubInterface, args []s
 		stub.PutState(pk, vBytes)
 
 		indexName := "unmatched~type~uuid"
-		colorNameIndexKey, err := stub.CreateCompositeKey(indexName, []string{"invoice", v.Uuid})
+		colorNameIndexKey, err := stub.CreateCompositeKey(indexName, []string{"invoice", pk})
 		if err != nil {
 			logger.Errorf("Failed to create composite key %s", err)
 			return shim.Error(err.Error())
@@ -92,7 +94,7 @@ func (t *SimpleChaincode) addInvoices(stub shim.ChaincodeStubInterface, args []s
 
 // Deletes an entity from state
 func (t *SimpleChaincode) getInvoice(stub shim.ChaincodeStubInterface, args []string) pb.Response {
-	logger.Debug("enter get invoice")
+	logger.Debugf("enter get invoice: %-v",args)
 	defer logger.Debug("exited get invoice")
 
 	//key := args[0]

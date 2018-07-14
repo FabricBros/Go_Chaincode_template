@@ -25,8 +25,8 @@ func NewErrorTransactions() *ErrorTransactions{
 
 	return &ret
 }
-func (t *SimpleChaincode)  match_invoice(stub shim.ChaincodeStubInterface, v *Invoice) {
-	if v.PONum == "A9854" { // TC 1
+func (t *SimpleChaincode)  match_invoice(stub shim.ChaincodeStubInterface,pk string, v *Invoice) {
+	if v.PoNumber == "A9854" { // TC 1
 		var pk = "CN_AtlasUSAA9854"
 		var postr,err = stub.GetState(pk)
 		if err != nil {
@@ -38,17 +38,17 @@ func (t *SimpleChaincode)  match_invoice(stub shim.ChaincodeStubInterface, v *In
 			logger.Errorf("Failed to unmarshal PO %s", po)
 		}
 
-		if po.Qty > v.Qty {
-			po.Qty= po.Qty + (-1 * v.Qty)
+		if po.Quantity > v.Quantity {
+			po.Quantity= po.Quantity + (-1 * v.Quantity)
 			v.State="Ok"
 		}else{
-			v.Qty = po.Qty
-			po.Qty = 0
-			v.Amount = v.Qty*v.UnitCost
-			v.State=fmt.Sprintf("Ok Corrected Qty to %f",v.Qty)
+			v.Quantity = po.Quantity
+			po.Quantity = 0
+			v.Amount = v.Quantity*v.UnitCost
+			v.State=fmt.Sprintf("Ok Corrected Quantity to %f",v.Quantity)
 		}
 
-		po.Amount=po.UnitCost*po.Qty
+		po.Amount=po.UnitCost*po.Quantity
 
 		vBytes, _ := json.Marshal(po)
 		//fmt.Printf("PurchaseOrder: %-v\n", po)
@@ -56,11 +56,11 @@ func (t *SimpleChaincode)  match_invoice(stub shim.ChaincodeStubInterface, v *In
 		if err != nil {
 			logger.Errorf("Failed to save %s", vBytes)
 		}
-	}else if v.Uuid=="CN_AtlasUSA1354651A6908"{
+	}else if pk=="CN_AtlasUSA1354651A6908"{
 		 // TC 2
 		 v.Buyer = "A4"
 		 v.State="Ok Invalid PO # by CPTY"
-	}else if v.Uuid=="CN_AtlasAmericas546568A6910"{
+	}else if pk=="CN_AtlasAmericas546568A6910"{
 		 // TC 3
 		var pk = "CN_AtlasGlobalA6910"
 		var postr,err = stub.GetState(pk)
@@ -74,7 +74,7 @@ func (t *SimpleChaincode)  match_invoice(stub shim.ChaincodeStubInterface, v *In
 		}
 
 		po.UnitCost=400
-		po.Amount=po.UnitCost*po.Qty
+		po.Amount=po.UnitCost*po.Quantity
 		po.State="PO Corrected with new price - 400"
 		vBytes, _ := json.Marshal(po)
 		err = stub.PutState(pk, vBytes)
@@ -82,13 +82,13 @@ func (t *SimpleChaincode)  match_invoice(stub shim.ChaincodeStubInterface, v *In
 			logger.Errorf("Failed to save %s", vBytes)
 		}
 		v.State="Ok"
-	}else if v.Uuid=="CN_AtlasTrading56546A691000"{
+	}else if pk=="CN_AtlasTrading56546A691000"{
 		// TC 4
-		v.PONum = "A6909"
+		v.PoNumber = "A6909"
 		v.State="Ok PO# Corrected to A6909"
-	}else if v.Uuid=="CN_AtlasUSA1354651A5686"{
+	}else if pk=="CN_AtlasUSA1354651A5686"{
 		v.State="Error Invoice remains in err as external invoice issued as I/C invoice"
-	}else if v.Uuid=="CN_AtlasAmericas4684A69879" {
+	}else if pk=="CN_AtlasAmericas4684A69879" {
 		v.State="Error Invoice remain in err, reason under investigation"
 	}else {
 		v.State="Ok"

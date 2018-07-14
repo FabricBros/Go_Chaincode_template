@@ -2,8 +2,6 @@ package main
 
 import (
 	"github.com/hyperledger/fabric/core/chaincode/shim"
-	"reflect"
-	"encoding/json"
 	"testing"
 	"os"
 	"fmt"
@@ -17,7 +15,7 @@ var (
 
 func mySetupFunction() {
 	//print("Setup")
-	documents = []*Document{ NewDocument("Document1","Sample Data")}
+	documents = []*Document{}
 	scc = new(SimpleChaincode)
 	stub = shim.NewMockStub("ex02", scc)
 }
@@ -36,35 +34,32 @@ func TestMain(m *testing.M) {
 
 func TestInvoke(t *testing.T) {
 	command := []byte(ADD_DOCUMENTS)
-	arg1,_ := json.Marshal(documents)
-	args := [][]byte{command, arg1}
+	args := [][]byte{command, []byte("document"), []byte("pk")}
 
 	checkInvoke(stub, args)
 
-	var m = queryDocument(stub, documents[0].Uuid)
-	if ! reflect.DeepEqual(m, documents[0]) {
+	var m = queryDocument(stub, "pk")
+	fmt.Printf("%-v",m)
+	if string(m) != "document"  {
 		t.Fail()
 	}
 }
 func TestDocumentUpdate(t *testing.T){
 			command := []byte(UPDATE_DOCUMENTS)
-			var updateValue = "1234"
-
-			documents[0].Data = updateValue
-
-			arg1,_ := json.Marshal(documents)
-			args := [][]byte{command, arg1}
+			var updateValue = []byte("1234")
+			var pk = []byte("pk123")
+			args := [][]byte{command, updateValue,pk }
 
 			checkInvoke(stub, args)
 
-			var m = queryDocument(stub, documents[0].Uuid)
-			if m==nil || m.Data != updateValue {
+			var m = queryDocument(stub, string(pk))
+			if m==nil || string(m) != string(updateValue) {
 					t.Fail() //("Value should reflect updated value.")
 			}
 }
 
 
-func queryDocument(stub *shim.MockStub, name string) *Document {
+func queryDocument(stub *shim.MockStub, name string) []byte {
 
 	res := stub.MockInvoke("1", [][]byte{[]byte(GET_DOCUMENTS), []byte(name)})
 	if res.Status != shim.OK {
@@ -76,7 +71,5 @@ func queryDocument(stub *shim.MockStub, name string) *Document {
 		return nil
 	}
 
-	item := &Document{}
-	_ = json.Unmarshal(res.Payload,item)
-	return item
+	return res.Payload
 }
