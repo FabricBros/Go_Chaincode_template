@@ -39,7 +39,6 @@ func queryPurchaseOrder(stub *shim.MockStub, ref string) []PurchaseOrder {
 		fmt.Printf("queryPO %s failed with %s ", ref, string(res.Message))
 		return nil
 	}
-	//fmt.Printf("queryPO %s\n %s ", ref, string(res.Payload))
 
 	item := []PurchaseOrder{}
 	_ = json.Unmarshal(res.Payload, &item)

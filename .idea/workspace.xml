@@ -3,15 +3,28 @@
   <component name="ChangeListManager">
     <list default="true" id="1692966d-a1f2-4a2d-8f21-56146cbbf315" name="Default" comment="a">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Invoice.go" beforeDir="false" afterPath="$PROJECT_DIR$/Invoice.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Invoice_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/Invoice_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PurchaseOrder.go" beforeDir="false" afterPath="$PROJECT_DIR$/PurchaseOrder.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PurchaseOrder_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/PurchaseOrder_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fixtures/invoice_ex1.json" beforeDir="false" afterPath="$PROJECT_DIR$/fixtures/invoice_ex1.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fixtures/purchaseOrder_ex1.json" beforeDir="false" afterPath="$PROJECT_DIR$/fixtures/purchaseOrder_ex1.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_router.go" beforeDir="false" afterPath="$PROJECT_DIR$/main_router.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/matching.go" beforeDir="false" afterPath="$PROJECT_DIR$/matching.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/matching_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/matching_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util.go" beforeDir="false" afterPath="$PROJECT_DIR$/util.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_helpers.go" beforeDir="false" afterPath="$PROJECT_DIR$/test_helpers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor_1/github.com/golang/protobuf/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor_1/github.com/golang/protobuf/proto/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor_1/github.com/golang/protobuf/proto/clone.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor_1/github.com/golang/protobuf/proto/decode.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor_1/github.com/golang/protobuf/proto/discard.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor_1/github.com/golang/protobuf/proto/encode.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor_1/github.com/golang/protobuf/proto/equal.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor_1/github.com/golang/protobuf/proto/extensions.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor_1/github.com/golang/protobuf/proto/lib.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor_1/github.com/golang/protobuf/proto/message_set.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor_1/github.com/golang/protobuf/proto/pointer_reflect.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor_1/github.com/golang/protobuf/proto/pointer_unsafe.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor_1/github.com/golang/protobuf/proto/properties.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor_1/github.com/golang/protobuf/proto/text.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor_1/github.com/golang/protobuf/proto/text_parser.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor_1/github.com/hyperledger/fabric/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor_1/github.com/hyperledger/fabric/common/attrmgr/attrmgr.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor_1/vendor.json" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,12 +37,13 @@
     <SUITE FILE_PATH="coverage/chaincode$TestMatching_Invoice2Po_in_github_com_FabricBros_chaincode.out" NAME="TestMatching_Invoice2Po in github.com/FabricBros/chaincode Coverage Results" MODIFIED="1531021134231" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/chaincode$TestMatching_List_Unmatched_in_github_com_FabricBros_chaincode.out" NAME="TestMatching_List_Unmatched in github.com/FabricBros/chaincode Coverage Results" MODIFIED="1531550389474" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/chaincode$TestMatching_InvPriceExceedsPOPrice_in_github_com_FabricBros_chaincode.out" NAME="TestMatching_InvPriceExceedsPOPrice in github.com/FabricBros/chaincode Coverage Results" MODIFIED="1531549178249" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/chaincode$go_test_github_com_FabricBros_chaincode.out" NAME="go test github.com/FabricBros/chaincode Coverage Results" MODIFIED="1531543560584" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/chaincode$go_test_github_com_FabricBros_chaincode.out" NAME="go test github.com/FabricBros/chaincode Coverage Results" MODIFIED="1531551021950" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/chaincode$TestGoChaincodeTemplate_in_github_com_FabricBros_chaincode_tests.out" NAME="TestGoChaincodeTemplate in github.com/FabricBros/chaincode/tests Coverage Results" MODIFIED="1529765184245" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/Go_Chaincode_template$go_test_github_com_Go_Chaincode_template.out" NAME="go test github.com/Go_Chaincode_template Coverage Results" MODIFIED="1529188814889" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
   <component name="CoverageViewManager">
-    <option name="myElementSize" value="132" />
+    <option name="myAutoScrollToSource" value="true" />
+    <option name="myElementSize" value="342" />
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="-1704020533">
@@ -45,7 +59,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="go" value="91" />
+          <entry key="go" value="97" />
           <entry key="json" value="14" />
           <entry key="md" value="2" />
           <entry key="sh" value="1" />
@@ -54,20 +68,20 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Bash" value="1" />
-          <entry key="Go" value="91" />
+          <entry key="Go" value="97" />
           <entry key="JSON" value="14" />
           <entry key="Markdown" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="go" value="3764" />
+          <entry key="go" value="3765" />
           <entry key="json" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Go" value="3764" />
+          <entry key="Go" value="3765" />
           <entry key="JSON" value="8" />
         </counts>
       </usages-collector>
@@ -83,17 +97,47 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Invoice_test.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
+            <state relative-caret-position="929">
               <caret line="108" column="68" lean-forward="true" selection-start-line="108" selection-start-column="68" selection-end-line="108" selection-end-column="68" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Document.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="645">
+              <caret line="54" column="28" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/matching_test.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="289" column="23" selection-start-line="289" selection-start-column="23" selection-end-line="289" selection-end-column="23" />
+            <state relative-caret-position="1355">
+              <caret line="285" column="10" lean-forward="true" selection-start-line="285" selection-start-column="10" selection-end-line="285" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test_helpers.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="11" column="5" lean-forward="true" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/util.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="16" column="25" lean-forward="true" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
+              <folding>
+                <element signature="e#14#133#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -101,26 +145,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PurchaseOrder_test.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Invoice.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="326">
-              <caret line="90" lean-forward="true" selection-start-line="90" selection-end-line="90" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/matching.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="92" column="28" lean-forward="true" selection-start-line="92" selection-start-column="28" selection-end-line="92" selection-end-column="28" />
+            <state relative-caret-position="172">
+              <caret line="35" column="18" lean-forward="true" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -128,8 +154,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PurchaseOrder.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="332">
-              <caret line="75" lean-forward="true" selection-start-line="75" selection-end-line="75" />
+            <state relative-caret-position="182">
+              <caret line="36" column="25" lean-forward="true" selection-start-line="36" selection-start-column="25" selection-end-line="36" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main_router.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="563">
+              <caret line="137" lean-forward="true" selection-start-line="131" selection-end-line="137" />
             </state>
           </provider>
         </entry>
@@ -236,21 +271,21 @@
         <option value="$PROJECT_DIR$/invoice_test.go" />
         <option value="$PROJECT_DIR$/access/interface.go" />
         <option value="$PROJECT_DIR$/access/access_control.go" />
-        <option value="$PROJECT_DIR$/test_helpers.go" />
         <option value="$PROJECT_DIR$/vendor/vendor.json" />
         <option value="$PROJECT_DIR$/EntityMaster.go" />
-        <option value="$PROJECT_DIR$/main_router.go" />
         <option value="$PROJECT_DIR$/Document.go" />
         <option value="$PROJECT_DIR$/Document_test.go" />
         <option value="$PROJECT_DIR$/fixtures/invoice_ex1.json" />
         <option value="$PROJECT_DIR$/fixtures/purchaseOrder_ex1.json" />
         <option value="$PROJECT_DIR$/util.go" />
-        <option value="$PROJECT_DIR$/PurchaseOrder_test.go" />
         <option value="$PROJECT_DIR$/Invoice_test.go" />
         <option value="$PROJECT_DIR$/Invoice.go" />
-        <option value="$PROJECT_DIR$/matching.go" />
         <option value="$PROJECT_DIR$/PurchaseOrder.go" />
         <option value="$PROJECT_DIR$/matching_test.go" />
+        <option value="$PROJECT_DIR$/test_helpers.go" />
+        <option value="$PROJECT_DIR$/PurchaseOrder_test.go" />
+        <option value="$PROJECT_DIR$/matching.go" />
+        <option value="$PROJECT_DIR$/main_router.go" />
       </list>
     </option>
   </component>
@@ -276,16 +311,6 @@
             <path>
               <item name="chaincode" type="b2602c69:ProjectViewProjectNode" />
               <item name="chaincode" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chaincode" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chaincode" type="462c0819:PsiDirectoryNode" />
-              <item name="fixtures" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="chaincode" type="b2602c69:ProjectViewProjectNode" />
-              <item name="chaincode" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="chaincode" type="b2602c69:ProjectViewProjectNode" />
@@ -338,7 +363,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Go Test.TestMatching_List_Unmatched in github.com/FabricBros/chaincode">
+  <component name="RunManager" selected="Go Test.go test github.com/FabricBros/chaincode">
     <configuration name="Run CC v5" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="Go_Chaincode_template" />
       <working_directory value="$PROJECT_DIR$/" />
@@ -424,30 +449,15 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.go test github.com/FabricBros/chaincode" />
         <item itemvalue="Go Test.TestMatching_List_Unmatched in github.com/FabricBros/chaincode" />
         <item itemvalue="Go Test.TestMatching_InvMismatchExternal in github.com/FabricBros/chaincode" />
         <item itemvalue="Go Test.TestMatching_InvPriceExceedsPOPrice in github.com/FabricBros/chaincode" />
         <item itemvalue="Go Test.TestMatching_POExceedsNTE in github.com/FabricBros/chaincode" />
-        <item itemvalue="Go Test.go test github.com/FabricBros/chaincode" />
       </list>
     </recent_temporary>
   </component>
   <component name="TestHistory">
-    <history-entry file="TestMatching_InvPriceExceedsPOPrice_in_github_com_FabricBros_chaincode - 2018.07.14 at 01h 16m 20s.xml">
-      <configuration name="TestMatching_InvPriceExceedsPOPrice in github.com/FabricBros/chaincode" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="TestMatching_InvPriceExceedsPOPrice_in_github_com_FabricBros_chaincode - 2018.07.14 at 01h 17m 55s.xml">
-      <configuration name="TestMatching_InvPriceExceedsPOPrice in github.com/FabricBros/chaincode" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="TestMatching_InvPriceExceedsPOPrice_in_github_com_FabricBros_chaincode - 2018.07.14 at 01h 18m 04s.xml">
-      <configuration name="TestMatching_InvPriceExceedsPOPrice in github.com/FabricBros/chaincode" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="TestMatching_InvPriceExceedsPOPrice_in_github_com_FabricBros_chaincode - 2018.07.14 at 01h 19m 25s.xml">
-      <configuration name="TestMatching_InvPriceExceedsPOPrice in github.com/FabricBros/chaincode" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="TestMatching_InvPriceExceedsPOPrice_in_github_com_FabricBros_chaincode - 2018.07.14 at 01h 19m 38s.xml">
-      <configuration name="TestMatching_InvPriceExceedsPOPrice in github.com/FabricBros/chaincode" configurationId="GoTestRunConfiguration" />
-    </history-entry>
     <history-entry file="TestMatching_InvMismatchExternal_in_github_com_FabricBros_chaincode - 2018.07.14 at 01h 32m 14s.xml">
       <configuration name="TestMatching_InvMismatchExternal in github.com/FabricBros/chaincode" configurationId="GoTestRunConfiguration" />
     </history-entry>
@@ -463,17 +473,32 @@
     <history-entry file="TestMatching_List_Unmatched_in_github_com_FabricBros_chaincode - 2018.07.14 at 01h 39m 49s.xml">
       <configuration name="TestMatching_List_Unmatched in github.com/FabricBros/chaincode" configurationId="GoTestRunConfiguration" />
     </history-entry>
+    <history-entry file="go_test_github_com_FabricBros_chaincode - 2018.07.14 at 01h 47m 05s.xml">
+      <configuration name="go test github.com/FabricBros/chaincode" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="go_test_github_com_FabricBros_chaincode - 2018.07.14 at 01h 47m 51s.xml">
+      <configuration name="go test github.com/FabricBros/chaincode" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="go_test_github_com_FabricBros_chaincode - 2018.07.14 at 01h 47m 55s.xml">
+      <configuration name="go test github.com/FabricBros/chaincode" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="go_test_github_com_FabricBros_chaincode - 2018.07.14 at 01h 49m 38s.xml">
+      <configuration name="go test github.com/FabricBros/chaincode" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="go_test_github_com_FabricBros_chaincode - 2018.07.14 at 01h 50m 22s.xml">
+      <configuration name="go test github.com/FabricBros/chaincode" configurationId="GoTestRunConfiguration" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22100122" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22100122" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49928263" weight="0.3278272" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49772874" weight="0.26541275" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49772874" visible="true" weight="0.26541275" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49967554" weight="0.20118344" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -482,13 +507,13 @@
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.4985653" weight="0.32810867" />
       <window_info anchor="bottom" id="Graph Database Console" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50227123" side_tool="true" weight="0.3289941" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.48548388" visible="true" weight="0.2998955" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.48548388" weight="0.2998955" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Graph Database" order="3" />
       <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="right" id="Coverage" order="5" sideWeight="0.5145161" side_tool="true" visible="true" weight="0.14346765" />
+      <window_info anchor="right" id="Coverage" order="5" sideWeight="0.5145161" side_tool="true" visible="true" weight="0.2924298" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -606,13 +631,6 @@
     <entry file="file://$PROJECT_DIR$/vendor/github.com/hyperledger/fabric/core/chaincode/lib/cid/README.md" />
     <entry file="file://$PROJECT_DIR$/../../../hyperledger/fabric/core/chaincode/shim/interfaces_stable.go" />
     <entry file="file://$PROJECT_DIR$/vendor/github.com/hyperledger/fabric/core/chaincode/lib/cid/cid.go" />
-    <entry file="file://$PROJECT_DIR$/EntityMaster.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2130">
-          <caret line="149" column="24" selection-start-line="149" selection-start-column="22" selection-end-line="149" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/github.com/hyperledger/fabric/common/attrmgr/attrmgr.go" />
     <entry file="file://$PROJECT_DIR$/Makefile">
       <provider selected="true" editor-type-id="text-editor" />
@@ -656,13 +674,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Document.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="54" column="28" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../hyperledger/fabric/core/chaincode/shim/mockstub.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="217">
@@ -674,13 +685,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="217">
           <caret line="73" column="5" selection-start-line="73" selection-start-column="5" selection-end-line="73" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_helpers.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -736,62 +740,83 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PurchaseOrder_test.go">
+    <entry file="file://$PROJECT_DIR$/EntityMaster.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main_router.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="116" column="20" lean-forward="true" selection-start-line="116" selection-start-column="20" selection-end-line="116" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/util.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="5" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
-          <folding>
-            <element signature="e#14#133#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Invoice_test.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="108" column="68" lean-forward="true" selection-start-line="108" selection-start-column="68" selection-end-line="108" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Invoice.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="90" lean-forward="true" selection-start-line="90" selection-end-line="90" />
+        <state relative-caret-position="180">
+          <caret line="19" column="19" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/matching.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="92" column="28" lean-forward="true" selection-start-line="92" selection-start-column="28" selection-end-line="92" selection-end-column="28" />
+        <state relative-caret-position="120">
+          <caret line="15" column="49" selection-start-line="15" selection-start-column="49" selection-end-line="15" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Invoice.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="113">
+          <caret line="140" column="53" lean-forward="true" selection-start-line="140" selection-start-column="53" selection-end-line="140" selection-end-column="53" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PurchaseOrder.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="75" lean-forward="true" selection-start-line="75" selection-end-line="75" />
+        <state relative-caret-position="182">
+          <caret line="36" column="25" lean-forward="true" selection-start-line="36" selection-start-column="25" selection-end-line="36" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PurchaseOrder_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="35" column="18" lean-forward="true" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/matching_test.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="289" column="23" selection-start-line="289" selection-start-column="23" selection-end-line="289" selection-end-column="23" />
+        <state relative-caret-position="1355">
+          <caret line="285" column="10" lean-forward="true" selection-start-line="285" selection-start-column="10" selection-end-line="285" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Invoice_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="929">
+          <caret line="108" column="68" lean-forward="true" selection-start-line="108" selection-start-column="68" selection-end-line="108" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Document.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="54" column="28" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main_router.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="563">
+          <caret line="137" lean-forward="true" selection-start-line="131" selection-end-line="137" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_helpers.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="11" column="5" lean-forward="true" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="25" lean-forward="true" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
+          <folding>
+            <element signature="e#14#133#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

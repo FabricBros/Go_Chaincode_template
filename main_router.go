@@ -82,9 +82,9 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 	//}
 
 	// Check for health
-	if function == "Ping" {
-		return t.Ping(stub)
-	}
+	//if function == "Ping" {
+	//	return t.Ping(stub)
+	//}
 
 	// PO operations
 	if function == ADD_PO {
@@ -129,9 +129,9 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 	return shim.Error("Received unknown function invocation")
 }
 
-func (this *SimpleChaincode) Ping(stub shim.ChaincodeStubInterface) pb.Response {
-	logger.Info("Ping: enter")
-	defer logger.Info("Ping: exit")
-
-	return shim.Success([]byte("Ok"))
-}
+//func (this *SimpleChaincode) Ping(stub shim.ChaincodeStubInterface) pb.Response {
+//	logger.Info("Ping: enter")
+//	defer logger.Info("Ping: exit")
+//
+//	return shim.Success([]byte("Ok"))
+//}

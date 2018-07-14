@@ -9,22 +9,10 @@ import (
 	"encoding/json"
 )
 
-type ErrorTransactions struct{
-	Invoices []Invoice
-	POs		 []PurchaseOrder
-}
-
 func init() {
 	//logger.SetLevel(shim.LogDebug)
 }
 
-func NewErrorTransactions() *ErrorTransactions{
-	var ret = ErrorTransactions{}
-	ret.Invoices= make([]Invoice,0)
-	ret.POs= make([]PurchaseOrder,0)
-
-	return &ret
-}
 func (t *SimpleChaincode)  match_invoice(stub shim.ChaincodeStubInterface,pk string, v *Invoice) {
 	if v.PoNumber == "A9854" { // TC 1
 		var attr = []string{"org", v.PoNumber}
