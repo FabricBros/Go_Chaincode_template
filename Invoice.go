@@ -1,36 +1,39 @@
 package main
 
 import (
-	"bytes"
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	pb "github.com/hyperledger/fabric/protos/peer"
+	"strings"
 	"encoding/json"
-	)
+	"bytes"
+)
 
 //FabricKey	Seller	Date	Ref	Buyer	PO #	SKU	Qty	Curr	Unit cost	Amount
 type Invoice struct {
-	Amount   string `json:"amount"`
+	Amount     float32 `json:"Amount,string"`
 	Buyer    string `json:"buyer"`
 	Currency string `json:"currency"`
 	Date     string `json:"date"`
 	PoNumber string `json:"poNumber"`
-	Quantity string    `json:"quantity"`
+	Quantity float32    `json:"quantity,string"`
 	RefID    string    `json:"refId"`
 	Seller   string `json:"seller"`
 	Sku      string    `json:"sku"`
-	UnitCost string    `json:"unitCost"`
+	UnitCost float32    `json:"unitCost,string"`
+	State      string  `json:"State"`
 }
 
 func init(){
 	//logger.SetLevel(shim.LogDebug)
 }
+
 // Transaction makes payment of X units from A to B
 func (t *SimpleChaincode) addInvoices(stub shim.ChaincodeStubInterface, args []string) pb.Response {
-	logger.Debug("adding invoice")
+	logger.Debug("adding invoice: %d", len(args))
 	defer logger.Debug("exit adding invoice")
 
 	var items []Invoice
-	logger.Debug("addInvoice:"+args[0])
+	//logger.Debug("addInvoice:"+args[0])
 
 	err := json.Unmarshal([]byte(args[0]), &items)
 	if err != nil {
@@ -48,14 +51,17 @@ func (t *SimpleChaincode) addInvoices(stub shim.ChaincodeStubInterface, args []s
 			logger.Debug(err.Error())
 			shim.Error(err.Error())
 		}
-		logger.Debug("adding item:")
-		logger.Debug(v)
+
+		//logger.Debug("adding item:")
+		//logger.Debug(v)
 
 		var attr = []string{cn, v.RefID, v.PoNumber}
 
 		pk, err := buildPK(stub, "Invoice", attr)
 
-		logger.Debug("Invoice has pk: "+pk)
+		//logger.Debug("Invoice has pk: "+pk)
+
+		t.match_invoice(stub, pk, &v)
 
 		vBytes, err := json.Marshal(v)
 
@@ -64,6 +70,25 @@ func (t *SimpleChaincode) addInvoices(stub shim.ChaincodeStubInterface, args []s
 			return shim.Error(err.Error())
 		}
 		stub.PutState(pk, vBytes)
+
+		indexName := "unmatched~cn~ref~po"
+		colorNameIndexKey, err := stub.CreateCompositeKey(indexName, attr)
+		if err != nil {
+			logger.Errorf("Failed to create composite key %s", err)
+			return shim.Error(err.Error())
+		}
+		//  Save index entry to state. Only the key name is needed, no need to store a duplicate copy of the Marble.
+		//  Note - passing a 'nil' value will effectively delete the key from state, therefore we pass null character as value
+		if ! strings.Contains(v.State,"Ok"){
+			//logger.Errorf("Unmatched: %s\n%s",indexName, attr)
+			value := []byte{0x00}
+			err = stub.PutState(colorNameIndexKey, value)
+			if err != nil {
+				logger.Errorf("Failed to create composite key %s", err)
+				return shim.Error(err.Error())
+			}
+		}
+
 	}
 
 	return shim.Success(nil)
@@ -71,7 +96,7 @@ func (t *SimpleChaincode) addInvoices(stub shim.ChaincodeStubInterface, args []s
 
 // Deletes an entity from state
 func (t *SimpleChaincode) getInvoice(stub shim.ChaincodeStubInterface, args []string) pb.Response {
-	logger.Debug("enter get invoice")
+	logger.Debugf("enter get invoice: %-v",args)
 	defer logger.Debug("exited get invoice")
 
 	//key := args[0]
@@ -87,16 +112,18 @@ func (t *SimpleChaincode) getInvoice(stub shim.ChaincodeStubInterface, args []st
 	invoiceByte, err := stub.GetState(pk)
 	logger.Debugf("got back from state %s", invoiceByte)
 	if err != nil {
+		logger.Errorf("error from state %s", err)
 		return shim.Error(err.Error())
 	}
+
 	err = json.Unmarshal(invoiceByte, &invoice)
 	if err != nil {
 		logger.Error(err)
 		return shim.Error(err.Error())
 	}
 
-	logger.Debug("getInvoice:")
-	logger.Debug(invoice)
+	//logger.Debug("getInvoice:")
+	//logger.Debug(invoice)
 	var buffer bytes.Buffer
 	buffer.WriteString("[")
 	buffer.WriteString(string(invoiceByte))
@@ -123,8 +150,8 @@ func (t *SimpleChaincode) updateInvoices(stub shim.ChaincodeStubInterface, args 
 			logger.Debug(err.Error())
 			shim.Error(err.Error())
 		}
-		logger.Debug("updating item:")
-		logger.Debug(v)
+		//logger.Debug("updating item:")
+		//logger.Debug(v)
 
 		var attr = []string{cn, v.RefID, v.PoNumber}
 
