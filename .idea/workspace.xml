@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1692966d-a1f2-4a2d-8f21-56146cbbf315" name="Default" comment="a">
-      <change beforePath="$PROJECT_DIR$/Document.go" beforeDir="false" afterPath="$PROJECT_DIR$/Document.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EntityMaster.go" beforeDir="false" afterPath="$PROJECT_DIR$/EntityMaster.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Invoice.go" beforeDir="false" afterPath="$PROJECT_DIR$/Invoice.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PurchaseOrder.go" beforeDir="false" afterPath="$PROJECT_DIR$/PurchaseOrder.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_router.go" beforeDir="false" afterPath="$PROJECT_DIR$/main_router.go" afterDir="false" />
-    </list>
+    <list default="true" id="1692966d-a1f2-4a2d-8f21-56146cbbf315" name="Default" comment="a" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -101,7 +95,7 @@
         <entry file="file://$PROJECT_DIR$/main_router.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="296">
-              <caret line="87" column="41" lean-forward="true" selection-start-line="87" selection-start-column="41" selection-end-line="87" selection-end-column="41" />
+              <caret line="87" column="41" selection-start-line="87" selection-start-column="41" selection-end-line="87" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -296,6 +290,32 @@
               <item name="Go_Chaincode_template" type="b2602c69:ProjectViewProjectNode" />
               <item name="Go_Chaincode_template" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Go_Chaincode_template" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Go_Chaincode_template" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Go_Chaincode_template" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Go_Chaincode_template" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+              <item name="github.com" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Go_Chaincode_template" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Go_Chaincode_template" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+              <item name="github.com" type="462c0819:PsiDirectoryNode" />
+              <item name="hyperledger" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Go_Chaincode_template" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Go_Chaincode_template" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+              <item name="github.com" type="462c0819:PsiDirectoryNode" />
+              <item name="hyperledger" type="462c0819:PsiDirectoryNode" />
+              <item name="fabric" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -465,7 +485,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17094018" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -853,7 +872,7 @@
     <entry file="file://$PROJECT_DIR$/main_router.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="296">
-          <caret line="87" column="41" lean-forward="true" selection-start-line="87" selection-start-column="41" selection-end-line="87" selection-end-column="41" />
+          <caret line="87" column="41" selection-start-line="87" selection-start-column="41" selection-end-line="87" selection-end-column="41" />
         </state>
       </provider>
     </entry>
