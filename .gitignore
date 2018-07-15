@@ -3,3 +3,4 @@ chaincode
 src/
 pkg/
 old/
+.idea/*
