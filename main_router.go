@@ -11,17 +11,17 @@ var logger = shim.NewLogger("main logger")
 const (
 	// INVOICE FC
 	ADD_INVOICES    = "AddInvoices"
-	GET_INVOICES    = "RetreiveInvoice"
+	GET_INVOICES    = "RetrieveInvoice"
 	UPDATE_INVOICES = "UpdateInvoices"
 
 	//POs
 	ADD_PO    = "AddPO"
-	GET_PO    = "RetreivePO" // ( poNumber )
+	GET_PO    = "RetrievePO" // ( poNumber )
 	UPDATE_PO = "UpdatePO"   //( PurchaseOrder[] )
 
 	//EntityMaster
 	ADD_ENTITYMASTER    = "AddEntityMaster"      // ( ImportBlob[] )
-	GET_ENTITYMASTER    = "RetreiveEntityMaster" // ( importNumber )
+	GET_ENTITYMASTER    = "RetrieveEntityMaster" // ( importNumber )
 	UPDATE_ENTITYMASTER = "UpdateEntityMaster"   // ( ImportBlob[] )
 
 	// Unmatched
@@ -30,7 +30,7 @@ const (
 	//Documents
 
 	ADD_DOCUMENTS    = "AddDocuments"      // (args, documentPK)
-	GET_DOCUMENTS    = "RetreiveDocuments" // (documentPK)
+	GET_DOCUMENTS    = "RetrieveDocuments" // (documentPK)
 	UPDATE_DOCUMENTS = "UpdateDocument"    // (args, documentPK)
 )
 
@@ -96,11 +96,11 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 	}
 
 	// Entity operations
-	if function == "AddEntityMaster" {
+	if function == ADD_ENTITYMASTER {
 		return t.addEntity(stub, args)
-	}else if function == "RetrieveEntityMaster" {
+	}else if function == GET_ENTITYMASTER {
 		return t.getEntity(stub, args)
-	}else if function == "UpdateEntityMaster" {
+	}else if function == UPDATE_ENTITYMASTER {
 		return t.updateEntities(stub, args)
 	}
 	// Document operations
