@@ -29,6 +29,9 @@ type Unmatched struct {
 	Unit            string    `json:"unit"`
 }
 
+
+//TODO dont forget to check PO also and not only invoice to change value, use FixedPO's and FixedInvoices in the spreadsheet
+//TODO to see which field from which doc requires changing, its highlighted. before not to get confuse better invoice.buyer | po.buyer
 func (t *SimpleChaincode)  match_invoice(stub shim.ChaincodeStubInterface,pk string, v *Invoice) {
 	if v.PoNumber == "A9854" { // TC 1
 		var attr = []string{"org", v.PoNumber}
@@ -36,6 +39,8 @@ func (t *SimpleChaincode)  match_invoice(stub shim.ChaincodeStubInterface,pk str
 		var postr,err = stub.GetState(pk1)
 		if err != nil {
 			logger.Errorf("Failed to find %s", pk1)
+			//TODO if its error here, it should return to keep function from going forward
+			return //huy: i added this but i noticed a lot of errors below aren't getting handled and the function will keep going
 		}
 		po := &PurchaseOrder{}
 		err = json.Unmarshal(postr, po)
