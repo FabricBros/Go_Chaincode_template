@@ -13,6 +13,22 @@ func init() {
 	//logger.SetLevel(shim.LogDebug)
 }
 
+type Unmatched struct {
+	Amount          string `json:"amount"`
+	Buyer           string `json:"buyer"`
+	Currency        string `json:"currency"`
+	DisputeReason   string `json:"disputeReason"`
+	DisputeResDate  string `json:"disputeResDate"`
+	DisputeResSteps string `json:"disputeResSteps"`
+	InvStts         string `json:"invStts"`
+	PoNum           string `json:"poNum"`
+	Quantity        string    `json:"quantity"`
+	RefID           string    `json:"refId"`
+	Seller          string `json:"seller"`
+	Sku             string    `json:"sku"`
+	Unit            string    `json:"unit"`
+}
+
 func (t *SimpleChaincode)  match_invoice(stub shim.ChaincodeStubInterface,pk string, v *Invoice) {
 	if v.PoNumber == "A9854" { // TC 1
 		var attr = []string{"org", v.PoNumber}

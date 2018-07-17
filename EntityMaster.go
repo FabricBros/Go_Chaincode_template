@@ -117,15 +117,15 @@ func (t *SimpleChaincode) getEntity(stub shim.ChaincodeStubInterface, args []str
 func (t *SimpleChaincode) updateEntities(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	logger.Debug("Enter updateInvoices")
 	defer logger.Debug("Exited updateInvoices")
-	var invoices []Invoice
+	var entity []EntityMaster
 
-	err := json.Unmarshal([]byte(args[0]), &invoices)
+	err := json.Unmarshal([]byte(args[0]), &entity)
 	if err != nil {
 		logger.Error("Error unmarshing invoice json:", err)
 		return shim.Error(err.Error())
 	}
 
-	for _, v := range invoices {
+	for _, v := range entity {
 		cn, err := getCN(stub)
 		if err != nil{
 			logger.Debug(err)

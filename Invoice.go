@@ -10,7 +10,7 @@ import (
 
 //FabricKey	Seller	Date	Ref	Buyer	PO #	SKU	Qty	Curr	Unit cost	Amount
 type Invoice struct {
-	Amount     float32 `json:"Amount,string"`
+	Amount     float32 `json:"amount,string"`
 	Buyer    string `json:"buyer"`
 	Currency string `json:"currency"`
 	Date     string `json:"date"`
@@ -20,7 +20,7 @@ type Invoice struct {
 	Seller   string `json:"seller"`
 	Sku      string    `json:"sku"`
 	UnitCost float32    `json:"unitCost,string"`
-	State      string  `json:"State"`
+	//State      string  `json:"state"`
 }
 
 func init(){
