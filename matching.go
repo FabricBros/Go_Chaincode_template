@@ -46,12 +46,12 @@ func (t *SimpleChaincode)  match_invoice(stub shim.ChaincodeStubInterface,pk str
 
 		if po.Quantity > v.Quantity {
 			po.Quantity= po.Quantity + (-1 * v.Quantity)
-			v.State="Ok"
+			//v.State="Ok"
 		}else{
 			v.Quantity = po.Quantity
 			po.Quantity = 0
 			v.Amount = v.Quantity*v.UnitCost
-			v.State=fmt.Sprintf("Ok Corrected Quantity to %f",v.Quantity)
+			//v.State=fmt.Sprintf("Ok Corrected Quantity to %f",v.Quantity)
 		}
 
 		po.Amount=po.UnitCost*po.Quantity
@@ -65,7 +65,7 @@ func (t *SimpleChaincode)  match_invoice(stub shim.ChaincodeStubInterface,pk str
 	}else if v.PoNumber=="A6908" && v.RefID=="1354651"{
 		 // TC 2
 		 v.Buyer = "A4"
-		 v.State="Ok Invalid PO # by CPTY"
+		 //v.State="Ok Invalid PO # by CPTY"
 	}else if v.PoNumber=="A6910" && v.RefID=="546568"{
 		 // TC 3
 		var attr = []string{"org", v.PoNumber}
@@ -82,7 +82,7 @@ func (t *SimpleChaincode)  match_invoice(stub shim.ChaincodeStubInterface,pk str
 
 		po.UnitCost=400
 		po.Amount=po.UnitCost*po.Quantity
-		po.State="PO Corrected with new price - 400"
+		//po.State="PO Corrected with new price - 400"
 		vBytes, _ := json.Marshal(po)
 		//logger.Errorf("saving %s", pk1)
 		//logger.Errorf("saving %s", vBytes)
@@ -91,19 +91,19 @@ func (t *SimpleChaincode)  match_invoice(stub shim.ChaincodeStubInterface,pk str
 		if err != nil {
 			logger.Errorf("Failed to save %s", vBytes)
 		}
-		v.State="Ok"
+		//v.State="Ok"
 	}else if v.PoNumber=="A691000" && v.RefID=="56546"{
 		// TC 4
 		v.PoNumber = "A6909"
-		v.State="Ok PO# Corrected to A6909"
+		//v.State="Ok PO# Corrected to A6909"
 	}else if v.PoNumber=="A5686" && v.RefID=="1354651"{
 		// TC 5
-		v.State="Error Invoice remains in err as external invoice issued as I/C invoice"
+		//v.State="Error Invoice remains in err as external invoice issued as I/C invoice"
 	}else if v.PoNumber=="A69879" && v.RefID=="4684"{
 		// TC 6
-		v.State="Error Invoice remain in err, reason under investigation"
+		//v.State="Error Invoice remain in err, reason under investigation"
 	}else {
-		v.State="Ok"
+		//v.State="Ok"
 	}
 }
 

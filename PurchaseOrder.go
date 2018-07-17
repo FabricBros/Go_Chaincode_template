@@ -20,7 +20,7 @@ type PurchaseOrder struct {
 	Sku      string    `json:"sku"`
 	Type     POType `json:"type"`
 	UnitCost float32    `json:"unitCost,string"`
-	State 	string `json:"state"`
+	//State 	string `json:"state"`
 }
 
 //
